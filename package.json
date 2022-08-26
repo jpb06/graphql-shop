@@ -1,0 +1,63 @@
+{
+  "name": "graphql-shop",
+  "version": "0.0.0",
+  "repository": "https://github.com/jpb06/graphql-shop.git",
+  "author": "jpb06 <jpb.06@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "docker-api": "docker-compose -f apps/api/docker-compose.yml down && docker-compose -f apps/api/docker-compose.yml up shop-postgres",
+    "prisma-gen": "prisma generate --schema libs/backend/database/model/schema.prisma",
+    "prisma-migrate": "prisma migrate dev --schema libs/backend/database/model/schema.prisma --name",
+    "prisma-seed": "prisma db seed"
+  },
+  "private": true,
+  "dependencies": {
+    "@nestjs/apollo": "^10.0.22",
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^10.0.22",
+    "@nestjs/platform-express": "^9.0.0",
+    "@prisma/client": "^4.2.1",
+    "apollo-server-express": "^3.10.1",
+    "class-validator": "^0.13.2",
+    "graphql": "^16.6.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.4.0",
+    "@jest/types": "^28.1.3",
+    "@nestjs/schematics": "^9.0.0",
+    "@nestjs/testing": "^9.0.0",
+    "@nrwl/cli": "14.5.8",
+    "@nrwl/eslint-plugin-nx": "14.5.8",
+    "@nrwl/jest": "14.5.8",
+    "@nrwl/linter": "14.5.8",
+    "@nrwl/nest": "^14.5.8",
+    "@nrwl/node": "14.5.8",
+    "@nrwl/nx-cloud": "latest",
+    "@nrwl/workspace": "14.5.8",
+    "@types/jest": "27.4.1",
+    "@types/node": "16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "~8.15.0",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "express": "^4.18.1",
+    "jest": "27.5.1",
+    "nx": "14.5.8",
+    "prettier": "^2.6.2",
+    "prisma": "^4.2.1",
+    "ts-jest": "27.1.4",
+    "ts-node": "10.9.1",
+    "typescript": "~4.7.4"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} libs/backend/database/seed/seed-db.ts"
+  }
+}
