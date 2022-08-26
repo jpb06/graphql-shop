@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: Int!
+  idCategory: Int!
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  category: Category!
+}
+
+type Category {
+  id: Int!
+  name: String!
+  products: [Product!]!
+}
+
+type Query {
+  products: [Product!]!
+  product(id: Int!): Product!
+  categories: [Category!]!
+  category(id: Int!): Category!
+}
