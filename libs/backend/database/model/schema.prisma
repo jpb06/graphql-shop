@@ -11,7 +11,8 @@ datasource db {
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   name String
 
   Products Product[]
@@ -27,4 +28,44 @@ model Product {
   image       String
 
   Category Category? @relation(fields: [idCategory], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  email     String   @unique
+  lastName  String
+  firstName String
+  password  String
+  joinDate  DateTime @default(now())
+  role      Role     @default(USER)
+
+  JoinUserAddress JoinUserAddress[]
+}
+
+model Address {
+  id Int @id @default(autoincrement())
+
+  street  String
+  zipCode String
+  city    String
+  country String
+
+  JoinUserAddress JoinUserAddress[]
+}
+
+model JoinUserAddress {
+  id        Int @id @default(autoincrement())
+  idUser    Int
+  idAddress Int
+
+  creationDate DateTime @default(now())
+
+  User    User    @relation(fields: [idUser], references: [id])
+  Address Address @relation(fields: [idAddress], references: [id])
 }

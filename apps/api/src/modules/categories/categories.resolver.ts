@@ -7,10 +7,10 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 
-import { Product } from '../products/product.model';
-import { ProductsService } from '../products/product.service';
-import { Category } from './category.model';
-import { CategoriesService } from './category.service';
+import { Product } from '../products/dtos/product.dto';
+import { ProductsService } from '../products/products.service';
+import { CategoriesService } from './categories.service';
+import { Category } from './dtos/category.dto';
 
 @Resolver(Category)
 export class CategoriesResolver {

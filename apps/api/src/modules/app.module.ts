@@ -6,23 +6,25 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { DatabaseModule } from '@backend/database';
 
-import { CategoriesModule } from './categories/category.module';
-import { CategoriesResolver } from './categories/category.resolver';
-import { ProductsModule } from './products/product.module';
-import { ProductsResolver } from './products/product.resolver';
+import { CategoriesModule } from './categories/categories.module';
+import { CategoriesResolver } from './categories/categories.resolver';
+import { ProductsModule } from './products/products.module';
+import { ProductsResolver } from './products/products.resolver';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     DatabaseModule,
     CategoriesModule,
     ProductsModule,
+    UsersModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
-      //  debug: true,
+      // debug: true,
       playground: true,
     }),
   ],
-  providers: [ProductsResolver, CategoriesResolver],
+  providers: [ProductsResolver, CategoriesResolver, UsersModule],
 })
 export class AppModule {}

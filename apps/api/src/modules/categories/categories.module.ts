@@ -2,9 +2,9 @@ import { Module, forwardRef } from '@nestjs/common';
 
 import { DatabaseModule } from '@backend/database';
 
-import { ProductsModule } from '../products/product.module';
-import { CategoriesResolver } from './category.resolver';
-import { CategoriesService } from './category.service';
+import { ProductsModule } from '../products/products.module';
+import { CategoriesResolver } from './categories.resolver';
+import { CategoriesService } from './categories.service';
 
 @Module({
   imports: [DatabaseModule, forwardRef(() => ProductsModule)],

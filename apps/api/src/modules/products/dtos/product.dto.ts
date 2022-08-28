@@ -1,15 +1,15 @@
 import 'reflect-metadata';
-import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Float, ID } from '@nestjs/graphql';
 import { IsUrl } from 'class-validator';
 
-import { Category } from '../categories/category.model';
+import { Category } from '../../categories/dtos/category.dto';
 
 @ObjectType()
 export class Product {
-  @Field(() => Int)
+  @Field(() => ID)
   id: number;
 
-  @Field(() => Int)
+  @Field(() => ID)
   idCategory: number;
 
   @Field(() => String)
