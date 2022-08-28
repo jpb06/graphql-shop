@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 
-import { Product } from '../products/product.model';
+import { Product } from '../../products/dtos/product.dto';
 
 @ObjectType()
 export class Category {
-  @Field(() => Int)
+  @Field(() => ID)
   id: number;
 
   @Field(() => String)
