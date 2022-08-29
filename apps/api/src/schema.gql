@@ -2,29 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Product {
-  id: ID!
-  idCategory: ID!
-  name: String!
-  description: String!
-  image: String!
-  price: Float!
-  category: Category!
+type GqlAuthOutput {
+  id: Int!
+  token: String!
 }
 
-type Category {
-  id: ID!
-  name: String!
-  products: [Product!]!
-}
-
-type User {
+type GqlLoggedUser {
   id: ID!
   email: String!
   lastName: String!
   firstName: String!
   joinDate: DateTime!
   role: String!
+  token: String!
 }
 
 """
@@ -32,21 +22,43 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type GqlProduct {
+  id: ID!
+  idCategory: ID!
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  category: GqlCategory!
+}
+
+type GqlCategory {
+  id: ID!
+  name: String!
+  products: [GqlProduct!]!
+}
+
 type Query {
-  products: [Product!]!
-  product(id: Int!): Product!
-  categories: [Category!]!
-  category(id: Int!): Category!
-  user(email: String!): User!
+  products: [GqlProduct!]!
+  product(id: Int!): GqlProduct!
+  categories: [GqlCategory!]!
+  category(id: Int!): GqlCategory!
+  me: GqlLoggedUser!
 }
 
 type Mutation {
-  signup(input: SignupInput!): User!
+  signup(input: GqlSignupInput!): GqlAuthOutput!
+  login(input: GqlLoginInput!): GqlAuthOutput!
 }
 
-input SignupInput {
+input GqlSignupInput {
   email: String!
   lastName: String!
   firstName: String!
+  password: String!
+}
+
+input GqlLoginInput {
+  username: String!
   password: String!
 }
