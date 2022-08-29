@@ -8,7 +8,7 @@ import { ProductsService } from './products.service';
 
 @Module({
   imports: [DatabaseModule, forwardRef(() => CategoriesModule)],
-  providers: [ProductsResolver, ProductsService],
-  exports: [ProductsResolver, ProductsService],
+  providers: [ProductsService, ProductsResolver],
+  exports: [ProductsService, ProductsResolver],
 })
 export class ProductsModule {}
