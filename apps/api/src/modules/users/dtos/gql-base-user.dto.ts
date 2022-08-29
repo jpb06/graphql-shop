@@ -1,14 +1,12 @@
 import 'reflect-metadata';
 import { ObjectType, Field, GraphQLISODateTime, ID } from '@nestjs/graphql';
-import { IsEmail } from 'class-validator';
 
 @ObjectType()
-export class User {
+export class GqlBaseUser {
   @Field(() => ID)
   id: number;
 
   @Field(() => String)
-  @IsEmail()
   email: string;
 
   @Field(() => String)
@@ -21,5 +19,5 @@ export class User {
   joinDate: Date;
 
   @Field(() => String)
-  role: Date;
+  role: string;
 }
