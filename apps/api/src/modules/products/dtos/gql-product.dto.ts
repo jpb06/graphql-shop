@@ -2,10 +2,10 @@ import 'reflect-metadata';
 import { ObjectType, Field, Float, ID } from '@nestjs/graphql';
 import { IsUrl } from 'class-validator';
 
-import { Category } from '../../categories/dtos/category.dto';
+import { GqlCategory } from '../../categories/dtos/gql-category.dto';
 
 @ObjectType()
-export class Product {
+export class GqlProduct {
   @Field(() => ID)
   id: number;
 
@@ -25,6 +25,6 @@ export class Product {
   @Field(() => Float)
   price: number;
 
-  @Field(() => Category, { nullable: true, name: 'category' })
-  Category?: Category | null;
+  @Field(() => GqlCategory, { nullable: true, name: 'category' })
+  Category?: GqlCategory | null;
 }

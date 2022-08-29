@@ -6,31 +6,32 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
+import { Category } from '@prisma/client';
 
-import { Product } from '../products/dtos/product.dto';
+import { GqlProduct } from '../products/dtos/gql-product.dto';
 import { ProductsService } from '../products/products.service';
 import { CategoriesService } from './categories.service';
-import { Category } from './dtos/category.dto';
+import { GqlCategory } from './dtos/gql-category.dto';
 
-@Resolver(Category)
+@Resolver(GqlCategory)
 export class CategoriesResolver {
   constructor(
     private categories: CategoriesService,
     private products: ProductsService
   ) {}
 
-  @Query(() => [Category], { name: 'categories' })
-  async getAll() {
+  @Query(() => [GqlCategory], { name: 'categories' })
+  async getAll(): Promise<Array<Category>> {
     return this.categories.getAll();
   }
 
-  @Query(() => Category, { name: 'category' })
-  async getBy(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => GqlCategory, { name: 'category' })
+  async getBy(@Args('id', { type: () => Int }) id: number): Promise<Category> {
     return this.categories.getBy(id);
   }
 
-  @ResolveField('products', () => [Product])
-  async getProducts(@Parent() category: Category) {
+  @ResolveField('products', () => [GqlProduct])
+  async getProducts(@Parent() category: GqlCategory): Promise<Array<Category>> {
     const { id } = category;
 
     return this.products.getByCategory(id);
