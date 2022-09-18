@@ -1,4 +1,4 @@
-import Image from 'next/future/image'; // 'next/image';
+import Image from 'next/future/image';
 
 import ProductIcon from '../../../../../../../public/icons/product.svg';
 import { ArrayItemType } from '../../../../../../types/ArrayItemType.type';
