@@ -3,10 +3,10 @@ import { PrismaClient } from '@prisma/client';
 import { seedCategoriesAndProducts } from './datasets/seed.categories';
 import { seedUsers } from './datasets/seed.users';
 
-const seedDb = async () => {
+const seedDb = async (): Promise<void> => {
   const prisma = new PrismaClient();
 
-  const main = async () => {
+  const main = async (): Promise<void> => {
     await seedCategoriesAndProducts(prisma);
     await seedUsers(prisma);
   };
@@ -22,4 +22,4 @@ const seedDb = async () => {
     });
 };
 
-seedDb();
+void seedDb();

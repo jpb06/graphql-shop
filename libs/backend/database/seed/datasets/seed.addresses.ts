@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { PrismaDb } from '../types/prisma-db.type';
 import { range } from '../util/range';
 
-export const seedAddresses = async (prisma: PrismaDb) => {
+export const seedAddresses = async (prisma: PrismaDb): Promise<void> => {
   const promises = range(3).map(async (idAddress) =>
     prisma.address.upsert({
       where: { id: idAddress },
