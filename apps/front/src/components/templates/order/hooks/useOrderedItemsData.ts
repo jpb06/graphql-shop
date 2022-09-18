@@ -18,5 +18,9 @@ export const useOrderedItemsData = () => {
     }
   );
 
+  if (Object.keys(orders).length === 0) {
+    return { status: 'empty' };
+  }
+
   return { status, data };
 };
