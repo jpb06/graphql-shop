@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@backend/database": ["libs/backend/database/src/index.ts"],
-      "@backend/tests": ["libs/backend/tests/src/index.ts"]
+      "@backend/tests": ["libs/backend/tests/src/index.ts"],
+      "@front/api": ["libs/graphql/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
