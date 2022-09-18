@@ -26,12 +26,6 @@ export const OrderRoot = () => {
             ),
           }[status]
         }
-        {/* {data &&
-          data.productsWithIds.map((el) => (
-            <div key={el.id}>
-              {el.name} - {orders[el.id]} - {orders[el.id] * el.price} €
-            </div>
-          ))} */}
       </div>
     </div>
   );
