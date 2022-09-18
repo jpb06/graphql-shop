@@ -40,6 +40,7 @@ type GqlCategory {
 
 type Query {
   products: [GqlProduct!]!
+  productsWithIds(ids: [Int!]!): [GqlProduct!]!
   product(id: Int!): GqlProduct!
   categories: [GqlCategory!]!
   category(id: Int!): GqlCategory!
@@ -47,18 +48,6 @@ type Query {
 }
 
 type Mutation {
-  signup(input: GqlSignupInput!): GqlAuthOutput!
-  login(input: GqlLoginInput!): GqlAuthOutput!
-}
-
-input GqlSignupInput {
-  email: String!
-  lastName: String!
-  firstName: String!
-  password: String!
-}
-
-input GqlLoginInput {
-  username: String!
-  password: String!
+  signup(email: String!, lastName: String!, firstName: String!, password: String!): GqlAuthOutput!
+  login(username: String!, password: String!): GqlAuthOutput!
 }
