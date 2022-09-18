@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/graphql/codegen/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graphql/codegen/src/**/*.ts"]
+      }
+    },
+    "fetch": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "pnpm graphql-codegen --config libs/graphql/codegen/src/codegen-fetch.ts"
+      }
+    },
+    "graphql-request": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "pnpm graphql-codegen --config libs/graphql/codegen/src/codegen-graphql-request.ts"
+      }
+    }
+  },
+  "tags": []
+}
