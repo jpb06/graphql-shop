@@ -6,7 +6,7 @@ import { DatabaseService } from '@backend/database';
 
 import { AuthService } from '../auth/auth.service';
 import { GqlAuthOutput } from '../auth/dtos/gql-auth-output.dto';
-import { GqlSignupInput } from './dtos/gql-signup-input.dto';
+import { GqlSignupArgs } from './dtos/gql-signup-args.dto';
 
 @Injectable()
 export class UsersService {
@@ -37,7 +37,7 @@ export class UsersService {
     lastName,
     firstName,
     password,
-  }: GqlSignupInput): Promise<GqlAuthOutput> {
+  }: GqlSignupArgs): Promise<GqlAuthOutput> {
     const hashedPassword = await hash(password, 11);
 
     const user = await this.db.user.create({
