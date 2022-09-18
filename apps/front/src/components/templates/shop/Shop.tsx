@@ -1,8 +1,9 @@
 import { useProductsQuery } from '@front/api';
 
+import ErrorCircle from '../../../../public/icons/error-circle.svg';
 import { usePersistedOrders } from '../../../hooks/usePersistedOrders';
 import { GlobalCircularLoader } from '../../generic/global-circular-loader/GlobalCircularLoader';
-import { GlobalError } from '../../generic/global-error/GlobalError';
+import { GlobalIndicator } from '../../generic/global-indicator/GlobalIndicator';
 import { Title } from '../../generic/title/Title';
 import { ArticlesList } from './articles-list/ArticlesList';
 
@@ -11,17 +12,17 @@ export const ShopRoot = () => {
   const { status, data } = useProductsQuery();
 
   return (
-    <div className="p-2 md:p-4 flex-grow">
-      <div className="flex flex-col mt-3">
+    <div className="flex-grow p-2 md:p-4">
+      <div className="mt-3 flex flex-col">
         <Title>Articles</Title>
         {
           {
             loading: <GlobalCircularLoader>Loading</GlobalCircularLoader>,
             success: <ArticlesList products={data?.products} />,
             error: (
-              <GlobalError>
+              <GlobalIndicator Icon={ErrorCircle}>
                 An error occured while fetching articles
-              </GlobalError>
+              </GlobalIndicator>
             ),
           }[status]
         }
