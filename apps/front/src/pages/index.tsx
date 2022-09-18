@@ -4,7 +4,7 @@ import { NavBar } from '../components/generic/navbar';
 import { ShopRoot } from '../components/templates/shop/Shop';
 
 const Index = () => (
-  <div className="flex flex-col h-screen">
+  <div className="flex h-screen flex-col">
     <NavBar />
     <ShopRoot />
     <Footer />

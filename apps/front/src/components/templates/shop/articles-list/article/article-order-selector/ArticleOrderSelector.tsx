@@ -8,19 +8,19 @@ export const ArticleOrderSelector = ({ id }: ArticleOrderSelectorProps) => {
   const { count, handleCancelOrder, handleBumpOrder } = useOrderActions(id);
 
   return (
-    <div className="grow items-center text-center text-white rounded-lg bg-sky-800 hover:bg-sky-900">
-      <div className="flex gap-1 justify-between">
+    <div className="grow items-center rounded-lg bg-sky-800 text-center text-white hover:bg-sky-900">
+      <div className="flex justify-between gap-1">
         <button
-          className="bg-teal-600 hover:bg-teal-500 py-6 sm:py-2 px-14 sm:px-5 rounded-lg focus:outline:none text-xl"
+          className="focus:outline:none rounded-lg bg-teal-600 py-6 px-14 text-xl hover:bg-teal-500 sm:py-2 sm:px-5"
           onClick={handleCancelOrder}
         >
           -
         </button>
-        <div className="py-6 sm:py-2 rounded-lg text-2xl sm:text-lg">
+        <div className="rounded-lg py-6 text-2xl sm:py-2 sm:text-lg">
           {count}
         </div>
         <button
-          className="bg-teal-600 hover:bg-teal-500 py-6 sm:py-2 px-14 sm:px-5 rounded-lg focus:outline:none text-xl"
+          className="focus:outline:none rounded-lg bg-teal-600 py-6 px-14 text-xl hover:bg-teal-500 sm:py-2 sm:px-5"
           onClick={handleBumpOrder}
         >
           +

@@ -15,7 +15,7 @@ export const Article = (props: ArrayItemType<ProductsArrayType>) => {
   const { id, name, image, description, price } = props;
 
   return (
-    <div className="opacity-95 rounded-lg border shadow-md bg-gray-800 hover:bg-gray-700 border-gray-700 flex flex-col">
+    <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 opacity-95 shadow-md hover:bg-gray-700">
       <Image
         src={image}
         alt={name}
@@ -25,14 +25,14 @@ export const Article = (props: ArrayItemType<ProductsArrayType>) => {
         blurDataURL="https://loremflickr.com/320/240"
         className="rounded-t-md"
       />
-      <div className="px-5 pt-5 flex-grow">
+      <div className="flex-grow px-5 pt-5">
         <button onClick={handleArticleSelected}>
-          <h5 className="text-left mb-2 text-2xl font-bold tracking-tight text-white h-10 sm:h-24">
+          <h5 className="mb-2 h-10 text-left text-2xl font-bold tracking-tight text-white sm:h-24">
             {name}
           </h5>
         </button>
         <p className="mb-3 font-normal text-white">{price} €</p>
-        <p className="mb-3 font-light text-gray-400 truncate max-w-xs h-9">
+        <p className="mb-3 h-9 max-w-xs truncate font-light text-gray-400">
           {description}
         </p>
       </div>

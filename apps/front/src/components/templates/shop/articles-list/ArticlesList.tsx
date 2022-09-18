@@ -13,7 +13,7 @@ export const ArticlesList = ({ products }: Pick<ProductsQuery, 'products'>) => {
     products && (
       <>
         <ArticleDetailsModal {...modalState} />
-        <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 place-content-center">
+        <div className="grid place-content-center gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {products.slice(0, 13).map((p) => (
             <Article key={p.id} {...p} />
           ))}

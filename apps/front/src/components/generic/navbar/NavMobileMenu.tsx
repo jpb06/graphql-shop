@@ -7,11 +7,11 @@ type NavMobileMenuProps = {
 export const NavMobileMenu = ({ isCollapsed }: NavMobileMenuProps) => {
   return (
     <div
-      className="justify-between items-center w-full md:flex md:w-auto md:order-1"
+      className="w-full items-center justify-between md:order-1 md:flex md:w-auto"
       id="collapse-menu"
     >
       <div className={isCollapsed ? 'hidden md:flex' : 'md:flex'}>
-        <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+        <ul className="mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium">
           <NavMenuLink to="/">Articles</NavMenuLink>
           <NavMenuLink to="/order">Order</NavMenuLink>
         </ul>

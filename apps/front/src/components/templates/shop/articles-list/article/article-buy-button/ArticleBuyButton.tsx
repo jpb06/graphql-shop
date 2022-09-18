@@ -10,11 +10,11 @@ export const ArticleBuyButton = ({ id }: ArticleBuyButtonProps) => {
 
   return (
     <button
-      className="flex justify-center py-6 sm:py-2 px-3 text-xl items-center text-white rounded-lg bg-sky-800 hover:bg-sky-700"
+      className="flex items-center justify-center rounded-lg bg-sky-800 py-6 px-3 text-xl text-white hover:bg-sky-700 sm:py-2"
       onClick={handleBumpOrder}
     >
       Buy
-      <UpArrowChevronIcon className="ml-1 w-7 h-7 text-white" />
+      <UpArrowChevronIcon className="ml-1 h-7 w-7 text-white" />
     </button>
   );
 };

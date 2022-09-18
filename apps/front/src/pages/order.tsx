@@ -3,7 +3,7 @@ import { NavBar } from '../components/generic/navbar';
 import { OrderRoot } from '../components/templates/order/Order';
 
 const Order = () => (
-  <div className="flex flex-col h-screen">
+  <div className="flex h-screen flex-col">
     <NavBar />
     <OrderRoot />
     <Footer />

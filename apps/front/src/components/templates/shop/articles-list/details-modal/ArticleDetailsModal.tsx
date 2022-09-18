@@ -38,21 +38,21 @@ export const ArticleDetailsModal = ({
       aria-hidden={hidden ? 'true' : 'false'}
       className={rootClassname}
     >
-      <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
+      <div className="relative h-full w-full max-w-2xl p-4 md:h-auto">
         {/* Modal content */}
-        <div className="relative rounded-lg shadow bg-gray-700">
+        <div className="relative rounded-lg bg-gray-700 shadow">
           {/* Modal header */}
-          <div className="flex justify-between items-start p-4 rounded-t border-b border-gray-600">
+          <div className="flex items-start justify-between rounded-t border-b border-gray-600 p-4">
             <h3 className="text-xl font-semibold text-white">{name}</h3>
             <button
               type="button"
-              className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
+              className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-600 hover:text-white"
               data-modal-toggle="productModal"
               onClick={handleClose}
             >
               <svg
                 aria-hidden="true"
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ export const ArticleDetailsModal = ({
             </button>
           </div>
           {/* Modal body */}
-          <div className="p-6 space-y-6">
+          <div className="space-y-6 p-6">
             {image && (
               <Image
                 src={image}
@@ -79,7 +79,7 @@ export const ArticleDetailsModal = ({
                 className="rounded-t-md"
               />
             )}
-            <p className="text-base leading-relaxed text-white text-right">
+            <p className="text-right text-base leading-relaxed text-white">
               {price} €
             </p>
             <p className="text-base leading-relaxed text-gray-400">
@@ -87,7 +87,7 @@ export const ArticleDetailsModal = ({
             </p>
           </div>
           {/* Modal footer */}
-          <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-600"></div>
+          <div className="flex items-center space-x-2 rounded-b border-t border-gray-600 p-6"></div>
         </div>
       </div>
     </div>

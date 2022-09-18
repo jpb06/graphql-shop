@@ -3,10 +3,10 @@ import { PropsWithChildren } from 'react';
 import Loader from '../../../../public/loader.svg';
 
 export const GlobalCircularLoader = ({ children }: PropsWithChildren) => (
-  <div role="status" className="text-center w-full pt-36 pb-40">
-    <Loader className="inline mr-2 w-36 h-36 animate-spin text-gray-600 fill-blue-600" />
+  <div role="status" className="w-full pt-36 pb-40 text-center">
+    <Loader className="mr-2 inline h-36 w-36 animate-spin fill-blue-600 text-gray-600" />
     {children && (
-      <div className="text-center text-xl pt-2 text-gray-600 font-bold">
+      <div className="pt-2 text-center text-xl font-bold text-gray-600">
         {children}
       </div>
     )}

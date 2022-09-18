@@ -13,8 +13,8 @@ export const NavBar = () => {
 
   return (
     <>
-      <nav className="border-gray-200 px-2 sm:px-4 py-2.5 bg-gray-900 fixed w-full z-20 top-0 left-0 border-b text-white">
-        <div className="container flex flex-wrap justify-between items-center mx-auto">
+      <nav className="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-gray-900 px-2 py-2.5 text-white sm:px-4">
+        <div className="container mx-auto flex flex-wrap items-center justify-between">
           <Brand />
           <NavContent onExpandClick={handleExpandClick} />
           <NavMobileMenu isCollapsed={isNavCollapsed} />

@@ -11,7 +11,7 @@ import TailwindLogo from '../../../../public/technos-icons/tailwind.svg';
 import TypeGraphqlLogo from '../../../../public/technos-icons/typegraphql.png';
 
 export const Links = () => (
-  <div className="grid grid-cols-2 md:gap-20 sm:gap-12 md:grid-cols-3 lg:grid-cols-4 md:mr-20">
+  <div className="grid grid-cols-2 sm:gap-12 md:mr-20 md:grid-cols-3 md:gap-20 lg:grid-cols-4">
     <div>
       <h2 className="mb-6 text-sm font-semibold uppercase text-white">
         Frameworks
@@ -19,19 +19,19 @@ export const Links = () => (
       <ul className="text-gray-400">
         <li className="mb-4 flex">
           <Image src={NxLogo} width="20" height="20" alt="nx" />
-          <a href="https://nx.dev/" className="hover:underline pl-1">
+          <a href="https://nx.dev/" className="pl-1 hover:underline">
             nx
           </a>
         </li>
         <li className="mb-4 flex">
           <NextLogo className="h-5 w-5" />
-          <a href="https://nextjs.org/" className="hover:underline pl-1">
+          <a href="https://nextjs.org/" className="pl-1 hover:underline">
             nextjs
           </a>
         </li>
         <li className="mb-4 flex">
           <NestLogo className="h-5 w-5" />
-          <a href="https://nestjs.com/" className="hover:underline pl-1">
+          <a href="https://nestjs.com/" className="pl-1 hover:underline">
             nestjs
           </a>
         </li>
@@ -42,7 +42,7 @@ export const Links = () => (
       <ul className="text-gray-400">
         <li className="mb-4 flex">
           <GraphqlLogo className="h-5 w-5" />
-          <a href="https://graphql.org/" className="hover:underline pl-1">
+          <a href="https://graphql.org/" className="pl-1 hover:underline">
             graphql
           </a>
         </li>
@@ -53,7 +53,7 @@ export const Links = () => (
             height="20"
             alt="typegraphql"
           />
-          <a href="https://typegraphql.com/" className="hover:underline pl-1">
+          <a href="https://typegraphql.com/" className="pl-1 hover:underline">
             typegraphql
           </a>
         </li>
@@ -61,7 +61,7 @@ export const Links = () => (
           <ReactQueryLogo className="h-5 w-5" />
           <a
             href="https://tanstack.com/query/v4"
-            className="hover:underline pl-1"
+            className="pl-1 hover:underline"
           >
             react-query
           </a>
@@ -73,13 +73,13 @@ export const Links = () => (
       <ul className="text-gray-400">
         <li className="mb-4 flex">
           <ReactLogo className="h-5 w-5" />
-          <a href="https://reactjs.org/" className="hover:underline pl-1">
+          <a href="https://reactjs.org/" className="pl-1 hover:underline">
             react
           </a>
         </li>
         <li className="mb-4 flex">
           <TailwindLogo className="h-5 w-5" />
-          <a href="https://tailwindcss.com/" className="hover:underline pl-1">
+          <a href="https://tailwindcss.com/" className="pl-1 hover:underline">
             tailwind
           </a>
         </li>
@@ -92,7 +92,7 @@ export const Links = () => (
       <ul className="text-gray-400">
         <li className="mb-4 flex">
           <Image src={JotaiLogo} width="24" height="20" alt="jotai" />{' '}
-          <a href="https://jotai.org/docs" className="hover:underline pl-1">
+          <a href="https://jotai.org/docs" className="pl-1 hover:underline">
             jotai
           </a>
         </li>
