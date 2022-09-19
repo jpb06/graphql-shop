@@ -1,22 +1,28 @@
 import { useAtom } from 'jotai';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
-import { ordersAtom, OrdersIndexerType } from '../../state/orders.state';
+import { OrderData, ordersAtom } from '../../../../../state/orders.state';
 
-export const useOrderActions = (id: string) => {
+export const useOrderActions = (targetOrder: Omit<OrderData, 'count'>) => {
   const [orders, setOrders] = useAtom(ordersAtom);
-  const [, setLocalStorage] = useLocalStorage<OrdersIndexerType>(
-    'orders',
-    orders
-  );
+  const [, setLocalStorage] = useLocalStorage('orders', orders);
+
+  const getOrder = (v: OrderData[]) => v.find((el) => el.id === targetOrder.id);
 
   const handleCancelOrder = () =>
     setOrders((v) => {
-      const newValue = v[id] === 1 ? 0 : --v[id];
-      const newOrders = { ...v, [id]: newValue };
+      const maybeExistingOrder = getOrder(v);
 
-      if (newOrders[id] === 0) {
-        delete newOrders[id];
+      if (!maybeExistingOrder) {
+        return v;
+      }
+
+      let newOrders: Array<OrderData>;
+      if (maybeExistingOrder.count === 1) {
+        newOrders = v.filter((el) => el.id !== maybeExistingOrder.id);
+      } else {
+        maybeExistingOrder.count -= 1;
+        newOrders = [...v];
       }
 
       setLocalStorage(newOrders);
@@ -26,8 +32,17 @@ export const useOrderActions = (id: string) => {
 
   const handleBumpOrder = () =>
     setOrders((v) => {
-      const newValue = isNaN(v[id]) ? 1 : ++v[id];
-      const newOrders = { ...v, [id]: newValue };
+      const maybeExistingOrder = getOrder(v);
+
+      if (maybeExistingOrder) {
+        maybeExistingOrder.count += 1;
+
+        setLocalStorage([...v]);
+
+        return [...v];
+      }
+
+      const newOrders = [...v, { ...targetOrder, count: 1 }];
 
       setLocalStorage(newOrders);
 
@@ -35,7 +50,7 @@ export const useOrderActions = (id: string) => {
     });
 
   return {
-    count: isNaN(orders[id]) ? 0 : orders[id],
+    count: orders.find((el) => el.id === targetOrder.id)?.count,
     handleCancelOrder,
     handleBumpOrder,
   };

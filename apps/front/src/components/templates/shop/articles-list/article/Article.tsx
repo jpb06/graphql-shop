@@ -12,7 +12,7 @@ export type ProductsArrayType = Pick<ProductsQuery, 'products'>['products'];
 export const Article = (props: ArrayItemType<ProductsArrayType>) => {
   const { hasOrders, handleArticleSelected } = useArticleState(props);
 
-  const { id, name, image, description, price } = props;
+  const { name, image, description, price } = props;
 
   return (
     <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 opacity-95 shadow-md hover:bg-gray-700">
@@ -37,9 +37,9 @@ export const Article = (props: ArrayItemType<ProductsArrayType>) => {
         </p>
       </div>
       {hasOrders ? (
-        <ArticleOrderSelector id={id} />
+        <ArticleOrderSelector {...props} />
       ) : (
-        <ArticleBuyButton id={id} />
+        <ArticleBuyButton {...props} />
       )}
     </div>
   );

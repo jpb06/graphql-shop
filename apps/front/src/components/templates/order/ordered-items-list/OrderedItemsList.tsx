@@ -1,16 +1,17 @@
-import { ProductsWithIdsQuery } from '@front/api';
+import { useAtom } from 'jotai';
 
+import { ordersAtom } from '../../../state/orders.state';
+import { OrderSummary } from './order-summary/OrderSummary';
 import { OrderedItem } from './ordered-item/OrderedItem';
-import { OrderSummary } from './ordered-item/order-summary/OrderSummary';
 
-export const OrderedItemsList = ({
-  productsWithIds,
-}: Pick<ProductsWithIdsQuery, 'productsWithIds'>) => {
+export const OrderedItemsList = () => {
+  const [orders] = useAtom(ordersAtom);
+
   return (
     <div className="flex flex-col gap-2 md:justify-start xl:flex-row">
-      <OrderSummary productsWithIds={productsWithIds} />
-      <div className="col-span-2 flex flex-col gap-2">
-        {productsWithIds.map((product) => (
+      <OrderSummary />
+      <div className="col-span-2 flex flex-col gap-2 rounded-lg bg-gradient-to-tr from-slate-500 to-slate-400">
+        {orders.map((product) => (
           <OrderedItem key={product.id} {...product} />
         ))}
       </div>

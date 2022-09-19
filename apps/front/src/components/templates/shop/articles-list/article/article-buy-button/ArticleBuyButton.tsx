@@ -1,12 +1,10 @@
 import UpArrowChevronIcon from '../../../../../../../public/icons/up-arrow-chevron.svg';
+import { ArrayItemType } from '../../../../../../types/ArrayItemType.type';
+import { ProductsArrayType } from '../Article';
 import { useOrderActions } from '../hooks/useOrderActions';
 
-type ArticleBuyButtonProps = {
-  id: string;
-};
-
-export const ArticleBuyButton = ({ id }: ArticleBuyButtonProps) => {
-  const { handleBumpOrder } = useOrderActions(id);
+export const ArticleBuyButton = (order: ArrayItemType<ProductsArrayType>) => {
+  const { handleBumpOrder } = useOrderActions(order);
 
   return (
     <button

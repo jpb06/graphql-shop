@@ -1,11 +1,11 @@
+import { ArrayItemType } from '../../../../../../types/ArrayItemType.type';
+import { ProductsArrayType } from '../Article';
 import { useOrderActions } from './../hooks/useOrderActions';
 
-type ArticleOrderSelectorProps = {
-  id: string;
-};
-
-export const ArticleOrderSelector = ({ id }: ArticleOrderSelectorProps) => {
-  const { count, handleCancelOrder, handleBumpOrder } = useOrderActions(id);
+export const ArticleOrderSelector = (
+  order: ArrayItemType<ProductsArrayType>
+) => {
+  const { count, handleCancelOrder, handleBumpOrder } = useOrderActions(order);
 
   return (
     <div className="grow items-center rounded-lg bg-sky-800 text-center text-white hover:bg-sky-900">
