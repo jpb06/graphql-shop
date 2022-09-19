@@ -1,0 +1,9 @@
+query ProductsWithIds($ids: [Int!]!) {
+  productsWithIds(ids: $ids) {
+    id
+    name
+    description
+    image
+    price
+  }
+}

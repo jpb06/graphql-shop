@@ -25,6 +25,13 @@ export class ProductsResolver {
     return this.products.getAll();
   }
 
+  @Query(() => [GqlProduct], { name: 'productsWithIds' })
+  async getProductsWithIds(
+    @Args('ids', { type: () => [Int] }) ids: Array<number>
+  ): Promise<Array<Product>> {
+    return this.products.getByIds(ids);
+  }
+
   @Query(() => GqlProduct, { name: 'product' })
   async getBy(@Args('id', { type: () => Int }) id: number): Promise<Product> {
     return this.products.getBy(id);

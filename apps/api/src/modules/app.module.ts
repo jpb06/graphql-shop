@@ -24,7 +24,10 @@ import { UsersResolver } from './users/users.resolver';
     AuthModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
+      autoSchemaFile: join(
+        process.cwd(),
+        'apps/api/src/graphql/schema.graphql'
+      ),
       // debug: true,
       playground: true,
     }),

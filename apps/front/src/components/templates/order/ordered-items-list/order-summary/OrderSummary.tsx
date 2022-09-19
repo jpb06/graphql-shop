@@ -1,0 +1,43 @@
+import MonitorMoneyIcon from '../../../../../../public/icons/monitor-money.svg';
+import CheckSquareIcon from '../../../../../../public/icons/tick-square.svg';
+import { Button } from '../../../../generic/button/Button';
+import { TitleWithIcon } from '../../../../generic/title-with-icon/TitleWithIcon';
+import { useOrderSummaryActions } from './hooks/useOrderSummaryActions';
+import { useOrdersData } from './hooks/useOrdersData';
+
+export const OrderSummary = () => {
+  const { handleCancelPayment, handleStartPayment } = useOrderSummaryActions();
+  const { articlesCount, totalCost } = useOrdersData();
+
+  return (
+    <div className="grow rounded-md bg-sky-800 p-4 text-white">
+      <TitleWithIcon Icon={CheckSquareIcon}>Summary</TitleWithIcon>
+      <div className="flex flex-col justify-center text-center">
+        <MonitorMoneyIcon className="max-w-[160px] self-center md:max-w-[270px]" />
+        <div className="pb-5 text-5xl text-teal-200 md:text-6xl">
+          Your order
+        </div>
+        <div className="text-grey-200 pb-2 text-3xl">
+          {articlesCount} articles - {totalCost} €
+        </div>
+        <div className="mt-10 flex self-center">
+          <Button
+            variant="green"
+            className="h-40 w-40"
+            onClick={handleStartPayment}
+          >
+            Proceed
+            <br /> with payment
+          </Button>
+          <Button
+            variant="neutral"
+            className="h-40 w-40"
+            onClick={handleCancelPayment}
+          >
+            Cancel order
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

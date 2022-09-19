@@ -7,7 +7,7 @@ import { GqlAuthOutput } from '../auth/dtos/gql-auth-output.dto';
 import { JwtPayload } from '../auth/dtos/jwt-payload.dto';
 import { GqlAuthGuard } from '../auth/guards/graphql-auth.guard';
 import { GqlLoggedUser } from './dtos/gql-logged-user.dto';
-import { GqlSignupInput } from './dtos/gql-signup-input.dto';
+import { GqlSignupArgs } from './dtos/gql-signup-args.dto';
 import { UsersService } from './users.service';
 
 @Resolver()
@@ -21,7 +21,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => GqlAuthOutput)
-  async signup(@Args('input') input: GqlSignupInput): Promise<GqlAuthOutput> {
+  async signup(@Args() input: GqlSignupArgs): Promise<GqlAuthOutput> {
     return this.users.signup(input);
   }
 }

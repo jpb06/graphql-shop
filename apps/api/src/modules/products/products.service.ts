@@ -15,6 +15,14 @@ export class ProductsService {
     });
   }
 
+  async getByIds(ids: Array<number>): Promise<Array<Product>> {
+    return this.db.product.findMany({
+      where: {
+        id: { in: ids },
+      },
+    });
+  }
+
   async getBy(id: number): Promise<Product> {
     return this.db.product.findFirst({
       where: {

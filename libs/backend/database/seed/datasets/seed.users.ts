@@ -3,7 +3,7 @@ import { hash } from 'bcrypt';
 import { PrismaDb } from '../types/prisma-db.type';
 import { seedAddresses } from './seed.addresses';
 
-const seedUserOne = async (prisma: PrismaDb) => {
+const seedUserOne = async (prisma: PrismaDb): Promise<void> => {
   await prisma.user.upsert({
     where: { email: 'admin@cool.org' },
     update: {},
@@ -47,7 +47,7 @@ const seedUserOne = async (prisma: PrismaDb) => {
   });
 };
 
-const seedUserTwo = async (prisma: PrismaDb) => {
+const seedUserTwo = async (prisma: PrismaDb): Promise<void> => {
   await prisma.user.upsert({
     where: { email: 'bob@cool.org' },
     update: {},
@@ -70,7 +70,7 @@ const seedUserTwo = async (prisma: PrismaDb) => {
   });
 };
 
-export const seedUsers = async (prisma: PrismaDb) => {
+export const seedUsers = async (prisma: PrismaDb): Promise<void> => {
   await seedAddresses(prisma);
   await seedUserOne(prisma);
   await seedUserTwo(prisma);
