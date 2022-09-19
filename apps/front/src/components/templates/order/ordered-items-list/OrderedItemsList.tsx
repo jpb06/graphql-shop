@@ -10,10 +10,17 @@ export const OrderedItemsList = () => {
   return (
     <div className="flex flex-col gap-2 md:justify-start xl:flex-row">
       <OrderSummary />
-      <div className="col-span-2 flex flex-col gap-2 rounded-lg bg-gradient-to-tr from-slate-500 to-slate-400">
+      <div className="col-span-2 flex flex-col gap-2 rounded-lg">
         {orders.map((product) => (
           <OrderedItem key={product.id} {...product} />
         ))}
+        {orders.length < 3 &&
+          Array.from(Array(3 - orders.length).keys()).map((id) => (
+            <div
+              key={id}
+              className={`hidden animate-pulse rounded-lg bg-slate-300 xl:flex xl:h-[240px] xl:flex-row`}
+            />
+          ))}
       </div>
     </div>
   );

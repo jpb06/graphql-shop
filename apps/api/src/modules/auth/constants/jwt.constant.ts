@@ -1,1 +1,1 @@
-export const jwtSecret = process.env.JWT_SECRET;
+export const jwtSecret = process.env.NX_JWT_SECRET;
