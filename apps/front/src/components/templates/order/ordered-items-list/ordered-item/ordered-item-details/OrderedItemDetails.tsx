@@ -14,7 +14,7 @@ export const OrderedItemDetails = ({
   stock,
 }: OrderData) => (
   <>
-    <div className="rounded-t-lg border-2 border-gray-800 bg-gray-700 md:flex-none md:rounded-none md:rounded-l-lg">
+    <div className="rounded-t-lg border border-gray-800 bg-gray-700 md:flex-none md:rounded-none md:rounded-l-lg">
       <Image
         src={image}
         alt={name}
@@ -27,7 +27,7 @@ export const OrderedItemDetails = ({
     </div>
     <div className="flex-initial grow bg-gray-800 hover:bg-gray-700 md:w-[500px]">
       <div className="flex h-full flex-col p-4 leading-normal">
-        <TextWithIcon Icon={ProductIcon} className="text-2xl">
+        <TextWithIcon Icon={ProductIcon} className="text-2xl text-cyan-600">
           {name}
         </TextWithIcon>
         <TextWithIcon Icon={DollarPriceTagIcon} className="mt-6">
