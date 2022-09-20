@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
 import { OrderData, ordersAtom } from '../../../../../state/orders.state';
 
-export const useOrderActions = (targetOrder: Omit<OrderData, 'count'>) => {
+export const useOrderActions = (targetOrder: OrderData) => {
   const [orders, setOrders] = useAtom(ordersAtom);
   const [, setLocalStorage] = useLocalStorage('orders', orders);
 
@@ -33,6 +33,13 @@ export const useOrderActions = (targetOrder: Omit<OrderData, 'count'>) => {
   const handleBumpOrder = () =>
     setOrders((v) => {
       const maybeExistingOrder = getOrder(v);
+
+      if (
+        targetOrder.stock === 0 ||
+        maybeExistingOrder?.count >= targetOrder.stock
+      ) {
+        return v;
+      }
 
       if (maybeExistingOrder) {
         maybeExistingOrder.count += 1;
