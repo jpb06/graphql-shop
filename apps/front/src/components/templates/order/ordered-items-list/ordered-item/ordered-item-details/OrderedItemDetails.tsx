@@ -1,7 +1,7 @@
 import Image from 'next/future/image';
 
 import ProductIcon from '../../../../../../../public/icons/product.svg';
-import { TitleWithIcon } from '../../../../../generic/title-with-icon/TitleWithIcon';
+import { TextWithIcon } from '../../../../../generic/text-with-icon/TextWithIcon';
 import { OrderData } from '../../../../../state/orders.state';
 
 export const OrderedItemDetails = ({ name, description, image }: OrderData) => (
@@ -19,7 +19,9 @@ export const OrderedItemDetails = ({ name, description, image }: OrderData) => (
     </div>
     <div className="flex-initial grow bg-gray-800 hover:bg-gray-700 md:w-[500px]">
       <div className="p-4 leading-normal">
-        <TitleWithIcon Icon={ProductIcon}>{name}</TitleWithIcon>
+        <TextWithIcon Icon={ProductIcon} className="text-2xl">
+          {name}
+        </TextWithIcon>
         <p className="mb-3 font-normal text-gray-400">{description}</p>
       </div>
     </div>

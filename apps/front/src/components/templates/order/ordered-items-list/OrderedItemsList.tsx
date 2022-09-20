@@ -18,7 +18,7 @@ export const OrderedItemsList = () => {
           Array.from(Array(3 - orders.length).keys()).map((id) => (
             <div
               key={id}
-              className={`hidden animate-pulse rounded-lg bg-slate-300 xl:flex xl:h-[240px] xl:flex-row`}
+              className={`hidden animate-pulse rounded-lg bg-gradient-to-tl from-sky-200 to-sky-300 xl:flex xl:h-[240px] xl:flex-row`}
             />
           ))}
       </div>

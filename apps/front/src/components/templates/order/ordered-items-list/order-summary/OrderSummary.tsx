@@ -1,7 +1,7 @@
 import MonitorMoneyIcon from '../../../../../../public/icons/monitor-money.svg';
 import CheckSquareIcon from '../../../../../../public/icons/tick-square.svg';
 import { Button } from '../../../../generic/button/Button';
-import { TitleWithIcon } from '../../../../generic/title-with-icon/TitleWithIcon';
+import { TextWithIcon } from '../../../../generic/text-with-icon/TextWithIcon';
 import { useOrderSummaryActions } from './hooks/useOrderSummaryActions';
 import { useOrdersData } from './hooks/useOrdersData';
 
@@ -10,8 +10,10 @@ export const OrderSummary = () => {
   const { articlesCount, totalCost } = useOrdersData();
 
   return (
-    <div className="grow rounded-md bg-sky-800 p-4 text-white">
-      <TitleWithIcon Icon={CheckSquareIcon}>Summary</TitleWithIcon>
+    <div className="grow rounded-md bg-gradient-to-br from-sky-800 to-sky-200 p-4 text-white">
+      <TextWithIcon Icon={CheckSquareIcon} className="text-2xl">
+        Summary
+      </TextWithIcon>
       <div className="flex flex-col justify-center text-center">
         <MonitorMoneyIcon className="max-w-[160px] self-center md:max-w-[270px]" />
         <div className="pb-5 text-5xl text-teal-200 md:text-6xl">

@@ -1,6 +1,6 @@
 import ArrowRightIcon from '../../../../../../../public/icons/arrow-right.svg';
 import DollarPriceTagIcon from '../../../../../../../public/icons/dollar-price-tag.svg';
-import { TitleWithIcon } from '../../../../../generic/title-with-icon/TitleWithIcon';
+import { TextWithIcon } from '../../../../../generic/text-with-icon/TextWithIcon';
 import { OrderData } from '../../../../../state/orders.state';
 import { useOrderActions } from '../../../../shop/articles-list/article/hooks/useOrderActions';
 import { OrderedItemAction } from './OrderedItemAction';
@@ -11,7 +11,9 @@ export const OrderedItemControls = (order: OrderData) => {
   return (
     <div className="grid grid-cols-2 rounded-b-lg border border-l-0 border-gray-800 bg-gray-700 text-white shadow-md hover:bg-sky-900 md:block md:w-36 md:flex-initial md:rounded-none md:rounded-r-lg">
       <div className="mx-6 mt-4 mb-2 items-center">
-        <TitleWithIcon Icon={DollarPriceTagIcon}>Cost</TitleWithIcon>
+        <TextWithIcon Icon={DollarPriceTagIcon} className="text-2xl">
+          Cost
+        </TextWithIcon>
       </div>
       <div className="p-3 pt-6 text-right align-bottom text-xl md:mt-10 md:pt-2 md:text-base">
         <div className="">{`${order.count} x ${order.price} €`}</div>

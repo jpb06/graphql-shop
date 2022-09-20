@@ -29,6 +29,7 @@ type GqlProduct {
   description: String!
   image: String!
   price: Float!
+  stock: Int!
   category: GqlCategory!
 }
 

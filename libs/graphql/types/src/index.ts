@@ -69,6 +69,7 @@ export type GqlProduct = {
   image: Scalars['String'];
   name: Scalars['String'];
   price: Scalars['Float'];
+  stock: Scalars['Int'];
 };
 
 export type Mutation = {
@@ -163,7 +164,7 @@ export type ProductsWithIdsQuery = { __typename?: 'Query', productsWithIds: Arra
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, image: string, price: number, category: { __typename?: 'GqlCategory', id: string, name: string } }> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, image: string, price: number, stock: number, category: { __typename?: 'GqlCategory', id: string, name: string } }> };
 
 
 export const LoginDocument = /*#__PURE__*/ `
@@ -340,6 +341,7 @@ export const ProductsDocument = /*#__PURE__*/ `
     description
     image
     price
+    stock
     category {
       id
       name

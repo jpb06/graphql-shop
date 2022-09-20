@@ -8,7 +8,7 @@ export const ArticleOrderSelector = (
   const { count, handleCancelOrder, handleBumpOrder } = useOrderActions(order);
 
   return (
-    <div className="grow items-center rounded-lg bg-sky-800 text-center text-white hover:bg-sky-900">
+    <div className="rounded-lg bg-sky-800 text-center text-white hover:bg-sky-900">
       <div className="flex justify-between gap-1">
         <button
           className="focus:outline:none rounded-lg bg-teal-600 py-6 px-14 text-xl hover:bg-teal-500 sm:py-2 sm:px-5"

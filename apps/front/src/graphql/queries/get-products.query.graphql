@@ -5,6 +5,7 @@ query Products {
     description
     image
     price
+    stock
     category {
       id
       name

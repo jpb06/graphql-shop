@@ -1,24 +1,12 @@
-import { useAtom } from 'jotai';
-
 import { ProductsQuery } from '@front/api';
 
 import { Article } from './article/Article';
-import { ArticleDetailsModal } from './details-modal/ArticleDetailsModal';
-import { articleDetailsModalAtom } from './state/article-details-modal.state';
 
-export const ArticlesList = ({ products }: Pick<ProductsQuery, 'products'>) => {
-  const [modalState] = useAtom(articleDetailsModalAtom);
-
-  return (
-    products && (
-      <>
-        <ArticleDetailsModal {...modalState} />
-        <div className="grid place-content-center gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-          {products.slice(0, 13).map((p) => (
-            <Article key={p.id} {...p} />
-          ))}
-        </div>
-      </>
-    )
+export const ArticlesList = ({ products }: Pick<ProductsQuery, 'products'>) =>
+  products && (
+    <div className="grid place-content-center gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {products.slice(0, 13).map((p) => (
+        <Article key={p.id} {...p} />
+      ))}
+    </div>
   );
-};

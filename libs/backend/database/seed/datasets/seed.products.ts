@@ -15,8 +15,9 @@ export const seedProducts = async (
       data: {
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
-        image: faker.image.image(),
+        image: faker.image.image(640, 480, true),
         price: faker.commerce.price(),
+        stock: randomNumberBetween(0, 12),
         idCategory,
       },
     });
