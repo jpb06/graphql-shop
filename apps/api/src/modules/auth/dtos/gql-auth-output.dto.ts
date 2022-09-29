@@ -1,10 +1,9 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+
+import { GqlBaseUser } from '../../users/dtos/gql-base-user.dto';
 
 @ObjectType()
-export class GqlAuthOutput {
-  @Field(() => Int)
-  id: number;
-
+export class GqlAuthOutput extends GqlBaseUser {
   @Field(() => String)
   token: string;
 }

@@ -1,30 +1,10 @@
-import { endpointUrl, fetchParams } from './fetch-config';
 import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import { fetcher } from './fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-
-function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
-  return async (): Promise<TData> => {
-    const res = await fetch(endpointUrl as string, {
-    method: "POST",
-    ...(fetchParams),
-      body: JSON.stringify({ query, variables }),
-    });
-
-    const json = await res.json();
-
-    if (json.errors) {
-      const { message } = json.errors[0];
-
-      throw new Error(message);
-    }
-
-    return json.data;
-  }
-}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -38,7 +18,12 @@ export type Scalars = {
 
 export type GqlAuthOutput = {
   __typename?: 'GqlAuthOutput';
-  id: Scalars['Int'];
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  id: Scalars['ID'];
+  joinDate: Scalars['DateTime'];
+  lastName: Scalars['String'];
+  role: Scalars['String'];
   token: Scalars['String'];
 };
 
@@ -123,7 +108,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'GqlAuthOutput', token: string } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'GqlAuthOutput', id: string, token: string, email: string, firstName: string, lastName: string } };
 
 export type SignupMutationVariables = Exact<{
   email: Scalars['String'];
@@ -133,7 +118,7 @@ export type SignupMutationVariables = Exact<{
 }>;
 
 
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'GqlAuthOutput', id: number, token: string } };
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'GqlAuthOutput', id: string, token: string } };
 
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -170,7 +155,11 @@ export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename
 export const LoginDocument = /*#__PURE__*/ `
     mutation Login($username: String!, $password: String!) {
   login(username: $username, password: $password) {
+    id
     token
+    email
+    firstName
+    lastName
   }
 }
     `;
@@ -185,7 +174,6 @@ export const useLoginMutation = <
     );
 useLoginMutation.getKey = () => ['Login'];
 
-useLoginMutation.fetcher = (variables: LoginMutationVariables) => fetcher<LoginMutation, LoginMutationVariables>(LoginDocument, variables);
 export const SignupDocument = /*#__PURE__*/ `
     mutation Signup($email: String!, $lastName: String!, $firstName: String!, $password: String!) {
   signup(
@@ -210,7 +198,6 @@ export const useSignupMutation = <
     );
 useSignupMutation.getKey = () => ['Signup'];
 
-useSignupMutation.fetcher = (variables: SignupMutationVariables) => fetcher<SignupMutation, SignupMutationVariables>(SignupDocument, variables);
 export const CategoriesDocument = /*#__PURE__*/ `
     query Categories {
   categories {
@@ -241,7 +228,6 @@ export const useCategoriesQuery = <
 useCategoriesQuery.getKey = (variables?: CategoriesQueryVariables) => variables === undefined ? ['Categories'] : ['Categories', variables];
 ;
 
-useCategoriesQuery.fetcher = (variables?: CategoriesQueryVariables) => fetcher<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, variables);
 export const CategoryDocument = /*#__PURE__*/ `
     query Category($id: Int!) {
   category(id: $id) {
@@ -272,7 +258,6 @@ export const useCategoryQuery = <
 useCategoryQuery.getKey = (variables: CategoryQueryVariables) => ['Category', variables];
 ;
 
-useCategoryQuery.fetcher = (variables: CategoryQueryVariables) => fetcher<CategoryQuery, CategoryQueryVariables>(CategoryDocument, variables);
 export const ProductDocument = /*#__PURE__*/ `
     query Product($id: Int!) {
   product(id: $id) {
@@ -304,7 +289,6 @@ export const useProductQuery = <
 useProductQuery.getKey = (variables: ProductQueryVariables) => ['Product', variables];
 ;
 
-useProductQuery.fetcher = (variables: ProductQueryVariables) => fetcher<ProductQuery, ProductQueryVariables>(ProductDocument, variables);
 export const ProductsWithIdsDocument = /*#__PURE__*/ `
     query ProductsWithIds($ids: [Int!]!) {
   productsWithIds(ids: $ids) {
@@ -332,7 +316,6 @@ export const useProductsWithIdsQuery = <
 useProductsWithIdsQuery.getKey = (variables: ProductsWithIdsQueryVariables) => ['ProductsWithIds', variables];
 ;
 
-useProductsWithIdsQuery.fetcher = (variables: ProductsWithIdsQueryVariables) => fetcher<ProductsWithIdsQuery, ProductsWithIdsQueryVariables>(ProductsWithIdsDocument, variables);
 export const ProductsDocument = /*#__PURE__*/ `
     query Products {
   products {
@@ -364,5 +347,3 @@ export const useProductsQuery = <
 
 useProductsQuery.getKey = (variables?: ProductsQueryVariables) => variables === undefined ? ['Products'] : ['Products', variables];
 ;
-
-useProductsQuery.fetcher = (variables?: ProductsQueryVariables) => fetcher<ProductsQuery, ProductsQueryVariables>(ProductsDocument, variables);

@@ -13,7 +13,7 @@ import {
 type AuthData = Omit<JwtPayload, 'iat' | 'exp' | 'joinDate'> & {
   token: string;
   joinDate: Date;
-};
+} & Omit<User, 'password'>;
 
 @Injectable()
 export class AuthService {

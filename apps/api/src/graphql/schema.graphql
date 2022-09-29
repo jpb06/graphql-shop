@@ -3,11 +3,6 @@
 # ------------------------------------------------------
 
 type GqlAuthOutput {
-  id: Int!
-  token: String!
-}
-
-type GqlLoggedUser {
   id: ID!
   email: String!
   lastName: String!
@@ -21,6 +16,16 @@ type GqlLoggedUser {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type GqlLoggedUser {
+  id: ID!
+  email: String!
+  lastName: String!
+  firstName: String!
+  joinDate: DateTime!
+  role: String!
+  token: String!
+}
 
 type GqlProduct {
   id: ID!
