@@ -32,14 +32,14 @@ export const Article = (props: ArrayItemType<ProductsArrayType>) => {
       />
       <div className="flex-grow p-5">
         <Title>{name}</Title>
-        <p className="mt-3 mb-3 font-normal text-slate-300">
+        <div className="mt-3 mb-3 font-normal text-slate-300">
           <div className="flex flex-col">
             <TextWithIcon Icon={DollarPriceTagIcon}>{price} €</TextWithIcon>
             <TextWithIcon Icon={ProductGoodsBoxCompleteIcon}>
               {stock} in stock
             </TextWithIcon>
           </div>
-        </p>
+        </div>
         <p className="contents h-9 max-w-xs font-light text-gray-400">
           {description}
         </p>
