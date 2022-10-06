@@ -46,6 +46,13 @@
         "lintFilePatterns": ["apps/api/**/*.ts"]
       }
     },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["dist/apps/api"],
+      "options": {
+        "command": "pnpm tsc -b apps/api/tsconfig.json"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/api"],
