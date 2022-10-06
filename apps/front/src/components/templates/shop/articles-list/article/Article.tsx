@@ -5,9 +5,9 @@ import { ProductsQueryDataItem } from '@front/api';
 
 import DollarPriceTagIcon from '../../../../../../public/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '../../../../../../public/icons/product-goods-box-complete.svg';
+import { ordersAtom } from '../../../../../state/orders.state';
 import { TextWithIcon } from '../../../../generic/text-with-icon/TextWithIcon';
 import { Title } from '../../../../generic/title/Title';
-import { ordersAtom } from '../../../../state/orders.state';
 import { ArticleBuyButton } from './article-buy-button/ArticleBuyButton';
 import { ArticleOrderSelector } from './article-order-selector/ArticleOrderSelector';
 

@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
-import { OrderData, ordersAtom } from '../../../../../state/orders.state';
+import { OrderData, ordersAtom } from '../../../../../../state/orders.state';
 
 export const useOrderActions = (targetOrder: OrderData) => {
   const [orders, setOrders] = useAtom(ordersAtom);

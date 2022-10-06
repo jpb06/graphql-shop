@@ -1,8 +1,8 @@
 import { useAtom } from 'jotai';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
+import { ordersAtom } from '../../../../../../state/orders.state';
 import { modalStateAtom } from '../../../../../generic/modal/modal.state';
-import { ordersAtom } from '../../../../../state/orders.state';
 
 export const useOrderSummaryActions = () => {
   const [, setOrders] = useAtom(ordersAtom);

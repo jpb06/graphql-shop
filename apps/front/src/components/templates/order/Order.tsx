@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 
 import { usePersistedOrders } from '../../../hooks/usePersistedOrders';
+import { ordersAtom } from '../../../state/orders.state';
 import { ModalWrapper } from '../../generic/modal/ModalWrapper';
 import { PageTitle } from '../../generic/page-title/PageTitle';
-import { ordersAtom } from '../../state/orders.state';
 import { EmptyBasket } from './empty-basket/EmptyBasket';
 import { OrderedItemsList } from './ordered-items-list/OrderedItemsList';
 import { orderModalSteps, orderModalStep } from './state/order-modal.state';
