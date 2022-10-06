@@ -37,7 +37,7 @@ export const OrderedItemDetails = ({
           {stock} in stock
         </TextWithIcon>
         <p className="flex grow font-normal text-gray-400">
-          <div className="self-end">{description}</div>
+          <span className="self-end">{description}</span>
         </p>
       </div>
     </div>

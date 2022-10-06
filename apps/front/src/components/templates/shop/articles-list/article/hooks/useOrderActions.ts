@@ -12,7 +12,6 @@ export const useOrderActions = (targetOrder: OrderData) => {
   const handleCancelOrder = () =>
     setOrders((v) => {
       const maybeExistingOrder = getOrder(v);
-
       if (!maybeExistingOrder) {
         return v;
       }
@@ -33,27 +32,25 @@ export const useOrderActions = (targetOrder: OrderData) => {
   const handleBumpOrder = () =>
     setOrders((v) => {
       const maybeExistingOrder = getOrder(v);
+      if (!maybeExistingOrder) {
+        const newOrders = [...v, { ...targetOrder, count: 1 }];
+
+        setLocalStorage(newOrders);
+        return newOrders;
+      }
 
       if (
         targetOrder.stock === 0 ||
-        maybeExistingOrder?.count >= targetOrder.stock
+        maybeExistingOrder.count >= targetOrder.stock
       ) {
         return v;
       }
 
-      if (maybeExistingOrder) {
-        maybeExistingOrder.count += 1;
+      maybeExistingOrder.count += 1;
 
-        setLocalStorage([...v]);
+      setLocalStorage([...v]);
 
-        return [...v];
-      }
-
-      const newOrders = [...v, { ...targetOrder, count: 1 }];
-
-      setLocalStorage(newOrders);
-
-      return newOrders;
+      return [...v];
     });
 
   return {

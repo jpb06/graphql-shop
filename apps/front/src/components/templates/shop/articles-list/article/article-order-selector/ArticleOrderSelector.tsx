@@ -1,30 +1,29 @@
-import { ArrayItemType } from '../../../../../../types/ArrayItemType.type';
-import { ProductsArrayType } from '../Article';
-import { useOrderActions } from './../hooks/useOrderActions';
+import { ProductsQueryDataItem } from '@front/api';
 
-export const ArticleOrderSelector = (
-  order: ArrayItemType<ProductsArrayType>
-) => {
-  const { count, handleCancelOrder, handleBumpOrder } = useOrderActions(order);
+import { useOrderActions } from './../hooks/useOrderActions';
+import { NoStock } from './NoStock';
+import { OrderButton } from './OrderButton';
+
+export const ArticleOrderSelector = (product: ProductsQueryDataItem) => {
+  const { count, handleCancelOrder, handleBumpOrder } = useOrderActions({
+    ...product,
+    count: 0,
+  });
+
+  const outOfStock = count ? count >= product.stock : false;
 
   return (
     <div className="rounded-lg bg-sky-800 text-center text-white hover:bg-sky-900">
       <div className="flex justify-between gap-1">
-        <button
-          className="focus:outline:none rounded-lg bg-teal-600 py-6 px-14 text-xl hover:bg-teal-500 sm:py-2 sm:px-5"
-          onClick={handleCancelOrder}
-        >
-          -
-        </button>
+        <OrderButton onClick={handleCancelOrder}>-</OrderButton>
         <div className="rounded-lg py-6 text-2xl sm:py-2 sm:text-lg">
           {count}
         </div>
-        <button
-          className="focus:outline:none rounded-lg bg-teal-600 py-6 px-14 text-xl hover:bg-teal-500 sm:py-2 sm:px-5"
-          onClick={handleBumpOrder}
-        >
-          +
-        </button>
+        {outOfStock ? (
+          <NoStock />
+        ) : (
+          <OrderButton onClick={handleBumpOrder}>+</OrderButton>
+        )}
       </div>
     </div>
   );

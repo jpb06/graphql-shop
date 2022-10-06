@@ -1,20 +1,17 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 
-import { ProductsQuery } from '@front/api';
+import { ProductsQueryDataItem } from '@front/api';
 
 import DollarPriceTagIcon from '../../../../../../public/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '../../../../../../public/icons/product-goods-box-complete.svg';
-import { ArrayItemType } from '../../../../../types/ArrayItemType.type';
 import { TextWithIcon } from '../../../../generic/text-with-icon/TextWithIcon';
 import { Title } from '../../../../generic/title/Title';
 import { ordersAtom } from '../../../../state/orders.state';
 import { ArticleBuyButton } from './article-buy-button/ArticleBuyButton';
 import { ArticleOrderSelector } from './article-order-selector/ArticleOrderSelector';
 
-export type ProductsArrayType = Pick<ProductsQuery, 'products'>['products'];
-
-export const Article = (props: ArrayItemType<ProductsArrayType>) => {
+export const Article = (props: ProductsQueryDataItem) => {
   const [orders] = useAtom(ordersAtom);
   const { id, name, image, description, price, stock } = props;
   const hasOrders = orders.find((el) => el.id === id)?.count ?? 0;
