@@ -2,6 +2,21 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/graphql/types/src",
   "projectType": "library",
-  "targets": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graphql/types/src/custom-types/**/*.ts"]
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["dist/libs/graphql/types"],
+      "options": {
+        "command": "pnpm tsc -b libs/graphql/types/tsconfig.json"
+      }
+    }
+  },
   "tags": []
 }

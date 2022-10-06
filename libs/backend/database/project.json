@@ -9,6 +9,13 @@
       "options": {
         "lintFilePatterns": ["libs/backend/database/**/*.ts"]
       }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["dist/libs/backend/database"],
+      "options": {
+        "command": "pnpm tsc -b libs/backend/database/tsconfig.json"
+      }
     }
   },
   "tags": []

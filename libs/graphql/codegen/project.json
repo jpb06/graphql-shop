@@ -10,6 +10,13 @@
         "lintFilePatterns": ["libs/graphql/codegen/src/**/*.ts"]
       }
     },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["dist/libs/graphql/codegen"],
+      "options": {
+        "command": "pnpm tsc -b libs/graphql/codegen/tsconfig.json"
+      }
+    },
     "fetch": {
       "executor": "nx:run-commands",
       "options": {

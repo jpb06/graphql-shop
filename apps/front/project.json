@@ -56,6 +56,13 @@
       "options": {
         "lintFilePatterns": ["apps/front/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["dist/apps/front"],
+      "options": {
+        "command": "pnpm tsc -b apps/front/tsconfig.json"
+      }
     }
   },
   "tags": []
