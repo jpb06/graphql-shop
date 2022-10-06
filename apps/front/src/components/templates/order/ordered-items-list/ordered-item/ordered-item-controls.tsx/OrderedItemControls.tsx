@@ -1,7 +1,7 @@
 import ArrowRightIcon from '../../../../../../../public/icons/arrow-right.svg';
 import DollarPriceTagIcon from '../../../../../../../public/icons/dollar-price-tag.svg';
+import { OrderData } from '../../../../../../state/orders.state';
 import { TextWithIcon } from '../../../../../generic/text-with-icon/TextWithIcon';
-import { OrderData } from '../../../../../state/orders.state';
 import { useOrderActions } from '../../../../shop/articles-list/article/hooks/useOrderActions';
 import { OrderedItemAction } from './OrderedItemAction';
 

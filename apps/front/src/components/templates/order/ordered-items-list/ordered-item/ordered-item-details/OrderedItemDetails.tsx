@@ -3,8 +3,8 @@ import Image from 'next/future/image';
 import DollarPriceTagIcon from '../../../../../../../public/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '../../../../../../../public/icons/product-goods-box-complete.svg';
 import ProductIcon from '../../../../../../../public/icons/product.svg';
+import { OrderData } from '../../../../../../state/orders.state';
 import { TextWithIcon } from '../../../../../generic/text-with-icon/TextWithIcon';
-import { OrderData } from '../../../../../state/orders.state';
 
 export const OrderedItemDetails = ({
   name,

@@ -1,4 +1,4 @@
-import { OrderData } from '../../../../state/orders.state';
+import { OrderData } from '../../../../../state/orders.state';
 import { OrderedItemControls } from './ordered-item-controls.tsx/OrderedItemControls';
 import { OrderedItemDetails } from './ordered-item-details/OrderedItemDetails';
 
