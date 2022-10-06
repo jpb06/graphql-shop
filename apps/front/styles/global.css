@@ -7,3 +7,16 @@
     @apply bg-sky-200;
   }
 }
+
+@layer components {
+  .credit-card-signature {
+    background: repeating-linear-gradient(
+      0.1deg,
+      #fff 20%,
+      #fff 40%,
+      #fea 40%,
+      #fea 44%,
+      #fff 44%
+    );
+  }
+}

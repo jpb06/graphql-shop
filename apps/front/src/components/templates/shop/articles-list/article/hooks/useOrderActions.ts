@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
-import { OrderData, ordersAtom } from '../../../../../state/orders.state';
+import { OrderData, ordersAtom } from '../../../../../../state/orders.state';
 
-export const useOrderActions = (targetOrder: Omit<OrderData, 'count'>) => {
+export const useOrderActions = (targetOrder: OrderData) => {
   const [orders, setOrders] = useAtom(ordersAtom);
   const [, setLocalStorage] = useLocalStorage('orders', orders);
 
@@ -12,7 +12,6 @@ export const useOrderActions = (targetOrder: Omit<OrderData, 'count'>) => {
   const handleCancelOrder = () =>
     setOrders((v) => {
       const maybeExistingOrder = getOrder(v);
-
       if (!maybeExistingOrder) {
         return v;
       }
@@ -33,20 +32,25 @@ export const useOrderActions = (targetOrder: Omit<OrderData, 'count'>) => {
   const handleBumpOrder = () =>
     setOrders((v) => {
       const maybeExistingOrder = getOrder(v);
+      if (!maybeExistingOrder) {
+        const newOrders = [...v, { ...targetOrder, count: 1 }];
 
-      if (maybeExistingOrder) {
-        maybeExistingOrder.count += 1;
-
-        setLocalStorage([...v]);
-
-        return [...v];
+        setLocalStorage(newOrders);
+        return newOrders;
       }
 
-      const newOrders = [...v, { ...targetOrder, count: 1 }];
+      if (
+        targetOrder.stock === 0 ||
+        maybeExistingOrder.count >= targetOrder.stock
+      ) {
+        return v;
+      }
 
-      setLocalStorage(newOrders);
+      maybeExistingOrder.count += 1;
 
-      return newOrders;
+      setLocalStorage([...v]);
+
+      return [...v];
     });
 
   return {

@@ -12,7 +12,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
     const graphqlContext = GqlExecutionContext.create(context);
 
     const request = graphqlContext.getContext();
-    request.body = graphqlContext.getArgs().input;
+    request.body = graphqlContext.getArgs();
 
     return request;
   }

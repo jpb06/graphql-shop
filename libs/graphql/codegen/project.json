@@ -10,14 +10,21 @@
         "lintFilePatterns": ["libs/graphql/codegen/src/**/*.ts"]
       }
     },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["dist/libs/graphql/codegen"],
+      "options": {
+        "command": "pnpm tsc -b libs/graphql/codegen/tsconfig.json"
+      }
+    },
     "fetch": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "pnpm graphql-codegen --config libs/graphql/codegen/src/codegen-fetch.ts"
       }
     },
     "graphql-request": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "pnpm graphql-codegen --config libs/graphql/codegen/src/codegen-graphql-request.ts"
       }

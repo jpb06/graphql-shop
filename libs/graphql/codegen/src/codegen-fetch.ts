@@ -5,14 +5,8 @@ const config: CodegenConfig = {
   schema: 'apps/api/src/graphql/schema.graphql',
   documents: ['apps/front/src/graphql/**/*.graphql'],
   generates: {
-    'libs/graphql/types/src/index.ts': {
+    'libs/graphql/types/src/api.ts': {
       plugins: [
-        {
-          add: {
-            content:
-              "import { endpointUrl, fetchParams } from './fetch-config';",
-          },
-        },
         'typescript',
         'typescript-operations',
         'typescript-react-query',
@@ -21,17 +15,7 @@ const config: CodegenConfig = {
         pureMagicComment: true, // enforce tree-shaking
         exposeQueryKeys: true, // to prefetch queries (SSR)
         exposeMutationKeys: true,
-        exposeFetcher: true,
-        fetcher: {
-          endpoint: 'endpointUrl',
-          fetchParams: 'fetchParams',
-          //endpoint: process.env.NEXT_PUBLIC_GQL_API_URL,
-          // fetchParams: {
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //   },
-          // },
-        },
+        fetcher: './fetcher#fetcher',
       },
     },
   },

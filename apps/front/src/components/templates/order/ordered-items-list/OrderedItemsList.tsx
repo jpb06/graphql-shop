@@ -1,7 +1,8 @@
 import { useAtom } from 'jotai';
 
-import { ordersAtom } from '../../../state/orders.state';
+import { ordersAtom } from '../../../../state/orders.state';
 import { OrderSummary } from './order-summary/OrderSummary';
+import { OrderedItemSkeleton } from './ordered-item-skeleton/OrderedItemSkeleton';
 import { OrderedItem } from './ordered-item/OrderedItem';
 
 export const OrderedItemsList = () => {
@@ -16,10 +17,7 @@ export const OrderedItemsList = () => {
         ))}
         {orders.length < 3 &&
           Array.from(Array(3 - orders.length).keys()).map((id) => (
-            <div
-              key={id}
-              className={`hidden animate-pulse rounded-lg bg-slate-300 xl:flex xl:h-[240px] xl:flex-row`}
-            />
+            <OrderedItemSkeleton key={id} />
           ))}
       </div>
     </div>

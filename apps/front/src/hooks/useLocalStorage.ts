@@ -18,7 +18,7 @@ export const useLocalStorage = <T>(
     }
   });
 
-  const setValue = (value) => {
+  const setValue = (value: unknown) => {
     try {
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;

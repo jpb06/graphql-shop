@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { ordersAtom } from '../../../../../state/orders.state';
+import { ordersAtom } from '../../../../../../state/orders.state';
 
 export const useOrdersData = () => {
   const [orders] = useAtom(ordersAtom);

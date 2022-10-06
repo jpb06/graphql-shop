@@ -1,12 +1,20 @@
 import Image from 'next/future/image';
 
+import DollarPriceTagIcon from '../../../../../../../public/icons/dollar-price-tag.svg';
+import ProductGoodsBoxCompleteIcon from '../../../../../../../public/icons/product-goods-box-complete.svg';
 import ProductIcon from '../../../../../../../public/icons/product.svg';
-import { TitleWithIcon } from '../../../../../generic/title-with-icon/TitleWithIcon';
+import { TextWithIcon } from '../../../../../generic/text-with-icon/TextWithIcon';
 import { OrderData } from '../../../../../state/orders.state';
 
-export const OrderedItemDetails = ({ name, description, image }: OrderData) => (
+export const OrderedItemDetails = ({
+  name,
+  description,
+  image,
+  price,
+  stock,
+}: OrderData) => (
   <>
-    <div className="rounded-t-lg border-2 border-gray-800 bg-gray-700 md:flex-none md:rounded-none md:rounded-l-lg">
+    <div className="rounded-t-lg border border-gray-800 bg-gray-700 md:flex-none md:rounded-none md:rounded-l-lg">
       <Image
         src={image}
         alt={name}
@@ -18,9 +26,19 @@ export const OrderedItemDetails = ({ name, description, image }: OrderData) => (
       />
     </div>
     <div className="flex-initial grow bg-gray-800 hover:bg-gray-700 md:w-[500px]">
-      <div className="p-4 leading-normal">
-        <TitleWithIcon Icon={ProductIcon}>{name}</TitleWithIcon>
-        <p className="mb-3 font-normal text-gray-400">{description}</p>
+      <div className="flex h-full flex-col p-4 leading-normal">
+        <TextWithIcon Icon={ProductIcon} className="text-2xl text-cyan-600">
+          {name}
+        </TextWithIcon>
+        <TextWithIcon Icon={DollarPriceTagIcon} className="mt-6">
+          {price} €
+        </TextWithIcon>
+        <TextWithIcon Icon={ProductGoodsBoxCompleteIcon}>
+          {stock} in stock
+        </TextWithIcon>
+        <p className="flex grow font-normal text-gray-400">
+          <span className="self-end">{description}</span>
+        </p>
       </div>
     </div>
   </>
