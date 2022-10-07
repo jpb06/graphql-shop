@@ -1,2 +1,3 @@
 libs/graphql/types/src/index.ts
 apps/front/.next
+.dockerignore
