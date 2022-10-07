@@ -80,7 +80,7 @@ export const PaymentModalForm = ({
       <div className="flex w-full flex-row gap-1">
         <select
           name="expirationMonth"
-          className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-gray-400 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
+          className="block w-full appearance-none rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-gray-400 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           value={expirationMonth}
@@ -91,7 +91,7 @@ export const PaymentModalForm = ({
           />
         </select>
         <select
-          className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-gray-400 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
+          className="block w-full appearance-none rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-gray-400 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           name="expirationYear"

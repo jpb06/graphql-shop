@@ -14,7 +14,7 @@ export const OrderedItemDetails = ({
   stock,
 }: OrderData) => (
   <>
-    <div className="rounded-t-lg border border-gray-800 bg-gray-700 md:flex-none md:rounded-none md:rounded-l-lg">
+    <div className="rounded-t-lg border border-gray-800 bg-gray-700 md:max-h-60 md:flex-none md:rounded-none md:rounded-l-lg">
       <Image
         src={image}
         alt={name}
