@@ -22,16 +22,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "front:build",
+        "buildTarget": "app-frontend-shop:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "front:build:development",
+          "buildTarget": "app-frontend-shop:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "front:build:production",
+          "buildTarget": "app-frontend-shop:build:production",
           "dev": false
         }
       }
@@ -39,7 +39,7 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "front:build:production"
+        "buildTarget": "app-frontend-shop:build:production"
       }
     },
     "test": {

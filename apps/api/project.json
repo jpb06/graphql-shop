@@ -31,11 +31,11 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "api:build"
+        "buildTarget": "app-backend-api:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "api:build:production"
+          "buildTarget": "app-backend-api:build:production"
         }
       }
     },
