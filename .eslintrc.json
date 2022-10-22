@@ -105,7 +105,7 @@
         "eqeqeq": "error",
         "eol-last": "error",
         "func-call-spacing": ["error", "never"],
-        "func-style": "error",
+        "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
         "import/no-unresolved": 0,
         "jest/no-conditional-expect": 0,
         "key-spacing": "error",
