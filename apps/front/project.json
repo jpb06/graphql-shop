@@ -44,7 +44,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/front"],
+      "outputs": ["{workspaceRoot}/coverage/apps/front"],
       "options": {
         "jestConfig": "apps/front/jest.config.ts",
         "passWithNoTests": true
@@ -59,7 +59,7 @@
     },
     "type-check": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/apps/front"],
+      "outputs": ["{workspaceRoot}/dist/apps/front"],
       "options": {
         "command": "pnpm tsc -b apps/front/tsconfig.json"
       }

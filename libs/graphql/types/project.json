@@ -12,7 +12,7 @@
     },
     "type-check": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/libs/graphql/types"],
+      "outputs": ["{workspaceRoot}/dist/libs/graphql/types"],
       "options": {
         "command": "pnpm tsc -b libs/graphql/types/tsconfig.json"
       }

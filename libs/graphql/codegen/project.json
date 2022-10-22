@@ -12,7 +12,7 @@
     },
     "type-check": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/libs/graphql/codegen"],
+      "outputs": ["{workspaceRoot}/dist/libs/graphql/codegen"],
       "options": {
         "command": "pnpm tsc -b libs/graphql/codegen/tsconfig.json"
       }
