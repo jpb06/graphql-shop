@@ -1,6 +1,6 @@
-import { Footer } from '../components/generic/footer/Footer';
-import { NavBar } from '../components/generic/navbar';
-import { OrderRoot } from '../components/templates/order/Order';
+import { NavBar, Footer } from '@front/components';
+
+import { OrderRoot } from '../components/specialized/order/Order';
 
 const Order = () => (
   <div className="flex h-screen flex-col">
