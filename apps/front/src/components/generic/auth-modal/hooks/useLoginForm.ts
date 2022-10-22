@@ -6,7 +6,7 @@ import zod from 'zod';
 import { useLoginMutation } from '@front/api';
 
 import { authState } from '../../../../state/auth.state';
-import { orderModalStep } from '../../../templates/order/state/order-modal.state';
+import { orderModalStep } from '../../../specialized/order/state/order-modal.state';
 
 export type LoginFormModel = {
   email: string;
@@ -20,7 +20,7 @@ const schema: zod.ZodSchema<LoginFormModel> = zod.object({
 
 export const useLoginForm = () => {
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormModel>({
@@ -45,7 +45,7 @@ export const useLoginForm = () => {
   };
 
   return {
-    register,
+    control,
     onSubmit: handleSubmit(onSubmit),
     isLoading,
     formErrors: errors,

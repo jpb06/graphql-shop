@@ -1,9 +1,13 @@
 import { ChangeEventHandler, Dispatch, SetStateAction } from 'react';
 
-import { formatCvc, formatNumber } from '../credit-card/logic';
-import { CreditCardFocus } from '../credit-card/types';
-import { CurrentYearSelectOptions } from '../current-year-select-options/CurrentYearSelectOptions';
-import { MonthSelectOptions } from '../month-select-options/MonthSelectOptions';
+import {
+  formatCvc,
+  formatNumber,
+  CreditCardFocus,
+  CurrentYearSelectOptions,
+  MonthSelectOptions,
+} from '@front/components';
+
 import { CardState } from './PaymentModalContent';
 
 interface PaymentModalFormProps extends CardState {

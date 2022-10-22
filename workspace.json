@@ -3,9 +3,11 @@
   "version": 2,
   "projects": {
     "app-backend-api": "apps/api",
-    "lib-backend-tests": "libs/backend/tests",
-    "lib-backend-database": "libs/backend/database",
     "app-frontend-shop": "apps/front",
+    "lib-backend-database": "libs/backend/database",
+    "lib-backend-tests": "libs/backend/tests",
+    "lib-frontend-assets": "libs/frontend/assets",
+    "lib-frontend-components": "libs/frontend/components",
     "lib-graphql-codegen": "libs/graphql/codegen",
     "lib-graphql-types": "libs/graphql/types"
   }

@@ -1,9 +1,11 @@
-import Spinner from '../../../../public/icons/spinner.svg';
+import { Button, Input } from '@front/components';
+
+import { CreateAccount } from './children/CreateAccount';
+import { LostPassword } from './children/LostPassword';
 import { useLoginForm } from './hooks/useLoginForm';
 
 export const AuthModalContent = () => {
-  const { register, onSubmit, isLoading, formErrors, authError } =
-    useLoginForm();
+  const { onSubmit, isLoading, authError, control } = useLoginForm();
 
   return (
     <div className="px-6 pb-6 lg:px-8">
@@ -11,79 +13,37 @@ export const AuthModalContent = () => {
         Sign in to our platform
       </h3>
       <form className="space-y-6" onSubmit={onSubmit}>
-        <>
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-300"
-            >
-              Your email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="block w-full rounded-lg border border-gray-500 bg-gray-600 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
-              placeholder="name@company.com"
-              required
-              {...register('email', { required: true })}
-              disabled={Boolean(isLoading)}
-            />
-            {formErrors.email && (
-              <p className="mt-2 text-sm text-red-500">
-                {formErrors.email.message}
-              </p>
-            )}
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="mb-2 block text-sm font-medium text-gray-300"
-            >
-              Your password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="••••••••"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
-              required
-              {...register('password', { required: true })}
-              disabled={Boolean(isLoading)}
-            />
-            {formErrors.password && (
-              <p className="mt-2 text-sm text-red-500">
-                {formErrors.password.message}
-              </p>
-            )}
-          </div>
-        </>
-        <div className="flex justify-end">
-          <a href="#" className="text-sm text-blue-500 hover:underline">
-            Lost Password?
-          </a>
-        </div>
-        <button
-          type="submit"
-          className="flex w-full justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          disabled={Boolean(isLoading)}
+        <Input
+          control={control}
+          type="email"
+          name="email"
+          label="Your email"
+          placeholder="name@company.com"
+          isLoading={isLoading}
+        />
+        <Input
+          control={control}
+          type="password"
+          name="password"
+          label="Your password"
+          placeholder="••••••••"
+          isLoading={isLoading}
+        />
+        <LostPassword />
+        <Button
+          isLoading={isLoading}
+          variant="blue"
+          className="w-full"
+          loadingText="Logging in ..."
         >
-          {isLoading ? (
-            <Spinner className="h-4 w-4 animate-spin text-sky-700" />
-          ) : (
-            'Login to your account'
-          )}
-        </button>
+          Login to your account
+        </Button>
         {authError && (
           <div className="text-center text-red-400">
-            Login failed; please verify your username and password
+            Login failed - Please verify your username and password
           </div>
         )}
-        <div className="text-sm font-medium text-gray-300">
-          Not registered?{' '}
-          <a href="#" className="text-blue-500 hover:underline">
-            Create account
-          </a>
-        </div>
+        <CreateAccount />
       </form>
     </div>
   );

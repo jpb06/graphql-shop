@@ -18,7 +18,9 @@
     "paths": {
       "@backend/database": ["libs/backend/database/src/index.ts"],
       "@backend/tests": ["libs/backend/tests/src/index.ts"],
-      "@front/api": ["libs/graphql/types/src/index.ts"]
+      "@front/api": ["libs/graphql/types/src/index.ts"],
+      "@front/components": ["libs/frontend/components/src/index.ts"],
+      "@front/assets/*": ["libs/frontend/assets/files/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

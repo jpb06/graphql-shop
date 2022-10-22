@@ -1,7 +1,11 @@
 import { useState } from 'react';
 
-import { CreditCard } from '../credit-card/CreditCard';
-import { CreditCardFocus, CreditCardInfos } from '../credit-card/types';
+import {
+  CreditCard,
+  CreditCardFocus,
+  CreditCardInfos,
+} from '@front/components';
+
 import { PaymentModalForm } from './PaymentModalForm';
 
 export interface CardState extends CreditCardInfos {
