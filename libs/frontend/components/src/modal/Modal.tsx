@@ -4,7 +4,7 @@ import CloseIcon from '@front/assets/icons/close-icon.svg';
 
 import { useModalRootClassName } from './hooks/useModalRootClassName';
 import { useResetModalStateOnFirstRender } from './hooks/useResetModalStateOnFirstRender';
-import { modalStateAtom } from './modal.state';
+import { modalStateAtom } from './state/modal.state';
 import { ModalAnimation } from './types/modal-animation.types';
 
 type ModalProps = {

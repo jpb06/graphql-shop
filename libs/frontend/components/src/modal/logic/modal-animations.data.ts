@@ -1,4 +1,4 @@
-import { ModalAnimations } from './types/modal-animation.types';
+import { ModalAnimations } from './../types/modal-animation.types';
 
 export const modalAnimations: ModalAnimations = {
   blow: {

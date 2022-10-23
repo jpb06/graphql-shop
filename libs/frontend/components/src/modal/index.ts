@@ -1,2 +1,2 @@
 export * from './ModalWrapper';
-export * from './modal.state';
+export * from './state/modal.state';

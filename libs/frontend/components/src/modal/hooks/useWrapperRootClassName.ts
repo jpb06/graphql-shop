@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 
-import { modalAnimations } from '../modal-animations.data';
-import { modalStateAtom } from '../modal.state';
+import { modalAnimations } from '../logic/modal-animations.data';
+import { modalStateAtom } from '../state/modal.state';
 import { ModalAnimation } from '../types/modal-animation.types';
 
 export const useWrapperRootClassName = (animation: ModalAnimation) => {
