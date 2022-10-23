@@ -8,7 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "dev": "nx run-many --target=serve --projects=app-frontend-shop,app-backend-api",
+    "dev": "nx run-many --target=serve --projects=front-shop-app,back-api-app",
     "docker-db": "docker-compose -f apps/api/docker-compose.yml down && docker-compose -f apps/api/docker-compose.yml up shop-postgres",
     "docker-db-seed": "pnpm prisma-migrate dev && pnpm prisma-seed",
     "prisma-gen": "prisma generate --schema libs/backend/database/model/schema.prisma",
