@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'lib-frontend-components',
-  preset: '../../jest.preset.js',
+  displayName: 'front-components-lib',
+  preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/components',
+  coverageDirectory: '../../../coverage/libs/frontend/components',
 };
