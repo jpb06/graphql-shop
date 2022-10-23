@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import zod from 'zod';
 
 import { useLoginMutation } from '@front/api';
+import { authState } from '@front/state';
 
-import { authState } from '../../../../state/auth.state';
 import { orderModalStep } from '../../../specialized/order/state/order-modal.state';
 
 export type LoginFormModel = {

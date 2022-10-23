@@ -12,6 +12,13 @@
         "lintFilePatterns": ["libs/frontend/components/**/*.{ts,tsx,js,jsx}"]
       }
     },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/libs/frontend/components"],
+      "options": {
+        "command": "pnpm tsc -b libs/frontend/components/tsconfig.json"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

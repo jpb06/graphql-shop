@@ -1,10 +1,10 @@
 import { NavMenuLink } from './NavMenuLink';
 
-type NavMobileMenuProps = {
+type NavMenuProps = {
   isCollapsed: boolean;
 };
 
-export const NavMobileMenu = ({ isCollapsed }: NavMobileMenuProps) => {
+export const NavMenu = ({ isCollapsed }: NavMenuProps) => {
   return (
     <div
       className="w-full items-center justify-between md:order-1 md:flex md:w-auto"
