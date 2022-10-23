@@ -1,4 +1,5 @@
 {
+  "name": "back-api-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/src",
   "projectType": "application",
@@ -31,11 +32,11 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "app-backend-api:build"
+        "buildTarget": "back-api-app:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "app-backend-api:build:production"
+          "buildTarget": "back-api-app:build:production"
         }
       }
     },

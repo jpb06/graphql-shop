@@ -1,4 +1,5 @@
 {
+  "name": "front-shop-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/front",
   "projectType": "application",
@@ -22,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "app-frontend-shop:build",
+        "buildTarget": "front-shop-app:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app-frontend-shop:build:development",
+          "buildTarget": "front-shop-app:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "app-frontend-shop:build:production",
+          "buildTarget": "front-shop-app:build:production",
           "dev": false
         }
       }
@@ -39,7 +40,7 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "app-frontend-shop:build:production"
+        "buildTarget": "front-shop-app:build:production"
       }
     },
     "test": {

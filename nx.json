@@ -4,6 +4,11 @@
   "affected": {
     "defaultBase": "main"
   },
+  "pluginsConfig": {
+    "@nrwl/js": {
+      "analyzeSourceFiles": true
+    }
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
@@ -25,7 +30,7 @@
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     }
   },
-  "defaultProject": "api",
+  "defaultProject": "back-api-app",
   "generators": {
     "@nrwl/react": {
       "application": {
