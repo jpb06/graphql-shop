@@ -1,5 +1,4 @@
-import React from 'react';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 type GlobalIndicatorProps = {
   Icon: typeof React.Component;
