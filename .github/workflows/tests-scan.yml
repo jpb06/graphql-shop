@@ -116,5 +116,11 @@ jobs:
       - name: Installing dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Generating prisma models for Agent ${{ matrix.agent }}
+        run: pnpm prisma-gen
+        timeout-minutes: 5
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
       - name: Start Nx Agent ${{ matrix.agent }}
         run: pnpm exec nx-cloud start-agent
