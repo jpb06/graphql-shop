@@ -9,8 +9,8 @@ const seedUserOne = async (prisma: PrismaDb): Promise<void> => {
     update: {},
     create: {
       email: `admin@cool.org`,
-      firstName: '',
-      lastName: '',
+      firstName: 'Yolo',
+      lastName: 'Bro',
       password: await hash('admin', 11),
       role: 'ADMIN',
     },
