@@ -1,4 +1,4 @@
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '@front/assets/icons/product-goods-box-complete.svg';
