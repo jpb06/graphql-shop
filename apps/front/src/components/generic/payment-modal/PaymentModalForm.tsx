@@ -8,7 +8,10 @@ import {
   MonthSelectOptions,
 } from '@front/components';
 
+import { Input } from './Input';
 import { CardState } from './PaymentModalContent';
+import { Select } from './Select';
+import { NameValue } from './types/name-value.type';
 
 interface PaymentModalFormProps extends CardState {
   setCard: Dispatch<SetStateAction<CardState>>;
@@ -23,20 +26,14 @@ export const PaymentModalForm = ({
   setCard,
   setTransitionClassName,
 }: PaymentModalFormProps) => {
-  const handleInputFocus: ChangeEventHandler<{
-    name: string;
-    value: string;
-  }> = (e) => {
+  const handleInputFocus: ChangeEventHandler<NameValue> = (e) => {
     const { name } = e.target;
 
     setTransitionClassName((_) => (name === 'cvc' ? 'rotate-y-180' : ''));
     setCard((card) => ({ ...card, focus: name as CreditCardFocus }));
   };
 
-  const handleInputChange: ChangeEventHandler<{
-    name: string;
-    value: string;
-  }> = (e) => {
+  const handleInputChange: ChangeEventHandler<NameValue> = (e) => {
     const { name, value } = e.target;
 
     let maybeFormattedValue = '';
@@ -57,47 +54,42 @@ export const PaymentModalForm = ({
 
   return (
     <div className="flex w-[335px] flex-col items-center gap-2 p-2 pt-4">
-      <input
+      <Input
         type="tel"
         name="number"
-        className="block w-full rounded-lg border border-gray-600 bg-gray-700 py-2.5 pr-2 text-right text-sm text-white placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
-        required
-        placeholder="Card Number"
-        maxLength={19}
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
+        onInputChange={handleInputChange}
+        onInputFocus={handleInputFocus}
         value={number}
+        maxLength={19}
+        placeholder="Card Number"
       />
-      <input
+      <Input
         type="text"
         name="name"
-        spellCheck="false"
-        className="block w-full rounded-lg border border-gray-600 bg-gray-700 py-2.5 pr-2 text-right text-sm text-white placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
-        required
-        placeholder="Full Name"
-        pattern="[\d| ]{16,22}"
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
+        onInputChange={handleInputChange}
+        onInputFocus={handleInputFocus}
         maxLength={20}
+        spellcheck={false}
+        placeholder="Full name"
+        pattern="[\d| ]{16,22}"
         autoComplete="off"
       />
+
       <div className="flex w-full flex-row gap-1">
-        <select
+        <Select
+          onInputChange={handleInputChange}
+          onInputFocus={handleInputFocus}
           name="expirationMonth"
-          className="block w-full appearance-none rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-gray-400 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
           value={expirationMonth}
         >
           <MonthSelectOptions
             defaultValue="••"
             defaultValueText="Select a month"
           />
-        </select>
-        <select
-          className="block w-full appearance-none rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-gray-400 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
+        </Select>
+        <Select
+          onInputChange={handleInputChange}
+          onInputFocus={handleInputFocus}
           name="expirationYear"
           value={expirationYear}
         >
@@ -105,19 +97,17 @@ export const PaymentModalForm = ({
             defaultValue="••"
             defaultValueText="Select a year"
           />
-        </select>
+        </Select>
       </div>
-      <input
+      <Input
         type="number"
         name="cvc"
-        className="block w-full rounded-lg border border-gray-600 bg-gray-700 py-2.5 pr-2 text-right text-sm text-white placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500"
-        required
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
+        onInputChange={handleInputChange}
+        onInputFocus={handleInputFocus}
+        value={cvc}
         maxLength={4}
         placeholder="CVC"
         autoComplete="off"
-        value={cvc}
       />
       <button
         type="button"
