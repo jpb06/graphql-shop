@@ -58,6 +58,7 @@ specifiers:
   class-validator: ^0.13.2
   core-js: ^3.26.0
   cypress: ^10.11.0
+  date-fns: ^2.29.3
   eslint: 8.26.0
   eslint-config-next: 13.0.0
   eslint-config-prettier: 8.5.0
@@ -121,6 +122,7 @@ dependencies:
   class-transformer: 0.5.1
   class-validator: 0.13.2
   core-js: 3.26.0
+  date-fns: 2.29.3
   graphql: 16.6.0
   graphql-request: 5.0.0_graphql@16.6.0
   jotai: 1.9.0_otspjrsspon4ofp37rshhlhp2y
@@ -6997,6 +6999,11 @@ packages:
   /dataloader/2.1.0:
     resolution: {integrity: sha512-qTcEYLen3r7ojZNgVUaRggOI+KM7jrKxXeSHhogh/TWxYMeONEMqY+hmkobiYQozsGIyg9OYVzO4ZIfoB4I0pQ==}
     dev: true
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /dayjs/1.11.6:
     resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
