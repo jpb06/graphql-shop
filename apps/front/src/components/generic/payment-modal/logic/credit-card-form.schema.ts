@@ -1,9 +1,11 @@
 import zod from 'zod';
 
-import { creditCardRegex } from './credit-card.regex';
-import { cvcRegex } from './cvc.regex';
-import { monthRegex } from './month.regex';
-import { yearRegex } from './year.regex';
+import {
+  creditCardRegex,
+  cvcRegex,
+  monthRegex,
+  yearRegex,
+} from './schema.validation';
 
 export type PaymentFormModel = {
   number: string;
