@@ -28,8 +28,8 @@ model Product {
   image       String
   stock       Int
 
-  Category   Category?    @relation(fields: [idCategory], references: [id])
-  OrderItems OrderItems[]
+  Category    Category?     @relation(fields: [idCategory], references: [id])
+  OrderedItem OrderedItem[]
 }
 
 enum Role {
@@ -75,23 +75,24 @@ model JoinUserAddress {
 
 model Order {
   id           Int @id @default(autoincrement())
-  idOrderItems Int
   idUser       Int
   idCreditCard Int
 
   createdAt DateTime @default(now())
 
-  OrderItems OrderItems @relation(fields: [idOrderItems], references: [id])
-  User       User       @relation(fields: [idUser], references: [id])
-  CreditCard CreditCard @relation(fields: [idCreditCard], references: [id])
+  OrderedItem OrderedItem[]
+  User        User          @relation(fields: [idUser], references: [id])
+  CreditCard  CreditCard    @relation(fields: [idCreditCard], references: [id])
 }
 
-model OrderItems {
+model OrderedItem {
   id        Int @id @default(autoincrement())
   idProduct Int
+  idOrder   Int
+  quantity  Int
 
   Product Product @relation(fields: [idProduct], references: [id])
-  Order   Order[]
+  Order   Order   @relation(fields: [idOrder], references: [id])
 }
 
 model CreditCard {

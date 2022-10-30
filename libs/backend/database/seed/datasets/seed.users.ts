@@ -2,6 +2,8 @@ import { hash } from 'bcrypt';
 
 import { PrismaDb } from '../types/prisma-db.type';
 import { seedAddresses } from './seed.addresses';
+import { seedCreditCards } from './seed.credit-cards';
+import { seedOrders } from './seed.orders';
 
 const seedUserOne = async (prisma: PrismaDb): Promise<void> => {
   await prisma.user.upsert({
@@ -70,8 +72,13 @@ const seedUserTwo = async (prisma: PrismaDb): Promise<void> => {
   });
 };
 
-export const seedUsers = async (prisma: PrismaDb): Promise<void> => {
+export const seedUsers = async (
+  prisma: PrismaDb,
+  productsIds: Array<number>
+): Promise<void> => {
   await seedAddresses(prisma);
   await seedUserOne(prisma);
   await seedUserTwo(prisma);
+  await seedCreditCards(prisma);
+  await seedOrders(prisma, productsIds);
 };

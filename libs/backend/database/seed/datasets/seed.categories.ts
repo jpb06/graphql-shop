@@ -6,7 +6,7 @@ import { seedProducts } from './seed.products';
 
 export const seedCategoriesAndProducts = async (
   prisma: PrismaDb
-): Promise<void> => {
+): Promise<Array<number>> => {
   const promises = range(6).map(async (idCategory) => {
     await prisma.category.upsert({
       where: { id: idCategory },
@@ -17,8 +17,10 @@ export const seedCategoriesAndProducts = async (
       },
     });
 
-    await seedProducts(prisma, idCategory);
+    return seedProducts(prisma, idCategory);
   });
 
-  await Promise.all(promises);
+  const ids = await Promise.all(promises);
+
+  return ids.flat();
 };

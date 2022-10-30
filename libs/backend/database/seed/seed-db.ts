@@ -7,8 +7,8 @@ const seedDb = async (): Promise<void> => {
   const prisma = new PrismaClient();
 
   const main = async (): Promise<void> => {
-    await seedCategoriesAndProducts(prisma);
-    await seedUsers(prisma);
+    const productsIds = await seedCategoriesAndProducts(prisma);
+    await seedUsers(prisma, productsIds);
   };
 
   main()
