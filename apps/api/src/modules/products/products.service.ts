@@ -3,15 +3,15 @@ import { Product } from '@prisma/client';
 
 import { DatabaseService } from '@backend/database';
 
-import { GetAll, GetAllSelectType } from './closures/get-all.closure';
-import { GetBy, GetBySelectType } from './closures/get-by.closure';
+import { GetAllClosure, GetAllSelectType } from './closures/get-all.closure';
+import { GetByClosure, GetBySelectType } from './closures/get-by.closure';
 
 @Injectable()
 export class ProductsService {
   constructor(
     private readonly db: DatabaseService,
-    private readonly getAllClosure: GetAll,
-    private readonly getByClosure: GetBy
+    private readonly getAllClosure: GetAllClosure,
+    private readonly getByClosure: GetByClosure
   ) {}
 
   async getAll(): Promise<Array<GetAllSelectType>> {

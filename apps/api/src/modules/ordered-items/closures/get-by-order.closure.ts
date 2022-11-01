@@ -14,7 +14,7 @@ export type GetByOrderSelectType = Pick<OrderedItem, 'id' | 'quantity'> & {
 };
 
 @Injectable()
-export class GetByOrder {
+export class GetByOrderClosure {
   public static Select = selectOrderedItem({
     id: true,
     quantity: true,
@@ -33,6 +33,6 @@ export class GetByOrder {
   async from(orderId: number): Promise<Array<GetByOrderSelectType>> {
     return this.db.order
       .findUnique({ where: { id: orderId } })
-      .OrderedItem({ select: GetByOrder.Select });
+      .OrderedItem({ select: GetByOrderClosure.Select });
   }
 }

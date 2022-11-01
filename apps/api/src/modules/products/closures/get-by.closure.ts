@@ -11,7 +11,7 @@ export type GetBySelectType = Product & {
 };
 
 @Injectable()
-export class GetBy {
+export class GetByClosure {
   public static Include = selectProduct({
     Category: true,
   });
@@ -23,7 +23,7 @@ export class GetBy {
       where: {
         id,
       },
-      include: GetBy.Include,
+      include: GetByClosure.Include,
     });
   }
 }

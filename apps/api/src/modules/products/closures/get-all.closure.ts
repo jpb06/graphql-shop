@@ -11,7 +11,7 @@ export type GetAllSelectType = Product & {
 };
 
 @Injectable()
-export class GetAll {
+export class GetAllClosure {
   public static Include = selectProduct({
     Category: true,
   });
@@ -20,7 +20,7 @@ export class GetAll {
 
   async fetch(): Promise<Array<GetAllSelectType>> {
     return this.db.product.findMany({
-      include: GetAll.Include,
+      include: GetAllClosure.Include,
     });
   }
 }
