@@ -38,9 +38,7 @@ export class ProductsResolver {
   }
 
   @ResolveField('category', () => GqlCategory)
-  async getCategory(@Parent() product: GqlProduct): Promise<Category> {
-    const { Category } = product;
-
+  async getCategory(@Parent() { Category }: GqlProduct): Promise<Category> {
     return this.categories.getBy(Category.id);
   }
 }

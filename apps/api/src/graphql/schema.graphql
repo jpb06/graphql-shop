@@ -44,6 +44,22 @@ type GqlCategory {
   products: [GqlProduct!]!
 }
 
+type GqlOrderedItem {
+  id: ID!
+  quantity: Int!
+  name: String!
+  image: String!
+  price: Float!
+}
+
+type GqlOrder {
+  id: ID!
+  idUser: ID!
+  idCreditCard: ID!
+  createdAt: DateTime!
+  items: [GqlOrderedItem!]!
+}
+
 type Query {
   products: [GqlProduct!]!
   productsWithIds(ids: [Int!]!): [GqlProduct!]!
@@ -51,6 +67,7 @@ type Query {
   categories: [GqlCategory!]!
   category(id: Int!): GqlCategory!
   me: GqlLoggedUser!
+  orders: [GqlOrder!]!
 }
 
 type Mutation {

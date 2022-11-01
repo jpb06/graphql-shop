@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthResolver } from './auth/auth.resolver';
 import { CategoriesModule } from './categories/categories.module';
 import { CategoriesResolver } from './categories/categories.resolver';
+import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { ProductsResolver } from './products/products.resolver';
 import { UsersModule } from './users/users.module';
@@ -21,6 +22,7 @@ import { UsersResolver } from './users/users.resolver';
     CategoriesModule,
     ProductsModule,
     UsersModule,
+    OrdersModule,
     AuthModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -28,6 +30,7 @@ import { UsersResolver } from './users/users.resolver';
         process.cwd(),
         'apps/api/src/graphql/schema.graphql'
       ),
+      fieldResolverEnhancers: ['guards', 'interceptors'],
       // debug: true,
       playground: true,
     }),
