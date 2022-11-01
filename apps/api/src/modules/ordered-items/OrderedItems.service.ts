@@ -7,9 +7,9 @@ import {
 
 @Injectable()
 export class OrderedItemsService {
-  constructor(private readonly getByOrder: GetByOrder) {}
+  constructor(private readonly getByOrderClosure: GetByOrder) {}
 
   async getBy(idOrder: number): Promise<Array<GetByOrderSelectType>> {
-    return this.getByOrder.from(idOrder);
+    return this.getByOrderClosure.from(idOrder);
   }
 }

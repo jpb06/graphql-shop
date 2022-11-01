@@ -26,8 +26,6 @@ export class OrdersResolver {
   async getOrderItems(
     @Parent() { id }: GqlOrder
   ): Promise<Array<GetByOrderSelectType>> {
-    const orderedItems = await this.orderedItems.getBy(id);
-
-    return orderedItems;
+    return this.orderedItems.getBy(id);
   }
 }
