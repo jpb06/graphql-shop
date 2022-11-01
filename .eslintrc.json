@@ -88,7 +88,7 @@
         "array-bracket-spacing": ["error", "never"],
         "array-callback-return": "error",
         "block-spacing": ["error"],
-        "brace-style": "error",
+        "brace-style": "off",
         "camelcase": [
           0,
           {
