@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
-import { GqlProduct } from '../../products/dtos/gql-product.dto';
+import { GqlProduct } from '../../products/dtos/gql.product.dto';
 
 @ObjectType()
 export class GqlCategory {

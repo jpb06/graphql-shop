@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { DatabaseModule } from '@backend/database';
 
-import { OrderedItemsModule } from '../ordered-items/OrderedItems.module';
+import { OrderedItemsModule } from '../ordered-items/ordered-items.module';
 import { OrdersResolver } from './orders.resolver';
 import { OrdersService } from './orders.service';
 

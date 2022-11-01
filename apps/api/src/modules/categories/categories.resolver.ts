@@ -8,10 +8,10 @@ import {
 } from '@nestjs/graphql';
 import { Category } from '@prisma/client';
 
-import { GqlProduct } from '../products/dtos/gql-product.dto';
+import { GqlProduct } from '../products/dtos/gql.product.dto';
 import { ProductsService } from '../products/products.service';
 import { CategoriesService } from './categories.service';
-import { GqlCategory } from './dtos/gql-category.dto';
+import { GqlCategory } from './dtos/gql.category.dto';
 
 @Resolver(GqlCategory)
 export class CategoriesResolver {

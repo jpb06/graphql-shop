@@ -12,6 +12,13 @@ export class OrdersService {
       where: {
         idUser: userId,
       },
+      include: {
+        CreditCard: {
+          select: {
+            number: true,
+          },
+        },
+      },
     });
   }
 }

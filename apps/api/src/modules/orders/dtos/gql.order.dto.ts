@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
-import { GqlOrderedItem } from '../../ordered-items/dtos/gql-ordered-item.dto';
+import { GqlOrderedItem } from '../../ordered-items/dtos/gql.ordered-item.dto';
 
 @ObjectType()
 export class GqlOrder {

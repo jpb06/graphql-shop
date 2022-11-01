@@ -9,8 +9,8 @@ import {
 import { Product, Category } from '@prisma/client';
 
 import { CategoriesService } from '../categories/categories.service';
-import { GqlCategory } from '../categories/dtos/gql-category.dto';
-import { GqlProduct } from '../products/dtos/gql-product.dto';
+import { GqlCategory } from '../categories/dtos/gql.category.dto';
+import { GqlProduct } from '../products/dtos/gql.product.dto';
 import { ProductsService } from '../products/products.service';
 
 @Resolver(GqlProduct)

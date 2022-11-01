@@ -5,12 +5,12 @@ import { Order } from '@prisma/client';
 import { LoggedUserContext } from '../auth/contexts/logged-user.context';
 import { JwtPayload } from '../auth/dtos/jwt-payload.dto';
 import { GqlAuthGuard } from '../auth/guards/graphql-auth.guard';
-import { OrderedItemsService } from '../ordered-items/OrderedItems.service';
 import { GetByOrderSelectType } from '../ordered-items/closures/get-by-order.closure';
-import { GqlOrderedItem } from '../ordered-items/dtos/gql-ordered-item.dto';
-import { GqlOrder } from './dtos/gql-order.dto';
+import { GqlOrderedItem } from '../ordered-items/dtos/gql.ordered-item.dto';
+import { OrderedItemsService } from '../ordered-items/ordered-items.service';
+import { GqlOrder } from './dtos/gql.order.dto';
 import { OrdersService } from './orders.service';
-import { GetOrderItemsTransform } from './transform/getOrderItems.transform';
+import { GetOrderItemsTransform } from './transform/get-order-items.transform';
 
 @Resolver(GqlOrder)
 export class OrdersResolver {

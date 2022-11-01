@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { ObjectType, Field, Float, ID, Int } from '@nestjs/graphql';
 import { IsUrl } from 'class-validator';
 
-import { GqlCategory } from '../../categories/dtos/gql-category.dto';
+import { GqlCategory } from '../../categories/dtos/gql.category.dto';
 
 @ObjectType()
 export class GqlProduct {

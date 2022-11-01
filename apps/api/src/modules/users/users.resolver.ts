@@ -3,11 +3,11 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from '@prisma/client';
 
 import { LoggedUserContext } from '../auth/contexts/logged-user.context';
-import { GqlAuthOutput } from '../auth/dtos/gql-auth-output.dto';
+import { GqlAuthOutput } from '../auth/dtos/gql.auth-output.dto';
 import { JwtPayload } from '../auth/dtos/jwt-payload.dto';
 import { GqlAuthGuard } from '../auth/guards/graphql-auth.guard';
-import { GqlLoggedUser } from './dtos/gql-logged-user.dto';
-import { GqlSignupArgs } from './dtos/gql-signup-args.dto';
+import { GqlLoggedUser } from './dtos/gql.logged-user.dto';
+import { GqlSignupArgs } from './dtos/gql.signup-args.dto';
 import { UsersService } from './users.service';
 
 @Resolver()

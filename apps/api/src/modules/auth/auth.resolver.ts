@@ -3,8 +3,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { AuthService } from './auth.service';
 import { LoginContext } from './contexts/login.context';
-import { GqlAuthOutput } from './dtos/gql-auth-output.dto';
-import { GqlLoginArgs } from './dtos/gql-login-args.dto';
+import { GqlAuthOutput } from './dtos/gql.auth-output.dto';
+import { GqlLoginArgs } from './dtos/gql.login-args.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserWithoutPassword } from './util/without-password.util';
 
