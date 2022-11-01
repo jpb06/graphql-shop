@@ -1,7 +1,10 @@
-import { UseInterceptors } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Order } from '@prisma/client';
 
+import { LoggedUserContext } from '../auth/contexts/logged-user.context';
+import { JwtPayload } from '../auth/dtos/jwt-payload.dto';
+import { GqlAuthGuard } from '../auth/guards/graphql-auth.guard';
 import { OrderedItemsService } from '../ordered-items/OrderedItems.service';
 import { GetByOrderSelectType } from '../ordered-items/closures/get-by-order.closure';
 import { GqlOrderedItem } from '../ordered-items/dtos/gql-ordered-item.dto';
@@ -16,9 +19,12 @@ export class OrdersResolver {
     private orderedItems: OrderedItemsService
   ) {}
 
-  @Query(() => [GqlOrder], { name: 'orders' })
-  async getAll(): Promise<Array<Order>> {
-    return this.orders.getAll();
+  @Query(() => [GqlOrder], { name: 'myOrders' })
+  @UseGuards(GqlAuthGuard)
+  async getMyOrders(
+    @LoggedUserContext() { id }: JwtPayload
+  ): Promise<Array<Order>> {
+    return this.orders.getUserOrders(id);
   }
 
   @ResolveField('items', () => [GqlOrderedItem])

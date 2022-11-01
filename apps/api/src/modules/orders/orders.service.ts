@@ -7,7 +7,11 @@ import { DatabaseService } from '@backend/database';
 export class OrdersService {
   constructor(private readonly db: DatabaseService) {}
 
-  async getAll(): Promise<Array<Order>> {
-    return this.db.order.findMany();
+  async getUserOrders(userId: number): Promise<Array<Order>> {
+    return this.db.order.findMany({
+      where: {
+        idUser: userId,
+      },
+    });
   }
 }

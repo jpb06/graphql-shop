@@ -67,7 +67,7 @@ type Query {
   categories: [GqlCategory!]!
   category(id: Int!): GqlCategory!
   me: GqlLoggedUser!
-  orders: [GqlOrder!]!
+  myOrders: [GqlOrder!]!
 }
 
 type Mutation {
