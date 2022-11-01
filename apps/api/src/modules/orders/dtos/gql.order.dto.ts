@@ -17,6 +17,9 @@ export class GqlOrder {
   @Field(() => Date)
   createdAt: Date;
 
+  @Field(() => String)
+  creditCardNumber: string;
+
   @Field(() => [GqlOrderedItem], { nullable: true, name: 'items' })
   OrderItems?: GqlOrderedItem[] | null;
 }

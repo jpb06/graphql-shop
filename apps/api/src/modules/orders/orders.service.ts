@@ -1,24 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Order } from '@prisma/client';
 
-import { DatabaseService } from '@backend/database';
+import {
+  GetUserOrdersClosure,
+  GetUserOrdersSelectType,
+} from './closures/get-user-orders.closure';
 
 @Injectable()
 export class OrdersService {
-  constructor(private readonly db: DatabaseService) {}
+  constructor(private readonly getUserOdersClosure: GetUserOrdersClosure) {}
 
-  async getUserOrders(userId: number): Promise<Array<Order>> {
-    return this.db.order.findMany({
-      where: {
-        idUser: userId,
-      },
-      include: {
-        CreditCard: {
-          select: {
-            number: true,
-          },
-        },
-      },
-    });
+  async getUserOrders(userId: number): Promise<Array<GetUserOrdersSelectType>> {
+    return this.getUserOdersClosure.from(userId);
   }
 }

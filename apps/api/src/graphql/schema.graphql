@@ -57,6 +57,7 @@ type GqlOrder {
   idUser: ID!
   idCreditCard: ID!
   createdAt: DateTime!
+  creditCardNumber: String!
   items: [GqlOrderedItem!]!
 }
 
