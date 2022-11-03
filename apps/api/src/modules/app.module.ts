@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthResolver } from './auth/auth.resolver';
 import { CategoriesModule } from './categories/categories.module';
 import { CategoriesResolver } from './categories/categories.resolver';
+import { CreditCardsModule } from './credit-card/credit-cards.module';
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { ProductsResolver } from './products/products.resolver';
@@ -23,6 +24,7 @@ import { UsersResolver } from './users/users.resolver';
     ProductsModule,
     UsersModule,
     OrdersModule,
+    CreditCardsModule,
     AuthModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

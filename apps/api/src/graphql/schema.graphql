@@ -61,6 +61,10 @@ type GqlOrder {
   items: [GqlOrderedItem!]!
 }
 
+type GqlPlaceOrderOutput {
+  orderId: Int!
+}
+
 type Query {
   products: [GqlProduct!]!
   productsWithIds(ids: [Int!]!): [GqlProduct!]!
@@ -74,4 +78,16 @@ type Query {
 type Mutation {
   signup(email: String!, lastName: String!, firstName: String!, password: String!): GqlAuthOutput!
   login(username: String!, password: String!): GqlAuthOutput!
+  placeOrder(creditCard: GqlPlaceOrderInput!, orderedItems: [GqlNewOrderedItem!]!): GqlPlaceOrderOutput!
+}
+
+input GqlPlaceOrderInput {
+  number: String!
+  expires: String!
+  cvc: String!
+}
+
+input GqlNewOrderedItem {
+  idProduct: Int!
+  quantity: Int!
 }
