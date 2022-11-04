@@ -38,15 +38,11 @@ export class OrdersService {
       },
     });
 
-    const cool = orderedItems.map((item) => ({
-      ...item,
-      idOrder: order.id,
-    }));
-
-    console.log('ordered items', cool);
-
     await this.db.orderedItem.createMany({
-      data: cool,
+      data: orderedItems.map((item) => ({
+        ...item,
+        idOrder: order.id,
+      })),
     });
 
     return order.id;
