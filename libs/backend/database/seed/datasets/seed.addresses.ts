@@ -4,19 +4,24 @@ import { PrismaDb } from '../types/prisma-db.type';
 import { range } from '../util/range';
 
 export const seedAddresses = async (prisma: PrismaDb): Promise<void> => {
-  const promises = range(3).map(async (idAddress) =>
-    prisma.address.upsert({
+  const promises = range(3).map(async (idAddress) => {
+    const data = {
+      street: faker.address.street(),
+      zipCode: faker.address.zipCode(),
+      city: faker.address.city(),
+      country: faker.address.country(),
+    };
+
+    return prisma.address.upsert({
       where: { id: idAddress },
-      update: {},
+      update: data,
       create: {
         id: idAddress,
-        street: faker.address.street(),
-        zipCode: faker.address.zipCode(),
-        city: faker.address.city(),
-        country: faker.address.country(),
+        ...data,
       },
-    })
-  );
+    });
+  });
 
   await Promise.all(promises);
+  await prisma.$queryRaw`select setval('"public"."Address_id_seq"', 4)`;
 };

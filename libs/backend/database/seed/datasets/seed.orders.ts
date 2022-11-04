@@ -1,96 +1,56 @@
 import { PrismaDb } from '../types/prisma-db.type';
+import { randomNumberBetween } from '../util/random-number-between';
+import { range } from '../util/range';
+
+const seedOrder = async (
+  prisma: PrismaDb,
+  orderId: number,
+  creditCardId: number,
+  userId: number,
+  productsIds: Array<number>
+): Promise<number> => {
+  const orderData = {
+    idCreditCard: creditCardId,
+    idUser: userId,
+  };
+
+  await prisma.order.upsert({
+    where: { id: orderId },
+    update: orderData,
+    create: {
+      id: orderId,
+      ...orderData,
+    },
+  });
+
+  const itemsCount = randomNumberBetween(2, 8);
+  const promises = range(itemsCount).map(async () =>
+    prisma.orderedItem.create({
+      data: {
+        idOrder: orderId,
+        idProduct: productsIds[randomNumberBetween(0, productsIds.length - 1)],
+        quantity: randomNumberBetween(3, 12),
+      },
+    })
+  );
+
+  await Promise.all(promises);
+
+  return itemsCount;
+};
 
 export const seedOrders = async (
   prisma: PrismaDb,
   productsIds: Array<number>
 ): Promise<void> => {
-  await prisma.order.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      id: 1,
-      idCreditCard: 1,
-      idUser: 1,
-    },
-  });
-  await prisma.orderedItem.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      id: 1,
-      idOrder: 1,
-      idProduct: productsIds[0],
-      quantity: 4,
-    },
-  });
-  await prisma.orderedItem.upsert({
-    where: { id: 2 },
-    update: {},
-    create: {
-      id: 2,
-      idOrder: 1,
-      idProduct: productsIds[1],
-      quantity: 10,
-    },
-  });
-  await prisma.orderedItem.upsert({
-    where: { id: 3 },
-    update: {},
-    create: {
-      id: 3,
-      idOrder: 1,
-      idProduct: productsIds[2],
-      quantity: 2,
-    },
-  });
+  const orderedItemsCount = (
+    await Promise.all([
+      seedOrder(prisma, 1, 1, 1, productsIds),
+      seedOrder(prisma, 2, 1, 1, productsIds),
+      seedOrder(prisma, 3, 2, 2, productsIds),
+    ])
+  ).reduce((prev, curr) => prev + curr, 0);
 
-  await prisma.order.upsert({
-    where: { id: 2 },
-    update: {},
-    create: {
-      id: 2,
-      idCreditCard: 1,
-      idUser: 1,
-    },
-  });
-  await prisma.orderedItem.upsert({
-    where: { id: 4 },
-    update: {},
-    create: {
-      id: 4,
-      idOrder: 2,
-      idProduct: productsIds[3],
-      quantity: 5,
-    },
-  });
-  await prisma.orderedItem.upsert({
-    where: { id: 5 },
-    update: {},
-    create: {
-      id: 5,
-      idOrder: 2,
-      idProduct: productsIds[2],
-      quantity: 12,
-    },
-  });
-
-  await prisma.order.upsert({
-    where: { id: 3 },
-    update: {},
-    create: {
-      id: 3,
-      idCreditCard: 2,
-      idUser: 2,
-    },
-  });
-  await prisma.orderedItem.upsert({
-    where: { id: 6 },
-    update: {},
-    create: {
-      id: 6,
-      idOrder: 3,
-      idProduct: productsIds[0],
-      quantity: 1,
-    },
-  });
+  await prisma.$queryRaw`select setval('"public"."Order_id_seq"', 4)`;
+  await prisma.$queryRaw`select setval('"public"."OrderedItem_id_seq"', ${orderedItemsCount})`;
 };

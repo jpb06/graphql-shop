@@ -16,7 +16,7 @@ const seedDb = async (): Promise<void> => {
       await prisma.$disconnect();
     })
     .catch(async (e) => {
-      console.error(e);
+      console.error('error', e);
       await prisma.$disconnect();
       process.exit(1);
     });

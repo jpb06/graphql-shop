@@ -7,6 +7,7 @@ export const seedProducts = async (
   prisma: PrismaDb,
   idCategory: number
 ): Promise<Array<number>> => {
+  await prisma.orderedItem.deleteMany();
   await prisma.product.deleteMany();
 
   const ids: Array<number> = [];

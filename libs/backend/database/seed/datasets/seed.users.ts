@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { hash } from 'bcrypt';
 
 import { PrismaDb } from '../types/prisma-db.type';
@@ -5,51 +6,66 @@ import { seedAddresses } from './seed.addresses';
 import { seedCreditCards } from './seed.credit-cards';
 import { seedOrders } from './seed.orders';
 
-const seedUserOne = async (prisma: PrismaDb): Promise<void> => {
+const seedAdmin = async (prisma: PrismaDb): Promise<void> => {
+  const adminData = {
+    firstName: 'Yolo',
+    lastName: 'Bro',
+    password: await hash('admin', 11),
+    role: 'ADMIN' as Role,
+  };
   await prisma.user.upsert({
     where: { email: 'admin@cool.org' },
-    update: {},
+    update: adminData,
     create: {
       email: `admin@cool.org`,
-      firstName: 'Yolo',
-      lastName: 'Bro',
-      password: await hash('admin', 11),
-      role: 'ADMIN',
+      ...adminData,
     },
   });
 
-  await prisma.user.upsert({
-    where: { email: 'alice@cool.org' },
-    update: {},
-    create: {
-      email: `alice@cool.org`,
-      firstName: 'Alice',
-      lastName: 'Hartmann',
-      password: await hash('alice', 11),
-    },
-  });
-
+  const adminAddress = {
+    idAddress: 1,
+    idUser: 1,
+  };
   await prisma.joinUserAddress.upsert({
     where: { id: 1 },
-    update: {},
+    update: adminAddress,
     create: {
       id: 1,
-      idAddress: 1,
-      idUser: 1,
-    },
-  });
-  await prisma.joinUserAddress.upsert({
-    where: { id: 2 },
-    update: {},
-    create: {
-      id: 2,
-      idAddress: 2,
-      idUser: 1,
+      ...adminAddress,
     },
   });
 };
 
-const seedUserTwo = async (prisma: PrismaDb): Promise<void> => {
+const seedAlice = async (prisma: PrismaDb): Promise<void> => {
+  const userData = {
+    firstName: 'Alice',
+    lastName: 'Hartmann',
+    password: await hash('alice', 11),
+  };
+  await prisma.user.upsert({
+    where: { email: 'alice@cool.org' },
+    update: userData,
+    create: {
+      email: `alice@cool.org`,
+      ...userData,
+    },
+  });
+
+  const userAddress = {
+    idAddress: 2,
+    idUser: 1,
+  };
+  await prisma.joinUserAddress.upsert({
+    where: { id: 2 },
+    update: userAddress,
+    create: {
+      id: 2,
+      ...userAddress,
+    },
+  });
+};
+
+const seedBob = async (prisma: PrismaDb): Promise<void> => {
   await prisma.user.upsert({
     where: { email: 'bob@cool.org' },
     update: {},
@@ -77,8 +93,12 @@ export const seedUsers = async (
   productsIds: Array<number>
 ): Promise<void> => {
   await seedAddresses(prisma);
-  await seedUserOne(prisma);
-  await seedUserTwo(prisma);
+  await seedAdmin(prisma);
+  await seedAlice(prisma);
+  await seedBob(prisma);
   await seedCreditCards(prisma);
   await seedOrders(prisma, productsIds);
+
+  await prisma.$queryRaw`select setval('"public"."JoinUserAddress_id_seq"', 4)`;
+  await prisma.$queryRaw`select setval('"public"."User_id_seq"', 3)`;
 };
