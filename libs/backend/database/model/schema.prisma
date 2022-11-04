@@ -64,8 +64,8 @@ model Address {
 
 model JoinUserAddress {
   id        Int @id @default(autoincrement())
-  idUser    Int
-  idAddress Int
+  idUser    Int @map("User")
+  idAddress Int @map("Address")
 
   createdAt DateTime @default(now())
 
@@ -75,8 +75,8 @@ model JoinUserAddress {
 
 model Order {
   id           Int @id @default(autoincrement())
-  idUser       Int
-  idCreditCard Int
+  idUser       Int @map("User")
+  idCreditCard Int @map("CreditCard")
 
   createdAt DateTime @default(now())
 
@@ -87,16 +87,18 @@ model Order {
 
 model OrderedItem {
   id        Int @id @default(autoincrement())
-  idProduct Int
-  idOrder   Int
-  quantity  Int
+  idProduct Int @map("Product")
+  idOrder   Int @map("Order")
+
+  quantity Int
 
   Product Product @relation(fields: [idProduct], references: [id])
   Order   Order   @relation(fields: [idOrder], references: [id])
 }
 
 model CreditCard {
-  id      Int    @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   number  String
   expires String
   cvc     String
