@@ -1,19 +1,32 @@
-import { endpointUrl, fetchParams } from './fetch-config';
+import { useAtom } from 'jotai';
+
+import { authState } from '@front/state';
+
+import { endpointUrl } from './fetch-config';
 
 const delay = async (ms: number): Promise<unknown> =>
   new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 
-export const fetcher = <TData, TVariables>(
+export const useFetchData = <TData, TVariables>(
   query: string,
-  variables?: TVariables
-) => {
-  return async (): Promise<TData> => {
-    const fetchPromise = fetch(endpointUrl as string, {
+  options?: RequestInit['headers']
+): ((variables?: TVariables) => Promise<TData>) => {
+  const [auth] = useAtom(authState);
+
+  return async (variables?: TVariables) => {
+    const fetchPromise = fetch(endpointUrl, {
       method: 'POST',
-      ...fetchParams,
-      body: JSON.stringify({ query, variables }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: auth?.token,
+        ...options,
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
     });
 
     // Adding an artificial delay
@@ -22,9 +35,8 @@ export const fetcher = <TData, TVariables>(
     const json = await res.json();
 
     if (json.errors) {
-      const { message } = json.errors[0];
-
-      throw new Error(message);
+      const { message } = json.errors[0] || {};
+      throw new Error(message || 'Error…');
     }
 
     return json.data;

@@ -13,9 +13,10 @@ const config: CodegenConfig = {
       ],
       config: {
         pureMagicComment: true, // enforce tree-shaking
-        exposeQueryKeys: true, // to prefetch queries (SSR)
-        exposeMutationKeys: true,
-        fetcher: './fetcher#fetcher',
+        fetcher: {
+          func: './fetcher#useFetchData',
+          isReactHook: true,
+        },
       },
     },
   },
