@@ -15,7 +15,6 @@ export const OrderRoot = () => {
 
   return (
     <ModalWrapper
-      title="Payment"
       {...orderModalSteps[modalStep]}
       modalAnimation="move"
       outsideAnimation="blow"

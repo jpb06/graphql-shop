@@ -3,15 +3,13 @@ import { PropsWithChildren } from 'react';
 import { Modal } from './Modal';
 import { useWrapperRootClassName } from './hooks/useWrapperRootClassName';
 import { ModalAnimation } from './types/modal-animation.types';
+import { ModalStep } from './types/modal-step.type';
 
-type ModalWrapperProps = {
-  title: string;
-  Content: React.FC;
-  Footer: React.FC | null;
+interface ModalWrapperProps extends ModalStep {
   outsideAnimation?: ModalAnimation;
   modalAnimation?: ModalAnimation;
   width?: string;
-};
+}
 
 export const ModalWrapper = ({
   children,

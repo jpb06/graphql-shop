@@ -6,14 +6,12 @@ import { useModalRootClassName } from './hooks/useModalRootClassName';
 import { useResetModalStateOnFirstRender } from './hooks/useResetModalStateOnFirstRender';
 import { modalStateAtom } from './state/modal.state';
 import { ModalAnimation } from './types/modal-animation.types';
+import { ModalStep } from './types/modal-step.type';
 
-type ModalProps = {
-  title: string;
-  Content: React.FC;
-  Footer: React.FC | null;
+interface ModalProps extends ModalStep {
   animation: ModalAnimation;
   width?: string;
-};
+}
 
 export const Modal = ({
   title,
