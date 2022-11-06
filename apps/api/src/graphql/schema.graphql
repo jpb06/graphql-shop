@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type GqlAddress {
+  id: ID!
+  street: String!
+  zipCode: String!
+  city: String!
+  country: String!
+}
+
 type GqlAuthOutput {
   id: ID!
   email: String!
@@ -73,6 +81,7 @@ type Query {
   category(id: Int!): GqlCategory!
   me: GqlLoggedUser!
   myOrders: [GqlOrder!]!
+  myAddresses: [GqlAddress!]!
 }
 
 type Mutation {
