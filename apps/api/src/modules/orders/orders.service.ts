@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 import { DatabaseService } from '@backend/database';
 
-import { CreditCardsService } from '../credit-card/credit-cards.service';
-import { GqlCreditCard } from '../credit-card/dtos/gql.credit-card.dto';
+import { CreditCardsService } from '../credit-cards/credit-cards.service';
+import { GqlCreditCard } from '../credit-cards/dtos/gql.credit-card.dto';
 import {
   GetUserOrdersClosure,
   GetUserOrdersSelectType,
