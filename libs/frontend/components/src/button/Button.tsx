@@ -8,7 +8,7 @@ import { ButtonVariant } from './types/button-variant.type';
 type ButtonProps = {
   onClick?: () => void;
   variant: ButtonVariant;
-  className: string;
+  className?: string;
   isLoading?: boolean;
   loadingText?: string;
 };
@@ -16,7 +16,7 @@ type ButtonProps = {
 export const Button = ({
   onClick,
   variant,
-  className,
+  className = '',
   isLoading = false,
   loadingText,
   children,

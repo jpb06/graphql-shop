@@ -31,7 +31,7 @@ export function Input<T extends FieldValues>(
       </label>
       <input
         type={props.type}
-        className="block w-full rounded-lg border border-gray-500 bg-gray-600 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+        className="block w-full rounded-lg border border-gray-500 bg-gray-600 p-2.5 text-sm text-white placeholder-gray-400 ring-sky-500 focus:border-blue-500 focus:ring-blue-500"
         placeholder={props.placeholder}
         required
         disabled={props.isLoading}

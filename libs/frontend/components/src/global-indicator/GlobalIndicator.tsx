@@ -3,16 +3,20 @@ import React, { PropsWithChildren } from 'react';
 type GlobalIndicatorProps = {
   Icon: typeof React.Component;
   spin?: boolean;
+  noTopPadding?: boolean;
 };
 
 export const GlobalIndicator = ({
   Icon,
   spin,
+  noTopPadding = false,
   children,
 }: PropsWithChildren<GlobalIndicatorProps>) => (
   <div
     role="status"
-    className="w-full pb-12 text-center sm:pt-32 sm:pb-0 md:pt-36"
+    className={`w-full pb-12 text-center sm:pb-0 ${
+      !noTopPadding && 'sm:pt-32 md:pt-36'
+    }`}
   >
     <Icon
       className={`${

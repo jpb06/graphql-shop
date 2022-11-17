@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 
 import MenuIcon from '@front/assets/icons/menu-icon.svg';
-import { authState } from '@front/state';
+import { authStateAtom } from '@front/state';
 
 import { Avatar } from '../../avatar/Avatar';
 
@@ -10,7 +10,7 @@ type NavBurgerButtonProps = {
 };
 
 export const NavBurgerButton = ({ onExpandClick }: NavBurgerButtonProps) => {
-  const [state] = useAtom(authState);
+  const [state] = useAtom(authStateAtom);
 
   return (
     <div className="flex md:order-2">
