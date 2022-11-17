@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { authState } from '@front/state';
+import { authStateAtom } from '@front/state';
 
 import { endpointUrl } from './fetch-config';
 
@@ -13,14 +13,14 @@ export const useFetchData = <TData, TVariables>(
   query: string,
   options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const [auth] = useAtom(authState);
+  const [auth] = useAtom(authStateAtom);
 
   return async (variables?: TVariables) => {
     const fetchPromise = fetch(endpointUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: auth?.token,
+        Authorization: `Bearer ${auth?.token}`,
         ...options,
       },
       body: JSON.stringify({

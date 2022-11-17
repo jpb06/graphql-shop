@@ -1,4 +1,4 @@
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { useFetchData } from './fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -54,6 +54,15 @@ export type GqlLoggedUser = {
   token: Scalars['String'];
 };
 
+export type GqlNewAddressOutput = {
+  __typename?: 'GqlNewAddressOutput';
+  city: Scalars['String'];
+  country: Scalars['String'];
+  id: Scalars['ID'];
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
+};
+
 export type GqlNewOrderedItem = {
   idProduct: Scalars['Int'];
   quantity: Scalars['Int'];
@@ -78,9 +87,24 @@ export type GqlOrderedItem = {
   quantity: Scalars['Int'];
 };
 
+export type GqlPartialCreditCard = {
+  __typename?: 'GqlPartialCreditCard';
+  expires: Scalars['String'];
+  number: Scalars['String'];
+};
+
+export type GqlPartialOrderedItem = {
+  __typename?: 'GqlPartialOrderedItem';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+};
+
 export type GqlPlaceOrderInput = {
   cvc: Scalars['String'];
   expires: Scalars['String'];
+  name: Scalars['String'];
   number: Scalars['String'];
 };
 
@@ -101,11 +125,27 @@ export type GqlProduct = {
   stock: Scalars['Int'];
 };
 
+export type GqlUserOrder = {
+  __typename?: 'GqlUserOrder';
+  createdAt: Scalars['DateTime'];
+  creditCard: GqlPartialCreditCard;
+  items: Array<GqlPartialOrderedItem>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createAddress: GqlNewAddressOutput;
   login: GqlAuthOutput;
   placeOrder: GqlPlaceOrderOutput;
   signup: GqlAuthOutput;
+};
+
+
+export type MutationCreateAddressArgs = {
+  city: Scalars['String'];
+  country: Scalars['String'];
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
 };
 
 
@@ -132,6 +172,7 @@ export type Query = {
   __typename?: 'Query';
   categories: Array<GqlCategory>;
   category: GqlCategory;
+  getOrder: GqlUserOrder;
   me: GqlLoggedUser;
   myAddresses: Array<GqlAddress>;
   myOrders: Array<GqlOrder>;
@@ -146,6 +187,11 @@ export type QueryCategoryArgs = {
 };
 
 
+export type QueryGetOrderArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type QueryProductArgs = {
   id: Scalars['Int'];
 };
@@ -155,11 +201,6 @@ export type QueryProductsWithIdsArgs = {
   ids: Array<Scalars['Int']>;
 };
 
-export type MyAddressesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MyAddressesQuery = { __typename?: 'Query', myAddresses: Array<{ __typename?: 'GqlAddress', id: string, street: string, zipCode: string, city: string, country: string }> };
-
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -167,6 +208,36 @@ export type LoginMutationVariables = Exact<{
 
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'GqlAuthOutput', id: string, token: string, email: string, firstName: string, lastName: string } };
+
+export type NewAddressMutationVariables = Exact<{
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
+  city: Scalars['String'];
+  country: Scalars['String'];
+}>;
+
+
+export type NewAddressMutation = { __typename?: 'Mutation', createAddress: { __typename?: 'GqlNewAddressOutput', id: string, street: string, zipCode: string, city: string, country: string } };
+
+export type GetOrderQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetOrderQuery = { __typename?: 'Query', getOrder: { __typename?: 'GqlUserOrder', createdAt: any, creditCard: { __typename?: 'GqlPartialCreditCard', number: string, expires: string }, items: Array<{ __typename?: 'GqlPartialOrderedItem', id: string, name: string, quantity: number, price: number }> } };
+
+export type PlaceOrderMutationVariables = Exact<{
+  creditCard: GqlPlaceOrderInput;
+  orderedItems: Array<GqlNewOrderedItem> | GqlNewOrderedItem;
+}>;
+
+
+export type PlaceOrderMutation = { __typename?: 'Mutation', placeOrder: { __typename?: 'GqlPlaceOrderOutput', orderId: number } };
+
+export type MyAddressesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyAddressesQuery = { __typename?: 'Query', myAddresses: Array<{ __typename?: 'GqlAddress', id: string, street: string, zipCode: string, city: string, country: string }> };
 
 export type ProductQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -210,6 +281,96 @@ export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, image: string, price: number, stock: number, category: { __typename?: 'GqlCategory', id: string, name: string } }> };
 
 
+export const LoginDocument = /*#__PURE__*/ `
+    mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    id
+    token
+    email
+    firstName
+    lastName
+  }
+}
+    `;
+export const useLoginMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<LoginMutation, TError, LoginMutationVariables, TContext>) =>
+    useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
+      ['Login'],
+      useFetchData<LoginMutation, LoginMutationVariables>(LoginDocument),
+      options
+    );
+export const NewAddressDocument = /*#__PURE__*/ `
+    mutation NewAddress($street: String!, $zipCode: String!, $city: String!, $country: String!) {
+  createAddress(
+    street: $street
+    zipCode: $zipCode
+    city: $city
+    country: $country
+  ) {
+    id
+    street
+    zipCode
+    city
+    country
+  }
+}
+    `;
+export const useNewAddressMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<NewAddressMutation, TError, NewAddressMutationVariables, TContext>) =>
+    useMutation<NewAddressMutation, TError, NewAddressMutationVariables, TContext>(
+      ['NewAddress'],
+      useFetchData<NewAddressMutation, NewAddressMutationVariables>(NewAddressDocument),
+      options
+    );
+export const GetOrderDocument = /*#__PURE__*/ `
+    query GetOrder($id: Int!) {
+  getOrder(id: $id) {
+    createdAt
+    creditCard {
+      number
+      expires
+    }
+    items {
+      id
+      name
+      quantity
+      price
+    }
+  }
+}
+    `;
+export const useGetOrderQuery = <
+      TData = GetOrderQuery,
+      TError = unknown
+    >(
+      variables: GetOrderQueryVariables,
+      options?: UseQueryOptions<GetOrderQuery, TError, TData>
+    ) =>
+    useQuery<GetOrderQuery, TError, TData>(
+      ['GetOrder', variables],
+      useFetchData<GetOrderQuery, GetOrderQueryVariables>(GetOrderDocument).bind(null, variables),
+      options
+    );
+export const PlaceOrderDocument = /*#__PURE__*/ `
+    mutation PlaceOrder($creditCard: GqlPlaceOrderInput!, $orderedItems: [GqlNewOrderedItem!]!) {
+  placeOrder(creditCard: $creditCard, orderedItems: $orderedItems) {
+    orderId
+  }
+}
+    `;
+export const usePlaceOrderMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<PlaceOrderMutation, TError, PlaceOrderMutationVariables, TContext>) =>
+    useMutation<PlaceOrderMutation, TError, PlaceOrderMutationVariables, TContext>(
+      ['PlaceOrder'],
+      useFetchData<PlaceOrderMutation, PlaceOrderMutationVariables>(PlaceOrderDocument),
+      options
+    );
 export const MyAddressesDocument = /*#__PURE__*/ `
     query MyAddresses {
   myAddresses {
@@ -231,26 +392,6 @@ export const useMyAddressesQuery = <
     useQuery<MyAddressesQuery, TError, TData>(
       variables === undefined ? ['MyAddresses'] : ['MyAddresses', variables],
       useFetchData<MyAddressesQuery, MyAddressesQueryVariables>(MyAddressesDocument).bind(null, variables),
-      options
-    );
-export const LoginDocument = /*#__PURE__*/ `
-    mutation Login($username: String!, $password: String!) {
-  login(username: $username, password: $password) {
-    id
-    token
-    email
-    firstName
-    lastName
-  }
-}
-    `;
-export const useLoginMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<LoginMutation, TError, LoginMutationVariables, TContext>) =>
-    useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
-      ['Login'],
-      useFetchData<LoginMutation, LoginMutationVariables>(LoginDocument),
       options
     );
 export const ProductDocument = /*#__PURE__*/ `
