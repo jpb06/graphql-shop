@@ -12,3 +12,4 @@ export * from './navbar';
 export * from './page-title';
 export * from './text-with-icon';
 export * from './title';
+export * from './loader';

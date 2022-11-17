@@ -1,10 +1,9 @@
 import { useAtom } from 'jotai';
 
 import { GqlUserOrder, useGetOrderQuery } from '@front/api';
-import { Title } from '@front/components';
+import { Loader, Title } from '@front/components';
 
 import { orderModalAtom } from '../../specialized/order/state/order-modal.state';
-import { Loader } from 'libs/frontend/components/src/loader/Loader';
 
 export const OrderCompleteModalContent = () => {
   const [orderModalState] = useAtom(orderModalAtom);

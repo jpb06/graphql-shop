@@ -1,8 +1,8 @@
 import ArrowRightIcon from '@front/assets/icons/arrow-right.svg';
 import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import { TextWithIcon } from '@front/components';
+import { OrderData } from '@front/state';
 
-import { OrderData } from '../../../../../../state/orders.state';
 import { useOrderActions } from '../../../../shop/articles-list/article/hooks/useOrderActions';
 import { OrderedItemAction } from './OrderedItemAction';
 

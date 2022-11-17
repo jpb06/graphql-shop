@@ -1,13 +1,12 @@
 import { useAtom } from 'jotai';
 
-import { Button, GlobalIndicator, Title } from '@front/components';
+import { MyAddressesQuery, useMyAddressesQuery } from '@front/api';
 import ErrorCircle from '@front/assets/icons/error-circle.svg';
 import PlusIcon from '@front/assets/icons/plus.svg';
+import { Button, GlobalIndicator, Title, Loader } from '@front/components';
 
 import { orderModalAtom } from '../../specialized/order/state/order-modal.state';
 import { AddressSelection } from './children/AddressSelection';
-import { MyAddressesQuery, useMyAddressesQuery } from '@front/api';
-import { Loader } from 'libs/frontend/components/src/loader/Loader';
 
 export const ShippingAddressSelectionModalContent = () => {
   const [, setModalState] = useAtom(orderModalAtom);
