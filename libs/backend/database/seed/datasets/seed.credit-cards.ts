@@ -8,6 +8,7 @@ export const seedCreditCards = async (prisma: PrismaDb): Promise<void> => {
   const promises = range(2).map(async (idCreditCard) => {
     const data = {
       number: faker.finance.creditCardNumber('visa'),
+      name: faker.name.fullName(),
       expires: format(faker.date.future(), 'MM/yy'),
       cvc: faker.finance.creditCardCVV(),
     };
