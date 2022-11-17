@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 // Extracting this type to avoid a circular dep issue with @front/types
 type GqlAuthOutput = {
-  id: number;
+  id: string;
   email: string;
   lastName: string;
   firstName: string;
@@ -11,6 +11,6 @@ type GqlAuthOutput = {
   token: string;
 };
 
-export const authState = atom<
+export const authStateAtom = atom<
   Omit<GqlAuthOutput, 'joinDate' | 'role'> | undefined
 >(undefined);

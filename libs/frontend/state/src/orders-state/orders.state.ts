@@ -7,7 +7,7 @@ export interface OrderData
     GqlProduct,
     'id' | 'name' | 'description' | 'price' | 'image' | 'stock'
   > {
-  count: number;
+  quantity: number;
 }
 
 export const ordersAtom = atom<Array<OrderData>>([]);
