@@ -7,14 +7,9 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { obfuscateCreditCardNumber } from '../../credit-cards/logic/obfuscate-credit-card-number';
 import { GetUserOrdersSelectType } from '../closures/get-user-orders.closure';
 import { GqlOrder } from '../dtos/gql.order.dto';
-
-const obfuscateCreditCardNumber = (number: string): string => {
-  const lastFourNumbers = number.slice(-4);
-
-  return `${'•'.repeat(number.length - 4)}${lastFourNumbers}`;
-};
 
 @Injectable()
 export class GetUserOrdersTransform

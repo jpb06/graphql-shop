@@ -7,6 +7,9 @@ export class GqlCreditCard {
   number: string;
 
   @Field(() => String)
+  name: string;
+
+  @Field(() => String)
   expires: string;
 
   @Field(() => String)

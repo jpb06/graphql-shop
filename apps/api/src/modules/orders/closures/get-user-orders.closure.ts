@@ -21,7 +21,7 @@ export class GetUserOrdersClosure {
 
   constructor(private readonly db: DatabaseService) {}
 
-  async from(userId: number): Promise<Array<GetUserOrdersSelectType>> {
+  async for(userId: number): Promise<Array<GetUserOrdersSelectType>> {
     return this.db.order.findMany({
       where: {
         idUser: userId,
