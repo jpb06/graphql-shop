@@ -19,6 +19,13 @@
     "resolveJsonModule": true,
     "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "next-env.d.ts",
+    "../../libs/frontend/assets/src/index.d.ts"
+  ],
   "exclude": ["node_modules", "jest.config.ts"]
 }

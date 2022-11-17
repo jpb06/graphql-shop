@@ -1,0 +1,19 @@
+mutation NewAddress(
+  $street: String!
+  $zipCode: String!
+  $city: String!
+  $country: String!
+) {
+  createAddress(
+    street: $street
+    zipCode: $zipCode
+    city: $city
+    country: $country
+  ) {
+    id
+    street
+    zipCode
+    city
+    country
+  }
+}

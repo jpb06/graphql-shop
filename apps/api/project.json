@@ -1,4 +1,5 @@
 {
+  "name": "back-api-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/src",
   "projectType": "application",
@@ -31,11 +32,11 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "app-backend-api:build"
+        "buildTarget": "back-api-app:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "app-backend-api:build:production"
+          "buildTarget": "back-api-app:build:production"
         }
       }
     },
@@ -48,14 +49,14 @@
     },
     "type-check": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/apps/api"],
+      "outputs": ["{workspaceRoot}/dist/apps/api"],
       "options": {
         "command": "pnpm tsc -b apps/api/tsconfig.json"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/api"],
+      "outputs": ["{workspaceRoot}/coverage/apps/api"],
       "options": {
         "jestConfig": "apps/api/jest.config.ts",
         "passWithNoTests": true

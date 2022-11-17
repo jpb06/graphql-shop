@@ -1,4 +1,5 @@
 {
+  "name": "back-tests-lib",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/backend/tests/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "type-check": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/libs/backend/tests"],
+      "outputs": ["{workspaceRoot}/dist/libs/backend/tests"],
       "options": {
         "command": "pnpm tsc -b libs/backend/tests/tsconfig.json"
       }

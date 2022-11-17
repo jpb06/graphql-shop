@@ -1,0 +1,23 @@
+{
+  "name": "front-state-lib",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/lib-frontend-state/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/frontend/state/**/*.ts"]
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/libs/frontend/state"],
+      "options": {
+        "command": "pnpm tsc -b libs/frontend/state/tsconfig.json"
+      }
+    }
+  },
+  "tags": []
+}

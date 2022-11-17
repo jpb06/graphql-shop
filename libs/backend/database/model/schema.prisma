@@ -28,7 +28,8 @@ model Product {
   image       String
   stock       Int
 
-  Category Category? @relation(fields: [idCategory], references: [id])
+  Category    Category?     @relation(fields: [idCategory], references: [id])
+  OrderedItem OrderedItem[]
 }
 
 enum Role {
@@ -47,6 +48,7 @@ model User {
   role      Role     @default(USER)
 
   JoinUserAddress JoinUserAddress[]
+  Order           Order[]
 }
 
 model Address {
@@ -62,11 +64,45 @@ model Address {
 
 model JoinUserAddress {
   id        Int @id @default(autoincrement())
-  idUser    Int
-  idAddress Int
+  idUser    Int @map("User")
+  idAddress Int @map("Address")
 
-  creationDate DateTime @default(now())
+  createdAt DateTime @default(now())
 
   User    User    @relation(fields: [idUser], references: [id])
   Address Address @relation(fields: [idAddress], references: [id])
+}
+
+model Order {
+  id           Int @id @default(autoincrement())
+  idUser       Int @map("User")
+  idCreditCard Int @map("CreditCard")
+
+  createdAt DateTime @default(now())
+
+  OrderedItem OrderedItem[]
+  User        User          @relation(fields: [idUser], references: [id])
+  CreditCard  CreditCard    @relation(fields: [idCreditCard], references: [id])
+}
+
+model OrderedItem {
+  id        Int @id @default(autoincrement())
+  idProduct Int @map("Product")
+  idOrder   Int @map("Order")
+
+  quantity Int
+
+  Product Product @relation(fields: [idProduct], references: [id])
+  Order   Order   @relation(fields: [idOrder], references: [id])
+}
+
+model CreditCard {
+  id Int @id @default(autoincrement())
+
+  number  String
+  name    String
+  expires String
+  cvc     String
+
+  Order Order[]
 }

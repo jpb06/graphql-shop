@@ -6,19 +6,26 @@ import { seedProducts } from './seed.products';
 
 export const seedCategoriesAndProducts = async (
   prisma: PrismaDb
-): Promise<void> => {
+): Promise<Array<number>> => {
   const promises = range(6).map(async (idCategory) => {
+    const data = {
+      name: faker.commerce.department(),
+    };
+
     await prisma.category.upsert({
       where: { id: idCategory },
-      update: {},
+      update: data,
       create: {
         id: idCategory,
-        name: faker.commerce.department(),
+        ...data,
       },
     });
 
-    await seedProducts(prisma, idCategory);
+    return seedProducts(prisma, idCategory);
   });
 
-  await Promise.all(promises);
+  const ids = await Promise.all(promises);
+  await prisma.$queryRaw`select setval('"public"."Category_id_seq"', 7)`;
+
+  return ids.flat();
 };

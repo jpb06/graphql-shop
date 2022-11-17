@@ -2,6 +2,22 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type GqlAddress {
+  id: ID!
+  street: String!
+  zipCode: String!
+  city: String!
+  country: String!
+}
+
+type GqlNewAddressOutput {
+  id: ID!
+  street: String!
+  zipCode: String!
+  city: String!
+  country: String!
+}
+
 type GqlAuthOutput {
   id: ID!
   email: String!
@@ -44,6 +60,45 @@ type GqlCategory {
   products: [GqlProduct!]!
 }
 
+type GqlOrderedItem {
+  id: ID!
+  quantity: Int!
+  name: String!
+  image: String!
+  price: Float!
+}
+
+type GqlOrder {
+  id: ID!
+  idUser: ID!
+  idCreditCard: ID!
+  createdAt: DateTime!
+  creditCardNumber: String!
+  items: [GqlOrderedItem!]!
+}
+
+type GqlPlaceOrderOutput {
+  orderId: Int!
+}
+
+type GqlPartialCreditCard {
+  number: String!
+  expires: String!
+}
+
+type GqlPartialOrderedItem {
+  id: ID!
+  quantity: Int!
+  name: String!
+  price: Float!
+}
+
+type GqlUserOrder {
+  createdAt: DateTime!
+  creditCard: GqlPartialCreditCard!
+  items: [GqlPartialOrderedItem!]!
+}
+
 type Query {
   products: [GqlProduct!]!
   productsWithIds(ids: [Int!]!): [GqlProduct!]!
@@ -51,9 +106,26 @@ type Query {
   categories: [GqlCategory!]!
   category(id: Int!): GqlCategory!
   me: GqlLoggedUser!
+  getOrder(id: Int!): GqlUserOrder!
+  myOrders: [GqlOrder!]!
+  myAddresses: [GqlAddress!]!
 }
 
 type Mutation {
   signup(email: String!, lastName: String!, firstName: String!, password: String!): GqlAuthOutput!
   login(username: String!, password: String!): GqlAuthOutput!
+  placeOrder(creditCard: GqlPlaceOrderInput!, orderedItems: [GqlNewOrderedItem!]!): GqlPlaceOrderOutput!
+  createAddress(street: String!, zipCode: String!, city: String!, country: String!): GqlNewAddressOutput!
+}
+
+input GqlPlaceOrderInput {
+  number: String!
+  name: String!
+  expires: String!
+  cvc: String!
+}
+
+input GqlNewOrderedItem {
+  idProduct: Int!
+  quantity: Int!
 }

@@ -1,0 +1,15 @@
+query GetOrder($id: Int!) {
+  getOrder(id: $id) {
+    createdAt
+    creditCard {
+      number
+      expires
+    }
+    items {
+      id
+      name
+      quantity
+      price
+    }
+  }
+}

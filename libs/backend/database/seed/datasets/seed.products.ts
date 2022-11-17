@@ -6,20 +6,26 @@ import { randomNumberBetween } from '../util/random-number-between';
 export const seedProducts = async (
   prisma: PrismaDb,
   idCategory: number
-): Promise<void> => {
+): Promise<Array<number>> => {
+  await prisma.orderedItem.deleteMany();
   await prisma.product.deleteMany();
+
+  const ids: Array<number> = [];
 
   const productsCount = randomNumberBetween(4, 50);
   for (let i = 0; i < productsCount; i++) {
-    await prisma.product.create({
+    const product = await prisma.product.create({
       data: {
+        idCategory,
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
         image: faker.image.image(640, 480, true),
         price: faker.commerce.price(),
         stock: randomNumberBetween(0, 12),
-        idCategory,
       },
     });
+    ids.push(product.id);
   }
+
+  return ids;
 };

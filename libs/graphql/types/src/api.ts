@@ -1,22 +1,10 @@
-import {
-  useMutation,
-  useQuery,
-  UseMutationOptions,
-  UseQueryOptions,
-} from '@tanstack/react-query';
-
-import { fetcher } from './fetcher';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import { useFetchData } from './fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -26,6 +14,15 @@ export type Scalars = {
   Float: number;
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
+};
+
+export type GqlAddress = {
+  __typename?: 'GqlAddress';
+  city: Scalars['String'];
+  country: Scalars['String'];
+  id: Scalars['ID'];
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
 };
 
 export type GqlAuthOutput = {
@@ -57,6 +54,65 @@ export type GqlLoggedUser = {
   token: Scalars['String'];
 };
 
+export type GqlNewAddressOutput = {
+  __typename?: 'GqlNewAddressOutput';
+  city: Scalars['String'];
+  country: Scalars['String'];
+  id: Scalars['ID'];
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
+};
+
+export type GqlNewOrderedItem = {
+  idProduct: Scalars['Int'];
+  quantity: Scalars['Int'];
+};
+
+export type GqlOrder = {
+  __typename?: 'GqlOrder';
+  createdAt: Scalars['DateTime'];
+  creditCardNumber: Scalars['String'];
+  id: Scalars['ID'];
+  idCreditCard: Scalars['ID'];
+  idUser: Scalars['ID'];
+  items: Array<GqlOrderedItem>;
+};
+
+export type GqlOrderedItem = {
+  __typename?: 'GqlOrderedItem';
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+};
+
+export type GqlPartialCreditCard = {
+  __typename?: 'GqlPartialCreditCard';
+  expires: Scalars['String'];
+  number: Scalars['String'];
+};
+
+export type GqlPartialOrderedItem = {
+  __typename?: 'GqlPartialOrderedItem';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+};
+
+export type GqlPlaceOrderInput = {
+  cvc: Scalars['String'];
+  expires: Scalars['String'];
+  name: Scalars['String'];
+  number: Scalars['String'];
+};
+
+export type GqlPlaceOrderOutput = {
+  __typename?: 'GqlPlaceOrderOutput';
+  orderId: Scalars['Int'];
+};
+
 export type GqlProduct = {
   __typename?: 'GqlProduct';
   category: GqlCategory;
@@ -69,16 +125,41 @@ export type GqlProduct = {
   stock: Scalars['Int'];
 };
 
+export type GqlUserOrder = {
+  __typename?: 'GqlUserOrder';
+  createdAt: Scalars['DateTime'];
+  creditCard: GqlPartialCreditCard;
+  items: Array<GqlPartialOrderedItem>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createAddress: GqlNewAddressOutput;
   login: GqlAuthOutput;
+  placeOrder: GqlPlaceOrderOutput;
   signup: GqlAuthOutput;
 };
+
+
+export type MutationCreateAddressArgs = {
+  city: Scalars['String'];
+  country: Scalars['String'];
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
+};
+
 
 export type MutationLoginArgs = {
   password: Scalars['String'];
   username: Scalars['String'];
 };
+
+
+export type MutationPlaceOrderArgs = {
+  creditCard: GqlPlaceOrderInput;
+  orderedItems: Array<GqlNewOrderedItem>;
+};
+
 
 export type MutationSignupArgs = {
   email: Scalars['String'];
@@ -91,19 +172,30 @@ export type Query = {
   __typename?: 'Query';
   categories: Array<GqlCategory>;
   category: GqlCategory;
+  getOrder: GqlUserOrder;
   me: GqlLoggedUser;
+  myAddresses: Array<GqlAddress>;
+  myOrders: Array<GqlOrder>;
   product: GqlProduct;
   products: Array<GqlProduct>;
   productsWithIds: Array<GqlProduct>;
 };
 
+
 export type QueryCategoryArgs = {
   id: Scalars['Int'];
 };
 
+
+export type QueryGetOrderArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type QueryProductArgs = {
   id: Scalars['Int'];
 };
+
 
 export type QueryProductsWithIdsArgs = {
   ids: Array<Scalars['Int']>;
@@ -114,17 +206,45 @@ export type LoginMutationVariables = Exact<{
   password: Scalars['String'];
 }>;
 
-export type LoginMutation = {
-  __typename?: 'Mutation';
-  login: {
-    __typename?: 'GqlAuthOutput';
-    id: string;
-    token: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-  };
-};
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'GqlAuthOutput', id: string, token: string, email: string, firstName: string, lastName: string } };
+
+export type NewAddressMutationVariables = Exact<{
+  street: Scalars['String'];
+  zipCode: Scalars['String'];
+  city: Scalars['String'];
+  country: Scalars['String'];
+}>;
+
+
+export type NewAddressMutation = { __typename?: 'Mutation', createAddress: { __typename?: 'GqlNewAddressOutput', id: string, street: string, zipCode: string, city: string, country: string } };
+
+export type GetOrderQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetOrderQuery = { __typename?: 'Query', getOrder: { __typename?: 'GqlUserOrder', createdAt: any, creditCard: { __typename?: 'GqlPartialCreditCard', number: string, expires: string }, items: Array<{ __typename?: 'GqlPartialOrderedItem', id: string, name: string, quantity: number, price: number }> } };
+
+export type PlaceOrderMutationVariables = Exact<{
+  creditCard: GqlPlaceOrderInput;
+  orderedItems: Array<GqlNewOrderedItem> | GqlNewOrderedItem;
+}>;
+
+
+export type PlaceOrderMutation = { __typename?: 'Mutation', placeOrder: { __typename?: 'GqlPlaceOrderOutput', orderId: number } };
+
+export type MyAddressesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyAddressesQuery = { __typename?: 'Query', myAddresses: Array<{ __typename?: 'GqlAddress', id: string, street: string, zipCode: string, city: string, country: string }> };
+
+export type ProductQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'GqlProduct', id: string, name: string, description: string, image: string, price: number, category: { __typename?: 'GqlCategory', id: string, name: string } } };
 
 export type SignupMutationVariables = Exact<{
   email: Scalars['String'];
@@ -133,97 +253,33 @@ export type SignupMutationVariables = Exact<{
   password: Scalars['String'];
 }>;
 
-export type SignupMutation = {
-  __typename?: 'Mutation';
-  signup: { __typename?: 'GqlAuthOutput'; id: string; token: string };
-};
 
-export type CategoriesQueryVariables = Exact<{ [key: string]: never }>;
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'GqlAuthOutput', id: string, token: string } };
 
-export type CategoriesQuery = {
-  __typename?: 'Query';
-  categories: Array<{
-    __typename?: 'GqlCategory';
-    id: string;
-    name: string;
-    products: Array<{
-      __typename?: 'GqlProduct';
-      id: string;
-      name: string;
-      description: string;
-      price: number;
-    }>;
-  }>;
-};
+export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'GqlCategory', id: string, name: string, products: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, price: number }> }> };
 
 export type CategoryQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
-export type CategoryQuery = {
-  __typename?: 'Query';
-  category: {
-    __typename?: 'GqlCategory';
-    id: string;
-    name: string;
-    products: Array<{
-      __typename?: 'GqlProduct';
-      id: string;
-      name: string;
-      description: string;
-      price: number;
-    }>;
-  };
-};
 
-export type ProductQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-export type ProductQuery = {
-  __typename?: 'Query';
-  product: {
-    __typename?: 'GqlProduct';
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: { __typename?: 'GqlCategory'; id: string; name: string };
-  };
-};
+export type CategoryQuery = { __typename?: 'Query', category: { __typename?: 'GqlCategory', id: string, name: string, products: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, price: number }> } };
 
 export type ProductsWithIdsQueryVariables = Exact<{
   ids: Array<Scalars['Int']> | Scalars['Int'];
 }>;
 
-export type ProductsWithIdsQuery = {
-  __typename?: 'Query';
-  productsWithIds: Array<{
-    __typename?: 'GqlProduct';
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-  }>;
-};
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never }>;
+export type ProductsWithIdsQuery = { __typename?: 'Query', productsWithIds: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, image: string, price: number }> };
 
-export type ProductsQuery = {
-  __typename?: 'Query';
-  products: Array<{
-    __typename?: 'GqlProduct';
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    stock: number;
-    category: { __typename?: 'GqlCategory'; id: string; name: string };
-  }>;
-};
+export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'GqlProduct', id: string, name: string, description: string, image: string, price: number, stock: number, category: { __typename?: 'GqlCategory', id: string, name: string } }> };
+
 
 export const LoginDocument = /*#__PURE__*/ `
     mutation Login($username: String!, $password: String!) {
@@ -236,114 +292,108 @@ export const LoginDocument = /*#__PURE__*/ `
   }
 }
     `;
-export const useLoginMutation = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    LoginMutation,
-    TError,
-    LoginMutationVariables,
-    TContext
-  >
-) =>
-  useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
-    ['Login'],
-    (variables?: LoginMutationVariables) =>
-      fetcher<LoginMutation, LoginMutationVariables>(
-        LoginDocument,
-        variables
-      )(),
-    options
-  );
-useLoginMutation.getKey = () => ['Login'];
-
-export const SignupDocument = /*#__PURE__*/ `
-    mutation Signup($email: String!, $lastName: String!, $firstName: String!, $password: String!) {
-  signup(
-    email: $email
-    lastName: $lastName
-    firstName: $firstName
-    password: $password
+export const useLoginMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<LoginMutation, TError, LoginMutationVariables, TContext>) =>
+    useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
+      ['Login'],
+      useFetchData<LoginMutation, LoginMutationVariables>(LoginDocument),
+      options
+    );
+export const NewAddressDocument = /*#__PURE__*/ `
+    mutation NewAddress($street: String!, $zipCode: String!, $city: String!, $country: String!) {
+  createAddress(
+    street: $street
+    zipCode: $zipCode
+    city: $city
+    country: $country
   ) {
     id
-    token
+    street
+    zipCode
+    city
+    country
   }
 }
     `;
-export const useSignupMutation = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    SignupMutation,
-    TError,
-    SignupMutationVariables,
-    TContext
-  >
-) =>
-  useMutation<SignupMutation, TError, SignupMutationVariables, TContext>(
-    ['Signup'],
-    (variables?: SignupMutationVariables) =>
-      fetcher<SignupMutation, SignupMutationVariables>(
-        SignupDocument,
-        variables
-      )(),
-    options
-  );
-useSignupMutation.getKey = () => ['Signup'];
-
-export const CategoriesDocument = /*#__PURE__*/ `
-    query Categories {
-  categories {
-    id
-    name
-    products {
+export const useNewAddressMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<NewAddressMutation, TError, NewAddressMutationVariables, TContext>) =>
+    useMutation<NewAddressMutation, TError, NewAddressMutationVariables, TContext>(
+      ['NewAddress'],
+      useFetchData<NewAddressMutation, NewAddressMutationVariables>(NewAddressDocument),
+      options
+    );
+export const GetOrderDocument = /*#__PURE__*/ `
+    query GetOrder($id: Int!) {
+  getOrder(id: $id) {
+    createdAt
+    creditCard {
+      number
+      expires
+    }
+    items {
       id
       name
-      description
+      quantity
       price
     }
   }
 }
     `;
-export const useCategoriesQuery = <TData = CategoriesQuery, TError = unknown>(
-  variables?: CategoriesQueryVariables,
-  options?: UseQueryOptions<CategoriesQuery, TError, TData>
-) =>
-  useQuery<CategoriesQuery, TError, TData>(
-    variables === undefined ? ['Categories'] : ['Categories', variables],
-    fetcher<CategoriesQuery, CategoriesQueryVariables>(
-      CategoriesDocument,
-      variables
-    ),
-    options
-  );
-
-useCategoriesQuery.getKey = (variables?: CategoriesQueryVariables) =>
-  variables === undefined ? ['Categories'] : ['Categories', variables];
-export const CategoryDocument = /*#__PURE__*/ `
-    query Category($id: Int!) {
-  category(id: $id) {
-    id
-    name
-    products {
-      id
-      name
-      description
-      price
-    }
+export const useGetOrderQuery = <
+      TData = GetOrderQuery,
+      TError = unknown
+    >(
+      variables: GetOrderQueryVariables,
+      options?: UseQueryOptions<GetOrderQuery, TError, TData>
+    ) =>
+    useQuery<GetOrderQuery, TError, TData>(
+      ['GetOrder', variables],
+      useFetchData<GetOrderQuery, GetOrderQueryVariables>(GetOrderDocument).bind(null, variables),
+      options
+    );
+export const PlaceOrderDocument = /*#__PURE__*/ `
+    mutation PlaceOrder($creditCard: GqlPlaceOrderInput!, $orderedItems: [GqlNewOrderedItem!]!) {
+  placeOrder(creditCard: $creditCard, orderedItems: $orderedItems) {
+    orderId
   }
 }
     `;
-export const useCategoryQuery = <TData = CategoryQuery, TError = unknown>(
-  variables: CategoryQueryVariables,
-  options?: UseQueryOptions<CategoryQuery, TError, TData>
-) =>
-  useQuery<CategoryQuery, TError, TData>(
-    ['Category', variables],
-    fetcher<CategoryQuery, CategoryQueryVariables>(CategoryDocument, variables),
-    options
-  );
-
-useCategoryQuery.getKey = (variables: CategoryQueryVariables) => [
-  'Category',
-  variables,
-];
+export const usePlaceOrderMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<PlaceOrderMutation, TError, PlaceOrderMutationVariables, TContext>) =>
+    useMutation<PlaceOrderMutation, TError, PlaceOrderMutationVariables, TContext>(
+      ['PlaceOrder'],
+      useFetchData<PlaceOrderMutation, PlaceOrderMutationVariables>(PlaceOrderDocument),
+      options
+    );
+export const MyAddressesDocument = /*#__PURE__*/ `
+    query MyAddresses {
+  myAddresses {
+    id
+    street
+    zipCode
+    city
+    country
+  }
+}
+    `;
+export const useMyAddressesQuery = <
+      TData = MyAddressesQuery,
+      TError = unknown
+    >(
+      variables?: MyAddressesQueryVariables,
+      options?: UseQueryOptions<MyAddressesQuery, TError, TData>
+    ) =>
+    useQuery<MyAddressesQuery, TError, TData>(
+      variables === undefined ? ['MyAddresses'] : ['MyAddresses', variables],
+      useFetchData<MyAddressesQuery, MyAddressesQueryVariables>(MyAddressesDocument).bind(null, variables),
+      options
+    );
 export const ProductDocument = /*#__PURE__*/ `
     query Product($id: Int!) {
   product(id: $id) {
@@ -359,20 +409,92 @@ export const ProductDocument = /*#__PURE__*/ `
   }
 }
     `;
-export const useProductQuery = <TData = ProductQuery, TError = unknown>(
-  variables: ProductQueryVariables,
-  options?: UseQueryOptions<ProductQuery, TError, TData>
-) =>
-  useQuery<ProductQuery, TError, TData>(
-    ['Product', variables],
-    fetcher<ProductQuery, ProductQueryVariables>(ProductDocument, variables),
-    options
-  );
-
-useProductQuery.getKey = (variables: ProductQueryVariables) => [
-  'Product',
-  variables,
-];
+export const useProductQuery = <
+      TData = ProductQuery,
+      TError = unknown
+    >(
+      variables: ProductQueryVariables,
+      options?: UseQueryOptions<ProductQuery, TError, TData>
+    ) =>
+    useQuery<ProductQuery, TError, TData>(
+      ['Product', variables],
+      useFetchData<ProductQuery, ProductQueryVariables>(ProductDocument).bind(null, variables),
+      options
+    );
+export const SignupDocument = /*#__PURE__*/ `
+    mutation Signup($email: String!, $lastName: String!, $firstName: String!, $password: String!) {
+  signup(
+    email: $email
+    lastName: $lastName
+    firstName: $firstName
+    password: $password
+  ) {
+    id
+    token
+  }
+}
+    `;
+export const useSignupMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<SignupMutation, TError, SignupMutationVariables, TContext>) =>
+    useMutation<SignupMutation, TError, SignupMutationVariables, TContext>(
+      ['Signup'],
+      useFetchData<SignupMutation, SignupMutationVariables>(SignupDocument),
+      options
+    );
+export const CategoriesDocument = /*#__PURE__*/ `
+    query Categories {
+  categories {
+    id
+    name
+    products {
+      id
+      name
+      description
+      price
+    }
+  }
+}
+    `;
+export const useCategoriesQuery = <
+      TData = CategoriesQuery,
+      TError = unknown
+    >(
+      variables?: CategoriesQueryVariables,
+      options?: UseQueryOptions<CategoriesQuery, TError, TData>
+    ) =>
+    useQuery<CategoriesQuery, TError, TData>(
+      variables === undefined ? ['Categories'] : ['Categories', variables],
+      useFetchData<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument).bind(null, variables),
+      options
+    );
+export const CategoryDocument = /*#__PURE__*/ `
+    query Category($id: Int!) {
+  category(id: $id) {
+    id
+    name
+    products {
+      id
+      name
+      description
+      price
+    }
+  }
+}
+    `;
+export const useCategoryQuery = <
+      TData = CategoryQuery,
+      TError = unknown
+    >(
+      variables: CategoryQueryVariables,
+      options?: UseQueryOptions<CategoryQuery, TError, TData>
+    ) =>
+    useQuery<CategoryQuery, TError, TData>(
+      ['Category', variables],
+      useFetchData<CategoryQuery, CategoryQueryVariables>(CategoryDocument).bind(null, variables),
+      options
+    );
 export const ProductsWithIdsDocument = /*#__PURE__*/ `
     query ProductsWithIds($ids: [Int!]!) {
   productsWithIds(ids: $ids) {
@@ -385,25 +507,17 @@ export const ProductsWithIdsDocument = /*#__PURE__*/ `
 }
     `;
 export const useProductsWithIdsQuery = <
-  TData = ProductsWithIdsQuery,
-  TError = unknown
->(
-  variables: ProductsWithIdsQueryVariables,
-  options?: UseQueryOptions<ProductsWithIdsQuery, TError, TData>
-) =>
-  useQuery<ProductsWithIdsQuery, TError, TData>(
-    ['ProductsWithIds', variables],
-    fetcher<ProductsWithIdsQuery, ProductsWithIdsQueryVariables>(
-      ProductsWithIdsDocument,
-      variables
-    ),
-    options
-  );
-
-useProductsWithIdsQuery.getKey = (variables: ProductsWithIdsQueryVariables) => [
-  'ProductsWithIds',
-  variables,
-];
+      TData = ProductsWithIdsQuery,
+      TError = unknown
+    >(
+      variables: ProductsWithIdsQueryVariables,
+      options?: UseQueryOptions<ProductsWithIdsQuery, TError, TData>
+    ) =>
+    useQuery<ProductsWithIdsQuery, TError, TData>(
+      ['ProductsWithIds', variables],
+      useFetchData<ProductsWithIdsQuery, ProductsWithIdsQueryVariables>(ProductsWithIdsDocument).bind(null, variables),
+      options
+    );
 export const ProductsDocument = /*#__PURE__*/ `
     query Products {
   products {
@@ -420,15 +534,15 @@ export const ProductsDocument = /*#__PURE__*/ `
   }
 }
     `;
-export const useProductsQuery = <TData = ProductsQuery, TError = unknown>(
-  variables?: ProductsQueryVariables,
-  options?: UseQueryOptions<ProductsQuery, TError, TData>
-) =>
-  useQuery<ProductsQuery, TError, TData>(
-    variables === undefined ? ['Products'] : ['Products', variables],
-    fetcher<ProductsQuery, ProductsQueryVariables>(ProductsDocument, variables),
-    options
-  );
-
-useProductsQuery.getKey = (variables?: ProductsQueryVariables) =>
-  variables === undefined ? ['Products'] : ['Products', variables];
+export const useProductsQuery = <
+      TData = ProductsQuery,
+      TError = unknown
+    >(
+      variables?: ProductsQueryVariables,
+      options?: UseQueryOptions<ProductsQuery, TError, TData>
+    ) =>
+    useQuery<ProductsQuery, TError, TData>(
+      variables === undefined ? ['Products'] : ['Products', variables],
+      useFetchData<ProductsQuery, ProductsQueryVariables>(ProductsDocument).bind(null, variables),
+      options
+    );

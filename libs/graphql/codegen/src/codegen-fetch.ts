@@ -3,7 +3,7 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 const config: CodegenConfig = {
   overwrite: true,
   schema: 'apps/api/src/graphql/schema.graphql',
-  documents: ['apps/front/src/graphql/**/*.graphql'],
+  documents: ['apps/front/src/**/*.graphql'],
   generates: {
     'libs/graphql/types/src/api.ts': {
       plugins: [
@@ -13,9 +13,10 @@ const config: CodegenConfig = {
       ],
       config: {
         pureMagicComment: true, // enforce tree-shaking
-        exposeQueryKeys: true, // to prefetch queries (SSR)
-        exposeMutationKeys: true,
-        fetcher: './fetcher#fetcher',
+        fetcher: {
+          func: './fetcher#useFetchData',
+          isReactHook: true,
+        },
       },
     },
   },

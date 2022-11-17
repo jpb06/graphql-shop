@@ -1,6 +1,6 @@
-import { Footer } from '../components/generic/footer/Footer';
-import { NavBar } from '../components/generic/navbar';
-import { ShopRoot } from '../components/templates/shop/Shop';
+import { NavBar, Footer } from '@front/components';
+
+import { ShopRoot } from '../components/specialized/shop/Shop';
 
 const Index = () => (
   <div className="flex h-screen flex-col">

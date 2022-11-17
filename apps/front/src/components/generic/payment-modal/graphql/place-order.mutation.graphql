@@ -1,0 +1,8 @@
+mutation PlaceOrder(
+  $creditCard: GqlPlaceOrderInput!
+  $orderedItems: [GqlNewOrderedItem!]!
+) {
+  placeOrder(creditCard: $creditCard, orderedItems: $orderedItems) {
+    orderId
+  }
+}

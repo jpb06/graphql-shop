@@ -32,10 +32,8 @@ const rotateY = plugin(function ({ addUtilities }) {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    join(
-      __dirname,
-      '{src,pages,components}/**/*!(*.stories|*.spec).{ts,tsx,html}'
-    ),
+    join(__dirname, 'src/**/*!(*.stories|*.spec).{ts,tsx}'),
+    join(__dirname, '../../libs/frontend/components/src/**/*.{ts,tsx}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {

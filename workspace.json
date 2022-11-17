@@ -2,11 +2,14 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "app-backend-api": "apps/api",
-    "lib-backend-tests": "libs/backend/tests",
-    "lib-backend-database": "libs/backend/database",
-    "app-frontend-shop": "apps/front",
-    "lib-graphql-codegen": "libs/graphql/codegen",
-    "lib-graphql-types": "libs/graphql/types"
+    "back-api-app": "apps/api",
+    "back-database-lib": "libs/backend/database",
+    "back-tests-lib": "libs/backend/tests",
+    "front-assets-lib": "libs/frontend/assets",
+    "front-components-lib": "libs/frontend/components",
+    "front-shop-app": "apps/front",
+    "front-state-lib": "libs/frontend/state",
+    "graphql-codegen-lib": "libs/graphql/codegen",
+    "graphql-types-lib": "libs/graphql/types"
   }
 }

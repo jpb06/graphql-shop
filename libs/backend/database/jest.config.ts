@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'database',
+  displayName: 'back-database-lib',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {

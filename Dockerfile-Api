@@ -28,7 +28,7 @@ ADD . .
 
 RUN pnpm prisma-gen
 ADD ./libs/backend/database/model .
-RUN NX_DAEMON=false pnpm nx run api:build:production
+RUN NX_DAEMON=false pnpm nx run back-api-app:build:production
 
 # Finally, build the production image with minimal footprint
 FROM base

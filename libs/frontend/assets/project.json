@@ -1,0 +1,8 @@
+{
+  "name": "front-assets-lib",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/frontend/assets/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}
