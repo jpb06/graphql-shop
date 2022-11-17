@@ -1,21 +1,21 @@
 import { useAtom } from 'jotai';
 
 import { ModalWrapper, PageTitle } from '@front/components';
+import { ordersAtom } from '@front/state';
 
 import { usePersistedOrders } from '../../../hooks/usePersistedOrders';
-import { ordersAtom } from '../../../state/orders.state';
 import { EmptyBasket } from './empty-basket/EmptyBasket';
 import { OrderedItemsList } from './ordered-items-list/OrderedItemsList';
-import { orderModalSteps, orderModalStep } from './state/order-modal.state';
+import { orderModalAtom, orderModalSteps } from './state/order-modal.state';
 
 export const OrderRoot = () => {
   usePersistedOrders();
   const [orders] = useAtom(ordersAtom);
-  const [modalStep] = useAtom(orderModalStep);
+  const [modalStep] = useAtom(orderModalAtom);
 
   return (
     <ModalWrapper
-      {...orderModalSteps[modalStep]}
+      {...orderModalSteps[modalStep.step]}
       modalAnimation="move"
       outsideAnimation="blow"
       width="w-96"

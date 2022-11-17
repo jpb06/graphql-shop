@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { appWithTranslation } from 'next-i18next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -23,6 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
     </Head>
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </>
 );

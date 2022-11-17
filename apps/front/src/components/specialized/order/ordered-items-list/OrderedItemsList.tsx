@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai';
 
-import { ordersAtom } from '../../../../state/orders.state';
+import { ordersAtom } from '@front/state';
+
 import { OrderSummary } from './order-summary/OrderSummary';
 import { OrderedItemSkeleton } from './ordered-item-skeleton/OrderedItemSkeleton';
 import { OrderedItem } from './ordered-item/OrderedItem';

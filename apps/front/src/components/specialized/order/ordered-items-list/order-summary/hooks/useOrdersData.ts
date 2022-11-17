@@ -1,13 +1,13 @@
 import { useAtom } from 'jotai';
 
-import { ordersAtom } from '../../../../../../state/orders.state';
+import { ordersAtom } from '@front/state';
 
 export const useOrdersData = () => {
   const [orders] = useAtom(ordersAtom);
 
-  const articlesCount = orders.reduce((sum, { count }) => sum + count, 0);
+  const articlesCount = orders.reduce((sum, { quantity }) => sum + quantity, 0);
   const totalCost = orders.reduce(
-    (sum, { price, count }) => sum + price * count,
+    (sum, { price, quantity }) => sum + price * quantity,
     0
   );
 

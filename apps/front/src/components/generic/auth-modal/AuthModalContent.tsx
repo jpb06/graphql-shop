@@ -1,4 +1,4 @@
-import { Button, Input } from '@front/components';
+import { Button, Input, Title } from '@front/components';
 
 import { CreateAccount } from './children/CreateAccount';
 import { LostPassword } from './children/LostPassword';
@@ -9,9 +9,7 @@ export const AuthModalContent = () => {
 
   return (
     <div className="px-6 pb-6 lg:px-8">
-      <h3 className="mb-4 text-xl font-medium text-white">
-        Sign in to our platform
-      </h3>
+      <Title>Sign in to our platform</Title>
       <form className="space-y-6" onSubmit={onSubmit}>
         <Input
           control={control}

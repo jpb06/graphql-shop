@@ -1,7 +1,8 @@
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { ordersAtom } from '../state/orders.state';
+import { ordersAtom } from '@front/state';
+
 import { useLocalStorage } from './useLocalStorage';
 
 export const usePersistedOrders = () => {

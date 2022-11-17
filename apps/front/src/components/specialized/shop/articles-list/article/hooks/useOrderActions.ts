@@ -1,7 +1,8 @@
 import { useAtom } from 'jotai';
 
+import { OrderData, ordersAtom } from '@front/state';
+
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
-import { OrderData, ordersAtom } from '../../../../../../state/orders.state';
 
 export const useOrderActions = (targetOrder: OrderData) => {
   const [orders, setOrders] = useAtom(ordersAtom);
@@ -17,10 +18,10 @@ export const useOrderActions = (targetOrder: OrderData) => {
       }
 
       let newOrders: Array<OrderData>;
-      if (maybeExistingOrder.count === 1) {
+      if (maybeExistingOrder.quantity === 1) {
         newOrders = v.filter((el) => el.id !== maybeExistingOrder.id);
       } else {
-        maybeExistingOrder.count -= 1;
+        maybeExistingOrder.quantity -= 1;
         newOrders = [...v];
       }
 
@@ -33,7 +34,7 @@ export const useOrderActions = (targetOrder: OrderData) => {
     setOrders((v) => {
       const maybeExistingOrder = getOrder(v);
       if (!maybeExistingOrder) {
-        const newOrders = [...v, { ...targetOrder, count: 1 }];
+        const newOrders = [...v, { ...targetOrder, quantity: 1 }];
 
         setLocalStorage(newOrders);
         return newOrders;
@@ -41,12 +42,12 @@ export const useOrderActions = (targetOrder: OrderData) => {
 
       if (
         targetOrder.stock === 0 ||
-        maybeExistingOrder.count >= targetOrder.stock
+        maybeExistingOrder.quantity >= targetOrder.stock
       ) {
         return v;
       }
 
-      maybeExistingOrder.count += 1;
+      maybeExistingOrder.quantity += 1;
 
       setLocalStorage([...v]);
 
@@ -54,7 +55,7 @@ export const useOrderActions = (targetOrder: OrderData) => {
     });
 
   return {
-    count: orders.find((el) => el.id === targetOrder.id)?.count,
+    quantity: orders.find((el) => el.id === targetOrder.id)?.quantity,
     handleCancelOrder,
     handleBumpOrder,
   };

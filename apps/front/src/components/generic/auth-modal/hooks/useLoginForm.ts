@@ -1,12 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import zod from 'zod';
 
 import { useLoginMutation } from '@front/api';
-import { authState } from '@front/state';
+import { authStateAtom } from '@front/state';
 
-import { orderModalStep } from '../../../specialized/order/state/order-modal.state';
+import { orderModalAtom } from '../../../specialized/order/state/order-modal.state';
 
 export type LoginFormModel = {
   email: string;
@@ -30,13 +31,23 @@ export const useLoginForm = () => {
     },
     resolver: zodResolver(schema),
   });
-  const [, setModalState] = useAtom(orderModalStep);
-  const [, setAuthState] = useAtom(authState);
+  const [, setModalState] = useAtom(orderModalAtom);
+  const [auth, setAuthState] = useAtom(authStateAtom);
+
+  useEffect(() => {
+    if (auth) {
+      setModalState(() => ({
+        step: 'address',
+      }));
+    }
+  }, [setModalState, auth]);
 
   const { mutate, isLoading, error } = useLoginMutation({
     onSuccess: (data) => {
       setAuthState(() => data.login);
-      setModalState(() => 'payment');
+      setModalState(() => ({
+        step: 'address',
+      }));
     },
   });
 

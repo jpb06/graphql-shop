@@ -7,6 +7,7 @@ import {
 import { Control } from 'react-hook-form';
 
 import {
+  Button,
   CreditCardFocus,
   CurrentYearSelectOptions,
   MonthSelectOptions,
@@ -17,14 +18,16 @@ import { Select } from './children/Select';
 import { PaymentFormModel } from './logic/credit-card-form.schema';
 import { NameValue } from './types/name-value.type';
 
-interface PaymentModalFormProps {
+type PaymentModalFormProps = {
+  isLoading: boolean;
   control: Control<PaymentFormModel, unknown>;
   onSubmit: FormEventHandler<HTMLFormElement> | undefined;
   setTransitionClassName: Dispatch<SetStateAction<string>>;
   setFocus: Dispatch<SetStateAction<CreditCardFocus>>;
-}
+};
 
 export const PaymentModalForm = ({
+  isLoading,
   control,
   onSubmit,
   setTransitionClassName,
@@ -92,12 +95,14 @@ export const PaymentModalForm = ({
         autoComplete="off"
         control={control}
       />
-      <button
-        type="submit"
-        className="mt-4 w-full rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-800"
+      <Button
+        variant="green"
+        isLoading={isLoading}
+        loadingText="Confirming payment ..."
+        className="mt-2 w-full"
       >
         Pay
-      </button>
+      </Button>
     </form>
   );
 };

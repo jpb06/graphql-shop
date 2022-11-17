@@ -1,0 +1,9 @@
+query MyAddresses {
+  myAddresses {
+    id
+    street
+    zipCode
+    city
+    country
+  }
+}

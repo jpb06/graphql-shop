@@ -5,15 +5,15 @@ import { ProductsQueryDataItem } from '@front/api';
 import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '@front/assets/icons/product-goods-box-complete.svg';
 import { TextWithIcon, Title } from '@front/components';
+import { ordersAtom } from '@front/state';
 
-import { ordersAtom } from '../../../../../state/orders.state';
 import { ArticleBuyButton } from './article-buy-button/ArticleBuyButton';
 import { ArticleOrderSelector } from './article-order-selector/ArticleOrderSelector';
 
 export const Article = (props: ProductsQueryDataItem) => {
   const [orders] = useAtom(ordersAtom);
   const { id, name, image, description, price, stock } = props;
-  const hasOrders = orders.find((el) => el.id === id)?.count ?? 0;
+  const hasOrders = orders.find((el) => el.id === id)?.quantity ?? 0;
 
   return (
     <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 opacity-95 shadow-md hover:bg-gray-700 ">

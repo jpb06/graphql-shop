@@ -4,7 +4,7 @@ import UpArrowChevronIcon from '@front/assets/icons/up-arrow-chevron.svg';
 import { useOrderActions } from '../hooks/useOrderActions';
 
 export const ArticleBuyButton = (product: ProductsQueryDataItem) => {
-  const { handleBumpOrder } = useOrderActions({ ...product, count: 0 });
+  const { handleBumpOrder } = useOrderActions({ ...product, quantity: 0 });
 
   if (product.stock === 0) {
     return (

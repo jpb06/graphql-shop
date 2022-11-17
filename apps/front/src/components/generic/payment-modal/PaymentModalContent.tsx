@@ -11,7 +11,7 @@ export interface CardState extends CreditCardInfos {
 }
 
 export const PaymentModalContent = () => {
-  const { control, onSubmit, watch } = usePaymentForm();
+  const { control, onSubmit, watch, isLoading } = usePaymentForm();
 
   const [focus, setFocus] = useState<CreditCardFocus>('number');
   const [transitionClassName, setTransitionClassName] = useState('');
@@ -28,6 +28,7 @@ export const PaymentModalContent = () => {
         onSubmit={onSubmit}
         setTransitionClassName={setTransitionClassName}
         setFocus={setFocus}
+        isLoading={isLoading}
       />
     </div>
   );
