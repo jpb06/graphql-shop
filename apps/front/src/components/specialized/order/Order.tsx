@@ -3,12 +3,10 @@ import { useAtom } from 'jotai';
 import { PageTitle } from '@front/components';
 import { ordersAtom } from '@front/state';
 
-import { usePersistedOrders } from '../../../hooks/usePersistedOrders';
 import { EmptyBasket } from './empty-basket/EmptyBasket';
 import { OrderedItemsList } from './ordered-items-list/OrderedItemsList';
 
 export const OrderRoot = () => {
-  usePersistedOrders();
   const [orders] = useAtom(ordersAtom);
 
   return (
