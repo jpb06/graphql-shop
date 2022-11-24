@@ -4,6 +4,10 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 
+import { ModalWrapper } from '@front/components';
+
+import { NavBar } from '../components/generic/navbar';
+
 import './../../styles/global.css';
 
 export const queryClient = new QueryClient({
@@ -22,7 +26,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <link rel="icon" href="/yolo-logo.svg" type="image/svg+xml" />
     </Head>
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <div className="flex h-screen flex-col">
+        <NavBar />
+        <ModalWrapper modalAnimation="move" outsideAnimation="blow">
+          <Component {...pageProps} />
+        </ModalWrapper>
+      </div>
     </QueryClientProvider>
   </>
 );

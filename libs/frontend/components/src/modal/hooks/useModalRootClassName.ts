@@ -1,9 +1,9 @@
 import { modalAnimations } from '../logic/modal-animations.data';
-import { ModalState } from '../state/modal.state';
+import { ModalStatus } from '../state/modal.state';
 import { ModalAnimation } from '../types/modal-animation.types';
 
 export const useModalRootClassName = (
-  state: ModalState,
+  state: ModalStatus,
   animation: ModalAnimation
 ) => {
   const animations = modalAnimations[animation].modal;
