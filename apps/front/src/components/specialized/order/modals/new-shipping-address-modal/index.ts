@@ -1,8 +1,8 @@
-import { ModalStep } from '@front/components';
+import { ModalContent } from '@front/components';
 
 import { NewShippingAddressModal } from './NewShippingAddressModal';
 
-export const NewAddressModal: ModalStep = {
+export const NewAddressModal: ModalContent = {
   title: 'New shipping address',
   Content: NewShippingAddressModal,
   Footer: null,

@@ -3,14 +3,18 @@ import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 
 import { usePlaceOrderMutation } from '@front/api';
+import { modalStateAtom } from '@front/components';
 import { ordersAtom } from '@front/state';
 
-import { useLocalStorage } from '../../../../hooks/useLocalStorage';
-import { orderModalAtom } from '../../../specialized/order/state/order-modal.state';
+import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
+import { orderModalAtom } from '../../../state/order-modal.state';
+import { OrderCompleteModal } from '../../order-complete-modal';
 import { PaymentFormModel, formSchema } from '../logic/credit-card-form.schema';
 
 export const usePaymentForm = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);
+  const [, setModalState] = useAtom(modalStateAtom);
+
   const [orders, setOrders] = useAtom(ordersAtom);
   const [, setPersistedOrders] = useLocalStorage('orders', []);
 
@@ -40,6 +44,10 @@ export const usePaymentForm = () => {
         ...state,
         step: 'complete',
         orderId: data.placeOrder.orderId,
+      }));
+      setModalState((state) => ({
+        ...state,
+        content: OrderCompleteModal,
       }));
     },
   });

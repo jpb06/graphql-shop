@@ -2,18 +2,30 @@ import { useAtom } from 'jotai';
 
 import ArrowLeft from '@front/assets/icons/arrow-left.svg';
 import ErrorCircle from '@front/assets/icons/error-circle.svg';
-import { Button, GlobalIndicator, Input, Title } from '@front/components';
+import {
+  Button,
+  GlobalIndicator,
+  Input,
+  modalStateAtom,
+  Title,
+} from '@front/components';
 
-import { orderModalAtom } from '../../specialized/order/state/order-modal.state';
+import { orderModalAtom } from '../../state/order-modal.state';
+import { AddressModal } from '../shipping-address-selection-modal';
 import { useNewAddressForm } from './hooks/useNewAddressForm';
 
 export const NewShippingAddressModal = () => {
-  const [, setModalState] = useAtom(orderModalAtom);
+  const [, setOrderModalState] = useAtom(orderModalAtom);
+  const [, setModalState] = useAtom(modalStateAtom);
 
   const { onSubmit, isLoading, isError, control } = useNewAddressForm();
 
   const handleGoToExistingAddresses = () => {
-    setModalState(() => ({ step: 'address' }));
+    setOrderModalState(() => ({ step: 'address' }));
+    setModalState((state) => ({
+      ...state,
+      content: AddressModal,
+    }));
   };
 
   if (isError) {

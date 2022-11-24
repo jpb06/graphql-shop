@@ -1,8 +1,8 @@
-import { ModalStep } from '@front/components';
+import { ModalContent } from '@front/components';
 
 import { PaymentModalContent } from './PaymentModalContent';
 
-export const PaymentModal: ModalStep = {
+export const PaymentModal: ModalContent = {
   title: 'Payment',
   Content: PaymentModalContent,
   Footer: null,

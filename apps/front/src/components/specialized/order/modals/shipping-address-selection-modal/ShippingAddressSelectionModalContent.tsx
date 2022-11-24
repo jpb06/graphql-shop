@@ -3,18 +3,30 @@ import { useAtom } from 'jotai';
 import { MyAddressesQuery, useMyAddressesQuery } from '@front/api';
 import ErrorCircle from '@front/assets/icons/error-circle.svg';
 import PlusIcon from '@front/assets/icons/plus.svg';
-import { Button, GlobalIndicator, Title, Loader } from '@front/components';
+import {
+  Button,
+  GlobalIndicator,
+  Title,
+  Loader,
+  modalStateAtom,
+} from '@front/components';
 
-import { orderModalAtom } from '../../specialized/order/state/order-modal.state';
+import { orderModalAtom } from '../../state/order-modal.state';
+import { NewAddressModal } from '../new-shipping-address-modal';
 import { AddressSelection } from './children/AddressSelection';
 
 export const ShippingAddressSelectionModalContent = () => {
-  const [, setModalState] = useAtom(orderModalAtom);
+  const [, setOrderModalState] = useAtom(orderModalAtom);
+  const [, setModalState] = useAtom(modalStateAtom);
 
   const { data, isLoading, isError } = useMyAddressesQuery();
 
   const handleNewAddressClick = () => {
-    setModalState(() => ({ step: 'newAddress' }));
+    setOrderModalState(() => ({ step: 'new-address' }));
+    setModalState((state) => ({
+      ...state,
+      content: NewAddressModal,
+    }));
   };
 
   if (isLoading) {
