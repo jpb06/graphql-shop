@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 
-import { Button } from '@front/components';
+import { Button, useModal } from '@front/components';
 import { authStateAtom } from '@front/state';
 
-import { useLoginModal } from '../hooks/useLoginModal';
+import { AuthModal } from '../modal/auth-modal';
 import { NavMenuLink } from './NavMenuLink';
 
 type NavMenuProps = {
@@ -13,7 +13,7 @@ type NavMenuProps = {
 export const NavMenu = ({ isCollapsed }: NavMenuProps) => {
   const [auth] = useAtom(authStateAtom);
 
-  const { handleLoginClick } = useLoginModal();
+  const { updateModal } = useModal();
 
   return (
     <div
@@ -28,7 +28,7 @@ export const NavMenu = ({ isCollapsed }: NavMenuProps) => {
             <Button
               variant="blue"
               className="mt-2 w-full md:hidden"
-              onClick={handleLoginClick}
+              onClick={() => updateModal(AuthModal)}
             >
               Login
             </Button>

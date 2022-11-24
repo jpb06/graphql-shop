@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { AuthModalForm, modalStateAtom, useLoginForm } from '@front/components';
+import { AuthModalForm, useLoginForm, useModal } from '@front/components';
 import { authStateAtom } from '@front/state';
 
 import { orderModalAtom } from '../../state/order-modal.state';
@@ -10,16 +10,14 @@ import { AddressModal } from '../shipping-address-selection-modal';
 export const AuthModalContent = () => {
   const [auth] = useAtom(authStateAtom);
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
+
+  const { updateModal } = useModal();
 
   const handleLoginSuccess = () => {
     setOrderModalState(() => ({
       step: 'address',
     }));
-    setModalState((state) => ({
-      ...state,
-      content: AddressModal,
-    }));
+    updateModal(AddressModal);
   };
 
   const { onSubmit, isLoading, authError, control } =
@@ -30,12 +28,9 @@ export const AuthModalContent = () => {
       setOrderModalState(() => ({
         step: 'address',
       }));
-      setModalState((state) => ({
-        ...state,
-        content: AddressModal,
-      }));
+      updateModal(AddressModal);
     }
-  }, [setModalState, setOrderModalState, auth]);
+  }, [updateModal, setOrderModalState, auth]);
 
   return (
     <AuthModalForm

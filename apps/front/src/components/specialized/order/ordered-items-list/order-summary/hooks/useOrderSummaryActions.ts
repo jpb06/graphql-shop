@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { modalStateAtom } from '@front/components';
+import { useModal } from '@front/components';
 import { ordersAtom } from '@front/state';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
@@ -11,14 +11,12 @@ export const useOrderSummaryActions = () => {
   const [, setOrders] = useAtom(ordersAtom);
   const [, setPersistedOrders] = useLocalStorage('orders', []);
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
+
+  const { updateModal } = useModal();
 
   const handleStartPayment = () => {
     setOrderModalState(() => ({ step: 'auth' }));
-    setModalState(() => ({
-      status: 'opened',
-      content: AuthModal,
-    }));
+    updateModal(AuthModal);
   };
 
   const handleCancelPayment = () => {

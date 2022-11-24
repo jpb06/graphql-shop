@@ -8,7 +8,7 @@ import {
   GlobalIndicator,
   Title,
   Loader,
-  modalStateAtom,
+  useModal,
 } from '@front/components';
 
 import { orderModalAtom } from '../../state/order-modal.state';
@@ -17,16 +17,14 @@ import { AddressSelection } from './children/AddressSelection';
 
 export const ShippingAddressSelectionModalContent = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
 
   const { data, isLoading, isError } = useMyAddressesQuery();
 
+  const { updateModal } = useModal();
+
   const handleNewAddressClick = () => {
     setOrderModalState(() => ({ step: 'new-address' }));
-    setModalState((state) => ({
-      ...state,
-      content: NewAddressModal,
-    }));
+    updateModal(NewAddressModal);
   };
 
   if (isLoading) {

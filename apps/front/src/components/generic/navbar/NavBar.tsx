@@ -1,18 +1,18 @@
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 
-import { Brand, Button } from '@front/components';
+import { Brand, Button, useModal } from '@front/components';
 import { authStateAtom } from '@front/state';
 
 import { NavBurgerButton } from './children/NavBurgerButton';
 import { NavMenu } from './children/NavMenu';
-import { useLoginModal } from './hooks/useLoginModal';
+import { AuthModal } from './modal/auth-modal';
 
 export const NavBar = () => {
   const [auth] = useAtom(authStateAtom);
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
-  const { handleLoginClick } = useLoginModal();
+  const { updateModal } = useModal();
 
   const handleExpandClick = () => {
     setIsNavCollapsed(!isNavCollapsed);
@@ -27,7 +27,7 @@ export const NavBar = () => {
           <NavMenu isCollapsed={isNavCollapsed} />
           {!auth && (
             <div className="hidden md:order-3 md:flex">
-              <Button variant="blue" onClick={handleLoginClick}>
+              <Button variant="blue" onClick={() => updateModal(AuthModal)}>
                 Login
               </Button>
             </div>

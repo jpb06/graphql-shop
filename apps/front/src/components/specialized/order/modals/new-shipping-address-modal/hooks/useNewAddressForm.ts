@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import zod from 'zod';
 
 import { useNewAddressMutation } from '@front/api';
-import { modalStateAtom } from '@front/components';
+import { useModal } from '@front/components';
 
 import { orderModalAtom } from '../../../state/order-modal.state';
 import { PaymentModal } from '../../payment-modal';
@@ -25,7 +25,7 @@ const schema: zod.ZodSchema<NewAddressFormModel> = zod.object({
 
 export const useNewAddressForm = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
+  const { updateModal } = useModal();
 
   const {
     control,
@@ -47,10 +47,7 @@ export const useNewAddressForm = () => {
         step: 'payment',
         address: data.createAddress,
       }));
-      setModalState((state) => ({
-        ...state,
-        content: PaymentModal,
-      }));
+      updateModal(PaymentModal);
     },
   });
 

@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 
 import { usePlaceOrderMutation } from '@front/api';
-import { modalStateAtom } from '@front/components';
+import { useModal } from '@front/components';
 import { ordersAtom } from '@front/state';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';
@@ -13,10 +13,10 @@ import { PaymentFormModel, formSchema } from '../logic/credit-card-form.schema';
 
 export const usePaymentForm = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
-
   const [orders, setOrders] = useAtom(ordersAtom);
   const [, setPersistedOrders] = useLocalStorage('orders', []);
+
+  const { updateModal } = useModal();
 
   const {
     control,
@@ -45,10 +45,7 @@ export const usePaymentForm = () => {
         step: 'complete',
         orderId: data.placeOrder.orderId,
       }));
-      setModalState((state) => ({
-        ...state,
-        content: OrderCompleteModal,
-      }));
+      updateModal(OrderCompleteModal);
     },
   });
 

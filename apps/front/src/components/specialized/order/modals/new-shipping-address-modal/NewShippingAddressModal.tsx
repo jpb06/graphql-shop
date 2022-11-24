@@ -6,8 +6,8 @@ import {
   Button,
   GlobalIndicator,
   Input,
-  modalStateAtom,
   Title,
+  useModal,
 } from '@front/components';
 
 import { orderModalAtom } from '../../state/order-modal.state';
@@ -16,16 +16,13 @@ import { useNewAddressForm } from './hooks/useNewAddressForm';
 
 export const NewShippingAddressModal = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
+  const { updateModal } = useModal();
 
   const { onSubmit, isLoading, isError, control } = useNewAddressForm();
 
   const handleGoToExistingAddresses = () => {
     setOrderModalState(() => ({ step: 'address' }));
-    setModalState((state) => ({
-      ...state,
-      content: AddressModal,
-    }));
+    updateModal(AddressModal);
   };
 
   if (isError) {

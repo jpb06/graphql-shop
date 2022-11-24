@@ -1,19 +1,14 @@
-import { useAtom } from 'jotai';
-
-import { AuthModalForm, modalStateAtom, useLoginForm } from '@front/components';
+import { AuthModalForm, useLoginForm, useModal } from '@front/components';
 
 export const AuthModalContent = () => {
-  const [, setModalState] = useAtom(modalStateAtom);
+  const { updateModal } = useModal();
 
-  const handleLoginSuccess = () => {
-    setModalState(() => ({
-      content: undefined,
-      status: 'closed',
-    }));
+  const handleSuccess = () => {
+    updateModal(undefined, 'closed');
   };
 
   const { onSubmit, isLoading, authError, control } =
-    useLoginForm(handleLoginSuccess);
+    useLoginForm(handleSuccess);
 
   return (
     <AuthModalForm

@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { useState } from 'react';
 
 import { GqlNewAddressOutput, MyAddressesQuery } from '@front/api';
-import { modalStateAtom } from '@front/components';
+import { useModal } from '@front/components';
 
 import { orderModalAtom } from '../../../state/order-modal.state';
 import { PaymentModal } from '../../payment-modal';
@@ -16,7 +16,8 @@ export const AddressSelection = ({ data }: AddressSelectionProps) => {
   const [checkedId, setCheckedId] = useState<string | null>(null);
 
   const [, setOrderModalState] = useAtom(orderModalAtom);
-  const [, setModalState] = useAtom(modalStateAtom);
+
+  const { updateModal } = useModal();
 
   const handleAddressChosen = (id: string) => {
     setCheckedId(id);
@@ -26,10 +27,7 @@ export const AddressSelection = ({ data }: AddressSelectionProps) => {
       step: 'payment',
       address: selectedAddress as GqlNewAddressOutput,
     }));
-    setModalState((state) => ({
-      ...state,
-      content: PaymentModal,
-    }));
+    updateModal(PaymentModal);
   };
 
   return (
