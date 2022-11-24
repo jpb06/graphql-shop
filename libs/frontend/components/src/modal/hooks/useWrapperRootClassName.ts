@@ -5,10 +5,10 @@ import { modalStateAtom } from '../state/modal.state';
 import { ModalAnimation } from '../types/modal-animation.types';
 
 export const useWrapperRootClassName = (animation: ModalAnimation) => {
-  const [state] = useAtom(modalStateAtom);
+  const [{ status }] = useAtom(modalStateAtom);
   const animations = modalAnimations[animation].wrapper;
 
-  switch (state) {
+  switch (status) {
     case 'idle':
       return '';
     case 'closed':

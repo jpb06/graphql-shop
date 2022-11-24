@@ -6,15 +6,13 @@ import {
   GlobalCircularLoader,
 } from '@front/components';
 
-import { usePersistedOrders } from '../../../hooks/usePersistedOrders';
 import { ArticlesList } from './articles-list/ArticlesList';
 
 export const ShopRoot = () => {
-  usePersistedOrders();
   const { status, data } = useProductsQuery();
 
   return (
-    <div className="flex-grow p-2 md:p-4">
+    <div className="z-10 flex-grow p-2 md:p-4">
       <div className="mt-3 flex flex-col">
         <PageTitle>Articles</PageTitle>
         {

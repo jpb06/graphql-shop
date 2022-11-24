@@ -1,37 +1,33 @@
+import { useAtom } from 'jotai';
 import { PropsWithChildren } from 'react';
 
 import { Modal } from './Modal';
 import { useWrapperRootClassName } from './hooks/useWrapperRootClassName';
+import { modalStateAtom } from './state/modal.state';
 import { ModalAnimation } from './types/modal-animation.types';
-import { ModalStep } from './types/modal-step.type';
 
-interface ModalWrapperProps extends ModalStep {
+interface ModalWrapperProps {
   outsideAnimation?: ModalAnimation;
   modalAnimation?: ModalAnimation;
-  width?: string;
 }
 
 export const ModalWrapper = ({
   children,
-  title,
-  Content,
-  Footer,
   outsideAnimation = 'blow',
   modalAnimation = 'move',
-  width,
 }: PropsWithChildren<ModalWrapperProps>) => {
   const rootClassName = useWrapperRootClassName(outsideAnimation);
+
+  const [{ content }] = useAtom(modalStateAtom);
+
+  if (!content) {
+    return <div className={rootClassName}>{children}</div>;
+  }
 
   return (
     <>
       <div className={rootClassName}>{children}</div>
-      <Modal
-        title={title}
-        Content={Content}
-        Footer={Footer}
-        animation={modalAnimation}
-        width={width}
-      />
+      <Modal animation={modalAnimation} {...content} />
     </>
   );
 };

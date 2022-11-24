@@ -3,12 +3,10 @@ import { useAtom } from 'jotai';
 import CloseIcon from '@front/assets/icons/close-icon.svg';
 
 import { useModalRootClassName } from './hooks/useModalRootClassName';
-import { useResetModalStateOnFirstRender } from './hooks/useResetModalStateOnFirstRender';
-import { modalStateAtom } from './state/modal.state';
+import { ModalContent, modalStateAtom } from './state/modal.state';
 import { ModalAnimation } from './types/modal-animation.types';
-import { ModalStep } from './types/modal-step.type';
 
-interface ModalProps extends ModalStep {
+interface ModalProps extends ModalContent {
   animation: ModalAnimation;
   width?: string;
 }
@@ -18,20 +16,19 @@ export const Modal = ({
   Content,
   Footer,
   animation,
-  width,
+  width = 'w-96',
 }: ModalProps) => {
-  const [state, setState] = useAtom(modalStateAtom);
-  useResetModalStateOnFirstRender();
-  const animationClassName = useModalRootClassName(state, animation);
+  const [{ status }, setState] = useAtom(modalStateAtom);
+  const animationClassName = useModalRootClassName(status, animation);
 
   const handleClose = () => {
-    setState(() => 'closed');
+    setState((state) => ({ ...state, status: 'closed' }));
   };
 
   return (
     <div
       tabIndex={-1}
-      aria-hidden={state !== 'opened' ? 'true' : 'false'}
+      aria-hidden={status !== 'opened' ? 'true' : 'false'}
       className={`h-modal fixed right-0 left-0 top-20 z-50 flex w-full items-center justify-center overflow-y-auto overflow-x-hidden sm:h-full md:inset-0 md:top-0 ${animationClassName}`}
     >
       <div className="relative contents h-full w-full max-w-2xl p-4 md:h-auto">
