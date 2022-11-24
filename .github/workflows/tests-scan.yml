@@ -62,30 +62,30 @@ jobs:
         run: pnpm exec nx run-many --target=test --parallel --all --codeCoverage
         timeout-minutes: 10
 
-      - name: Check if coverage folder exists
-        id: coverage-folder
-        run: |
-          if  [ -d ./coverage ]; then
-            echo "::set-output name=exists::true"
-          fi
+      # - name: Check if coverage folder exists
+      #   id: coverage-folder
+      #   run: |
+      #     if  [ -d ./coverage ]; then
+      #       echo "::set-output name=exists::true"
+      #     fi
 
-      - name: Installing lcov
-        # Executing this only if coverage has evolved somewhere (nx affected)
-        if: steps.coverage-folder.outputs.exists == 'true'
-        run: sudo apt-get install -y lcov
+      # - name: Installing lcov
+      #   # Executing this only if coverage has evolved somewhere (nx affected)
+      #   if: steps.coverage-folder.outputs.exists == 'true'
+      #   run: sudo apt-get install -y lcov
 
-      - name: Merge coverage
-        # Executing this only if coverage has evolved somewhere (nx affected)
-        if: steps.coverage-folder.outputs.exists == 'true'
-        run: find ./coverage -name "lcov.info" ! -size 0 | awk '$0="-a "$0' | xargs lcov -o ./coverage/lcov.info
+      # - name: Merge coverage
+      #   # Executing this only if coverage has evolved somewhere (nx affected)
+      #   if: steps.coverage-folder.outputs.exists == 'true'
+      #   run: find ./coverage -name "lcov.info" ! -size 0 | awk '$0="-a "$0' | xargs lcov -o ./coverage/lcov.info
 
-      - name: SonarCloud Scan
-        # Executing this only if coverage has evolved somewhere (nx affected)
-        if: steps.coverage-folder.outputs.exists == 'true'
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # - name: SonarCloud Scan
+      #   # Executing this only if coverage has evolved somewhere (nx affected)
+      #   if: steps.coverage-folder.outputs.exists == 'true'
+      #   uses: sonarsource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Stopping nx cloud CI
         run: pnpm exec nx-cloud stop-all-agents
