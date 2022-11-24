@@ -1,9 +1,8 @@
 import { useAtom } from 'jotai';
 
 import MenuIcon from '@front/assets/icons/menu-icon.svg';
+import { Avatar } from '@front/components';
 import { authStateAtom } from '@front/state';
-
-import { Avatar } from '../../avatar/Avatar';
 
 type NavBurgerButtonProps = {
   onExpandClick: () => void;
