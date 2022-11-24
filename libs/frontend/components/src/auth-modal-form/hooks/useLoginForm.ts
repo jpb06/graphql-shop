@@ -1,13 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import zod from 'zod';
 
 import { useLoginMutation } from '@front/api';
 import { authStateAtom } from '@front/state';
-
-import { orderModalAtom } from '../../../specialized/order/state/order-modal.state';
 
 export type LoginFormModel = {
   email: string;
@@ -19,7 +16,7 @@ const schema: zod.ZodSchema<LoginFormModel> = zod.object({
   password: zod.string().min(1, 'Password required'),
 });
 
-export const useLoginForm = () => {
+export const useLoginForm = (onSuccess?: () => void) => {
   const {
     control,
     handleSubmit,
@@ -31,23 +28,13 @@ export const useLoginForm = () => {
     },
     resolver: zodResolver(schema),
   });
-  const [, setModalState] = useAtom(orderModalAtom);
-  const [auth, setAuthState] = useAtom(authStateAtom);
 
-  useEffect(() => {
-    if (auth) {
-      setModalState(() => ({
-        step: 'address',
-      }));
-    }
-  }, [setModalState, auth]);
+  const [, setAuthState] = useAtom(authStateAtom);
 
   const { mutate, isLoading, error } = useLoginMutation({
     onSuccess: (data) => {
       setAuthState(() => data.login);
-      setModalState(() => ({
-        step: 'address',
-      }));
+      onSuccess && onSuccess();
     },
   });
 

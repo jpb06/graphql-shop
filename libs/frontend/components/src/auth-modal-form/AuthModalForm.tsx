@@ -1,16 +1,30 @@
-import { Button, Input, Title } from '@front/components';
+import { BaseSyntheticEvent } from 'react';
+import { Control } from 'react-hook-form';
 
+import { Button, Input, Title } from '..';
 import { CreateAccount } from './children/CreateAccount';
 import { LostPassword } from './children/LostPassword';
-import { useLoginForm } from './hooks/useLoginForm';
+import { LoginFormModel } from './hooks/useLoginForm';
 
-export const AuthModalContent = () => {
-  const { onSubmit, isLoading, authError, control } = useLoginForm();
+type AuthModalFormProps = {
+  control: Control<LoginFormModel, unknown>;
+  onSubmit: (
+    e?: BaseSyntheticEvent<object, unknown, unknown> | undefined
+  ) => Promise<void>;
+  isLoading: boolean;
+  error: unknown;
+};
 
-  return (
-    <div className="px-6 pb-6 lg:px-8">
-      <Title>Sign in to our platform</Title>
-      <form className="space-y-6" onSubmit={onSubmit}>
+export const AuthModalForm = ({
+  onSubmit,
+  control,
+  isLoading,
+  error,
+}: AuthModalFormProps) => (
+  <div className="px-6 pb-6 lg:px-8">
+    <Title>Sign in to our platform</Title>
+    <form className="space-y-6" onSubmit={onSubmit}>
+      <>
         <Input
           control={control}
           type="email"
@@ -36,13 +50,13 @@ export const AuthModalContent = () => {
         >
           Login to your account
         </Button>
-        {authError && (
+        {error && (
           <div className="text-center text-red-400">
             Login failed - Please verify your username and password
           </div>
         )}
         <CreateAccount />
-      </form>
-    </div>
-  );
-};
+      </>
+    </form>
+  </div>
+);
