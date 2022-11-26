@@ -478,27 +478,6 @@ export const useGetOrderQuery = <TData = GetOrderQuery, TError = unknown>(
     ),
     options
   );
-export const useInfiniteGetOrderQuery = <
-  TData = GetOrderQuery,
-  TError = unknown
->(
-  pageParamKey: keyof GetOrderQueryVariables,
-  variables: GetOrderQueryVariables,
-  options?: UseInfiniteQueryOptions<GetOrderQuery, TError, TData>
-) => {
-  const query = useFetchData<GetOrderQuery, GetOrderQueryVariables>(
-    GetOrderDocument
-  );
-  return useInfiniteQuery<GetOrderQuery, TError, TData>(
-    ['GetOrder.infinite', variables],
-    (metaData) =>
-      query({
-        ...variables,
-        ...(metaData.pageParam ? { [pageParamKey]: metaData.pageParam } : {}),
-      }),
-    options
-  );
-};
 
 export const PlaceOrderDocument = /*#__PURE__*/ `
     mutation PlaceOrder($creditCard: GqlPlaceOrderInput!, $orderedItems: [GqlNewOrderedItem!]!) {
@@ -549,29 +528,6 @@ export const useMyAddressesQuery = <TData = MyAddressesQuery, TError = unknown>(
     ).bind(null, variables),
     options
   );
-export const useInfiniteMyAddressesQuery = <
-  TData = MyAddressesQuery,
-  TError = unknown
->(
-  pageParamKey: keyof MyAddressesQueryVariables,
-  variables?: MyAddressesQueryVariables,
-  options?: UseInfiniteQueryOptions<MyAddressesQuery, TError, TData>
-) => {
-  const query = useFetchData<MyAddressesQuery, MyAddressesQueryVariables>(
-    MyAddressesDocument
-  );
-  return useInfiniteQuery<MyAddressesQuery, TError, TData>(
-    variables === undefined
-      ? ['MyAddresses.infinite']
-      : ['MyAddresses.infinite', variables],
-    (metaData) =>
-      query({
-        ...variables,
-        ...(metaData.pageParam ? { [pageParamKey]: metaData.pageParam } : {}),
-      }),
-    options
-  );
-};
 
 export const ProductsByPageDocument = /*#__PURE__*/ `
     query ProductsByPage($offset: Int!, $limit: Int!) {
@@ -652,29 +608,6 @@ export const useProductsQuery = <TData = ProductsQuery, TError = unknown>(
     ),
     options
   );
-export const useInfiniteProductsQuery = <
-  TData = ProductsQuery,
-  TError = unknown
->(
-  pageParamKey: keyof ProductsQueryVariables,
-  variables?: ProductsQueryVariables,
-  options?: UseInfiniteQueryOptions<ProductsQuery, TError, TData>
-) => {
-  const query = useFetchData<ProductsQuery, ProductsQueryVariables>(
-    ProductsDocument
-  );
-  return useInfiniteQuery<ProductsQuery, TError, TData>(
-    variables === undefined
-      ? ['Products.infinite']
-      : ['Products.infinite', variables],
-    (metaData) =>
-      query({
-        ...variables,
-        ...(metaData.pageParam ? { [pageParamKey]: metaData.pageParam } : {}),
-      }),
-    options
-  );
-};
 
 export const SignupDocument = /*#__PURE__*/ `
     mutation Signup($email: String!, $lastName: String!, $firstName: String!, $password: String!) {
@@ -727,29 +660,6 @@ export const useCategoriesQuery = <TData = CategoriesQuery, TError = unknown>(
     ).bind(null, variables),
     options
   );
-export const useInfiniteCategoriesQuery = <
-  TData = CategoriesQuery,
-  TError = unknown
->(
-  pageParamKey: keyof CategoriesQueryVariables,
-  variables?: CategoriesQueryVariables,
-  options?: UseInfiniteQueryOptions<CategoriesQuery, TError, TData>
-) => {
-  const query = useFetchData<CategoriesQuery, CategoriesQueryVariables>(
-    CategoriesDocument
-  );
-  return useInfiniteQuery<CategoriesQuery, TError, TData>(
-    variables === undefined
-      ? ['Categories.infinite']
-      : ['Categories.infinite', variables],
-    (metaData) =>
-      query({
-        ...variables,
-        ...(metaData.pageParam ? { [pageParamKey]: metaData.pageParam } : {}),
-      }),
-    options
-  );
-};
 
 export const CategoryDocument = /*#__PURE__*/ `
     query Category($id: Int!) {
