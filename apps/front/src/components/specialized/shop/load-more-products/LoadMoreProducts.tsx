@@ -9,14 +9,14 @@ import { ProductsByPageQuery, ProductsByPageQueryVariables } from '@front/api';
 import ProductIcon from '@front/assets/icons/product-2.svg';
 import { Button } from '@front/components';
 
-type LoadMoreProductsProps = {
+export interface LoadMoreProductsProps {
   fetchNextPage: (
     options?: FetchNextPageOptions | undefined
   ) => Promise<InfiniteQueryObserverResult<ProductsByPageQuery, unknown>>;
   pageParams: unknown[] | undefined;
   isLoading: boolean;
   hasNextPage: boolean | undefined;
-};
+}
 
 export const LoadMoreProducts = ({
   fetchNextPage,

@@ -7,7 +7,6 @@ import {
 } from '@front/components';
 
 import { ArticlesList } from './articles-list/ArticlesList';
-import { LoadMoreProducts } from './load-more-products/LoadMoreProducts';
 
 export const ShopRoot = () => {
   const { status, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -29,7 +28,15 @@ export const ShopRoot = () => {
         {
           {
             loading: <GlobalCircularLoader>Loading</GlobalCircularLoader>,
-            success: <ArticlesList pages={data?.pages} />,
+            success: (
+              <ArticlesList
+                pages={data?.pages}
+                pageParams={data?.pageParams}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                isLoading={isFetchingNextPage}
+              />
+            ),
             error: (
               <GlobalIndicator Icon={ErrorCircle}>
                 An error occured while fetching articles
@@ -38,12 +45,6 @@ export const ShopRoot = () => {
           }[status]
         }
       </div>
-      <LoadMoreProducts
-        fetchNextPage={fetchNextPage}
-        hasNextPage={hasNextPage}
-        pageParams={data?.pageParams}
-        isLoading={isFetchingNextPage}
-      />
     </div>
   );
 };
