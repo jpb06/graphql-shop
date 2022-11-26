@@ -57,7 +57,7 @@ nx is a great tool for monorepos. It will allow us to define both our backend an
 
 #### 🧿 Graphql Codegen
 
-We are using a tool to generate code based on react-query from the backend graphql schema and graphql code defined in our frontend. Here is a little schema:
+We are using [a tool](https://the-guild.dev/graphql/codegen) to generate code based on react-query from the backend graphql schema and graphql code defined in our frontend. Here is a little schema:
 
 ![codegen](./docs/graphql-codegen.png)
 
@@ -78,7 +78,7 @@ These resolvers rely on a service layer that is responsible for the interaction 
 
 ### 🔶 Frontend - [next](https://nextjs.org/docs/getting-started) | [jotai](https://jotai.org/docs/introduction) | [react-query](https://tanstack.com/query/v4/docs/overview) | [tailwind](https://tailwindcss.com/docs/installation)
 
-As for frontend, the api layer is already resolved for us thanks to the codegen mentioned earlier. We do need some transient state however. I elected jotai for this, which is very flexible, simple and elegant.
+As for frontend, the api layer is already resolved for us thanks to the codegen mentioned earlier. We do need some transient state however. I chose jotai for this, which is very flexible, simple and elegant.
 
 All we have to do is to define atomic state that can then be consumed anywhere in the components tree.
 
