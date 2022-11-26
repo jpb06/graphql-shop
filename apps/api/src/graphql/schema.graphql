@@ -60,6 +60,12 @@ type GqlCategory {
   products: [GqlProduct!]!
 }
 
+type GqlPaginatedProducts {
+  id: Int!
+  data: [GqlProduct!]!
+  hasMoreData: Boolean!
+}
+
 type GqlOrderedItem {
   id: ID!
   quantity: Int!
@@ -101,6 +107,7 @@ type GqlUserOrder {
 
 type Query {
   products: [GqlProduct!]!
+  productsByPage(pagination: GqlPaginationArgs!): GqlPaginatedProducts!
   productsWithIds(ids: [Int!]!): [GqlProduct!]!
   product(id: Int!): GqlProduct!
   categories: [GqlCategory!]!
@@ -109,6 +116,11 @@ type Query {
   getOrder(id: Int!): GqlUserOrder!
   myOrders: [GqlOrder!]!
   myAddresses: [GqlAddress!]!
+}
+
+input GqlPaginationArgs {
+  offset: Int = 0
+  limit: Int = 25
 }
 
 type Mutation {

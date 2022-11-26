@@ -1,0 +1,18 @@
+query ProductsByPage($offset: Int!, $limit: Int!) {
+  productsByPage(pagination: { offset: $offset, limit: $limit }) {
+    id
+    data {
+      id
+      name
+      description
+      image
+      price
+      stock
+      category {
+        id
+        name
+      }
+    }
+    hasMoreData
+  }
+}

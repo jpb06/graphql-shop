@@ -37,6 +37,7 @@ specifiers:
   '@nrwl/workspace': 15.1.1
   '@prisma/client': ^4.6.1
   '@svgr/webpack': ^6.5.1
+  '@tanstack/eslint-plugin-query': ^4.15.1
   '@tanstack/react-query': ^4.16.1
   '@testing-library/react': 13.4.0
   '@types/bcrypt': ^5.0.0
@@ -91,6 +92,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-hook-form: ^7.39.4
+  react-intersection-observer: ^9.4.1
   react-test-renderer: 18.2.0
   readme-package-icons: ^1.1.7
   reflect-metadata: ^0.1.13
@@ -135,6 +137,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.39.4_react@18.2.0
+  react-intersection-observer: 9.4.1_react@18.2.0
   reflect-metadata: 0.1.13
   regenerator-runtime: 0.13.11
   rxjs: 7.5.7
@@ -168,6 +171,7 @@ devDependencies:
   '@nrwl/web': 15.1.1_2s3yboin3pfvf7uzmuiabz7bia
   '@nrwl/workspace': 15.1.1_gayucdlmwoehp4xp2baonpzyea
   '@svgr/webpack': 6.5.1
+  '@tanstack/eslint-plugin-query': 4.15.1
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@types/bcrypt': 5.0.0
   '@types/jest': 29.2.3
@@ -4600,6 +4604,10 @@ packages:
     resolution: {integrity: sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==}
     dependencies:
       tslib: 2.4.1
+
+  /@tanstack/eslint-plugin-query/4.15.1:
+    resolution: {integrity: sha512-SMj7OsOkutuJQ9LQLIoXxW5u0kx84V7RICmJEcjpKNkHsBd31QttJvtG1hLx9GXb3ZuFLZ0Y1dOD/D9b/GIzTg==}
+    dev: true
 
   /@tanstack/query-core/4.15.1:
     resolution: {integrity: sha512-+UfqJsNbPIVo0a9ANW0ZxtjiMfGLaaoIaL9vZeVycvmBuWywJGtSi7fgPVMCPdZQFOzMsaXaOsDtSKQD5xLRVQ==}
@@ -12681,6 +12689,14 @@ packages:
       i18next: 21.9.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-intersection-observer/9.4.1_react@18.2.0:
+    resolution: {integrity: sha512-IXpIsPe6BleFOEHKzKh5UjwRUaz/JYS0lT/HPsupWEQou2hDqjhLMStc5zyE3eQVT4Fk3FufM8Fw33qW1uyeiw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

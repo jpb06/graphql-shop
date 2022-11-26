@@ -1,10 +1,11 @@
-query Product($id: Int!) {
-  product(id: $id) {
+query Products {
+  products {
     id
     name
     description
     image
     price
+    stock
     category {
       id
       name
