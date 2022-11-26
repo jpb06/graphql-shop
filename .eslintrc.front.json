@@ -1,9 +1,10 @@
 {
-  "plugins": ["jest-dom"],
+  "plugins": ["jest-dom", "@tanstack/query"],
   "extends": [
     "./.eslintrc.json",
     "plugin:react/recommended",
-    "plugin:jest-dom/recommended"
+    "plugin:jest-dom/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "env": { "jest": true },
   "settings": { "react": { "version": "detect" } },

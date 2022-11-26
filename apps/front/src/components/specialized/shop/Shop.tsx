@@ -1,4 +1,4 @@
-import { useProductsQuery } from '@front/api';
+import { useInfiniteProductsByPageQuery } from '@front/api';
 import ErrorCircle from '@front/assets/icons/error-circle.svg';
 import {
   PageTitle,
@@ -7,9 +7,20 @@ import {
 } from '@front/components';
 
 import { ArticlesList } from './articles-list/ArticlesList';
+import { LoadMoreProducts } from './load-more-products/LoadMoreProducts';
 
 export const ShopRoot = () => {
-  const { status, data } = useProductsQuery();
+  const { status, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteProductsByPageQuery(
+      {
+        offset: 0,
+        limit: 20,
+      },
+      {
+        getNextPageParam: (lastPage) =>
+          lastPage.productsByPage.hasMoreData === true ? true : undefined,
+      }
+    );
 
   return (
     <div className="z-10 flex-grow p-2 md:p-4">
@@ -18,7 +29,7 @@ export const ShopRoot = () => {
         {
           {
             loading: <GlobalCircularLoader>Loading</GlobalCircularLoader>,
-            success: <ArticlesList products={data?.products} />,
+            success: <ArticlesList pages={data?.pages} />,
             error: (
               <GlobalIndicator Icon={ErrorCircle}>
                 An error occured while fetching articles
@@ -27,6 +38,12 @@ export const ShopRoot = () => {
           }[status]
         }
       </div>
+      <LoadMoreProducts
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
+        pageParams={data?.pageParams}
+        isLoading={isFetchingNextPage}
+      />
     </div>
   );
 };
