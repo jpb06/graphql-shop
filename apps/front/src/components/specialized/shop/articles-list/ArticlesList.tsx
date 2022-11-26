@@ -8,7 +8,7 @@ import {
 } from '../load-more-products/LoadMoreProducts';
 import { Article } from './article/Article';
 
-interface ArticlesListProps extends LoadMoreProductsProps {
+interface ArticlesListProps extends Omit<LoadMoreProductsProps, 'hasMoreData'> {
   pages?: ProductsByPageQuery[];
 }
 
@@ -35,6 +35,7 @@ export const ArticlesList = ({
         ))}
       </div>
       <LoadMoreProducts
+        hasMoreData={pages.at(-1)?.productsByPage.hasMoreData}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         pageParams={pageParams}

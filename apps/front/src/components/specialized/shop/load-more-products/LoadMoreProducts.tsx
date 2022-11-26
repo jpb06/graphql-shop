@@ -16,6 +16,7 @@ export interface LoadMoreProductsProps {
   pageParams: unknown[] | undefined;
   isLoading: boolean;
   hasNextPage: boolean | undefined;
+  hasMoreData: boolean | undefined;
 }
 
 export const LoadMoreProducts = ({
@@ -23,25 +24,29 @@ export const LoadMoreProducts = ({
   pageParams,
   isLoading,
   hasNextPage,
+  hasMoreData,
 }: LoadMoreProductsProps) => {
   const { ref, inView } = useInView();
 
   const loadMore = useCallback(() => {
-    const lastPageParam = pageParams?.at(-1) as
-      | ProductsByPageQueryVariables
-      | undefined;
-    void fetchNextPage({
-      pageParam: lastPageParam
-        ? {
-            offset: lastPageParam.offset + 20,
-            limit: lastPageParam.limit,
-          }
-        : {
-            offset: 20,
-            limit: 20,
-          },
-    });
-  }, [fetchNextPage, pageParams]);
+    if (hasMoreData) {
+      const lastPageParam = pageParams?.at(-1) as
+        | ProductsByPageQueryVariables
+        | undefined;
+
+      void fetchNextPage({
+        pageParam: lastPageParam
+          ? {
+              offset: lastPageParam.offset + 20,
+              limit: lastPageParam.limit,
+            }
+          : {
+              offset: 20,
+              limit: 20,
+            },
+      });
+    }
+  }, [fetchNextPage, pageParams, hasMoreData]);
 
   const handleNext = () => {
     loadMore();

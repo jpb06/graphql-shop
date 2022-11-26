@@ -26,7 +26,7 @@ export class ProductsService {
     const [data, count] = await this.getPaginatedClosure.fetch(input);
 
     return {
-      id: data.at(0).id,
+      id: data.length > 0 ? data.at(0).id : null,
       data: data.map((product) => {
         const { price, ...data } = product;
 
