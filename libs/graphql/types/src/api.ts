@@ -100,11 +100,24 @@ export type GqlOrderedItem = {
   quantity: Scalars['Int'];
 };
 
-export type GqlPaginatedProducts = {
-  __typename?: 'GqlPaginatedProducts';
+export type GqlPaginatedProductsFiltersInput = {
+  availableStock?: InputMaybe<Scalars['Boolean']>;
+  categoriesIds?: InputMaybe<Array<Scalars['Int']>>;
+  price?: InputMaybe<Scalars['Int']>;
+  priceCondition?: InputMaybe<NumberCondition>;
+  text?: InputMaybe<Scalars['String']>;
+};
+
+export type GqlPaginatedProductsOutput = {
+  __typename?: 'GqlPaginatedProductsOutput';
   data: Array<GqlProduct>;
   hasMoreData: Scalars['Boolean'];
   id: Scalars['Int'];
+};
+
+export type GqlPaginatedProductsSortingInput = {
+  direction?: InputMaybe<SortDirection>;
+  field?: InputMaybe<SortField>;
 };
 
 export type GqlPaginationArgs = {
@@ -189,6 +202,11 @@ export type MutationSignupArgs = {
   password: Scalars['String'];
 };
 
+export enum NumberCondition {
+  Gte = 'gte',
+  Lte = 'lte',
+}
+
 export type Query = {
   __typename?: 'Query';
   categories: Array<GqlCategory>;
@@ -199,7 +217,7 @@ export type Query = {
   myOrders: Array<GqlOrder>;
   product: GqlProduct;
   products: Array<GqlProduct>;
-  productsByPage: GqlPaginatedProducts;
+  productsByPage: GqlPaginatedProductsOutput;
   productsWithIds: Array<GqlProduct>;
 };
 
@@ -216,12 +234,24 @@ export type QueryProductArgs = {
 };
 
 export type QueryProductsByPageArgs = {
+  filters: GqlPaginatedProductsFiltersInput;
   pagination: GqlPaginationArgs;
+  sort: GqlPaginatedProductsSortingInput;
 };
 
 export type QueryProductsWithIdsArgs = {
   ids: Array<Scalars['Int']>;
 };
+
+export enum SortDirection {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
+export enum SortField {
+  Name = 'name',
+  Price = 'price',
+}
 
 export type NewAddressMutationVariables = Exact<{
   street: Scalars['String'];
@@ -293,13 +323,19 @@ export type MyAddressesQuery = {
 export type ProductsByPageQueryVariables = Exact<{
   offset: Scalars['Int'];
   limit: Scalars['Int'];
+  text?: InputMaybe<Scalars['String']>;
+  categoriesIds?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  availableStock?: InputMaybe<Scalars['Boolean']>;
+  price?: InputMaybe<Scalars['Int']>;
+  priceCondition?: InputMaybe<NumberCondition>;
+  sortField?: InputMaybe<SortField>;
+  sortDirection?: InputMaybe<SortDirection>;
 }>;
 
 export type ProductsByPageQuery = {
   __typename?: 'Query';
   productsByPage: {
-    __typename?: 'GqlPaginatedProducts';
-    id: number;
+    __typename?: 'GqlPaginatedProductsOutput';
     hasMoreData: boolean;
     data: Array<{
       __typename?: 'GqlProduct';
@@ -530,9 +566,12 @@ export const useMyAddressesQuery = <TData = MyAddressesQuery, TError = unknown>(
   );
 
 export const ProductsByPageDocument = /*#__PURE__*/ `
-    query ProductsByPage($offset: Int!, $limit: Int!) {
-  productsByPage(pagination: {offset: $offset, limit: $limit}) {
-    id
+    query ProductsByPage($offset: Int!, $limit: Int!, $text: String, $categoriesIds: [Int!], $availableStock: Boolean, $price: Int, $priceCondition: NumberCondition, $sortField: SortField, $sortDirection: SortDirection) {
+  productsByPage(
+    pagination: {offset: $offset, limit: $limit}
+    filters: {text: $text, categoriesIds: $categoriesIds, availableStock: $availableStock, price: $price, priceCondition: $priceCondition}
+    sort: {field: $sortField, direction: $sortDirection}
+  ) {
     data {
       id
       name

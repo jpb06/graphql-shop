@@ -60,7 +60,7 @@ type GqlCategory {
   products: [GqlProduct!]!
 }
 
-type GqlPaginatedProducts {
+type GqlPaginatedProductsOutput {
   id: Int!
   data: [GqlProduct!]!
   hasMoreData: Boolean!
@@ -107,7 +107,7 @@ type GqlUserOrder {
 
 type Query {
   products: [GqlProduct!]!
-  productsByPage(pagination: GqlPaginationArgs!): GqlPaginatedProducts!
+  productsByPage(pagination: GqlPaginationArgs!, filters: GqlPaginatedProductsFiltersInput!, sort: GqlPaginatedProductsSortingInput!): GqlPaginatedProductsOutput!
   productsWithIds(ids: [Int!]!): [GqlProduct!]!
   product(id: Int!): GqlProduct!
   categories: [GqlCategory!]!
@@ -121,6 +121,34 @@ type Query {
 input GqlPaginationArgs {
   offset: Int = 0
   limit: Int = 25
+}
+
+input GqlPaginatedProductsFiltersInput {
+  categoriesIds: [Int!]
+  text: String
+  price: Int
+  priceCondition: NumberCondition
+  availableStock: Boolean
+}
+
+enum NumberCondition {
+  gte
+  lte
+}
+
+input GqlPaginatedProductsSortingInput {
+  field: SortField
+  direction: SortDirection
+}
+
+enum SortField {
+  price
+  name
+}
+
+enum SortDirection {
+  asc
+  desc
 }
 
 type Mutation {

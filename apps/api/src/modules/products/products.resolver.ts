@@ -14,7 +14,9 @@ import { GqlPaginationArgs } from '../dtos/pagination-args.dto';
 import { GqlProduct } from '../products/dtos/gql.product.dto';
 import { ProductsService } from '../products/products.service';
 import { GetAllSelectType } from './closures/get-all.closure';
-import { GqlPaginatedProducts } from './dtos/gql.paginated-products.dto';
+import { GqlPaginatedProductsFiltersInput } from './dtos/gql.paginated-products-filters.input.dto';
+import { GqlPaginatedProductsSortingInput } from './dtos/gql.paginated-products-sorting.input.dto';
+import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 
 @Resolver(GqlProduct)
 export class ProductsResolver {
@@ -28,12 +30,16 @@ export class ProductsResolver {
     return this.products.getAll();
   }
 
-  @Query(() => GqlPaginatedProducts, { name: 'productsByPage' })
+  @Query(() => GqlPaginatedProductsOutput, { name: 'productsByPage' })
   async getPaginatedProducts(
     @Args({ name: 'pagination', type: () => GqlPaginationArgs })
-    pagination: GqlPaginationArgs
-  ): Promise<GqlPaginatedProducts> {
-    return this.products.getPaginated(pagination);
+    pagination: GqlPaginationArgs,
+    @Args({ name: 'filters', type: () => GqlPaginatedProductsFiltersInput })
+    filters: GqlPaginatedProductsFiltersInput,
+    @Args({ name: 'sort', type: () => GqlPaginatedProductsSortingInput })
+    sorting: GqlPaginatedProductsSortingInput
+  ): Promise<GqlPaginatedProductsOutput> {
+    return this.products.getPaginated(pagination, filters, sorting);
   }
 
   @Query(() => [GqlProduct], { name: 'productsWithIds' })

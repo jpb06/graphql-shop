@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { GqlProduct } from './gql.product.dto';
 
 @ObjectType()
-export class GqlPaginatedProducts {
+export class GqlPaginatedProductsOutput {
   @Field(() => Int)
   id: number;
 
