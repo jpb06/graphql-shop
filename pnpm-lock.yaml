@@ -38,7 +38,7 @@ specifiers:
   '@prisma/client': ^4.6.1
   '@svgr/webpack': ^6.5.1
   '@tanstack/eslint-plugin-query': ^4.15.1
-  '@tanstack/react-query': ^4.17.1
+  '@tanstack/react-query': ^4.18.0
   '@testing-library/react': 13.4.0
   '@types/bcrypt': ^5.0.0
   '@types/jest': 29.2.3
@@ -92,7 +92,7 @@ specifiers:
   prisma: ^4.6.1
   react: 18.2.0
   react-dom: 18.2.0
-  react-hook-form: ^7.39.5
+  react-hook-form: ^7.39.6
   react-i18next: ^12.0.0
   react-intersection-observer: ^9.4.1
   react-test-renderer: 18.2.0
@@ -111,7 +111,7 @@ specifiers:
 
 dependencies:
   '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
-  '@hookform/resolvers': 2.9.10_react-hook-form@7.39.5
+  '@hookform/resolvers': 2.9.10_react-hook-form@7.39.6
   '@nestjs/apollo': 10.1.6_se6jieq6qwgaelexcqsrrr6try
   '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
   '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
@@ -120,7 +120,7 @@ dependencies:
   '@nestjs/passport': 9.0.0_s6va3jdeufsye4wwu25es3p4om
   '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
   '@prisma/client': 4.6.1_prisma@4.6.1
-  '@tanstack/react-query': 4.17.1_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query': 4.18.0_biqbaboplfbrettd7655fr4n2y
   apollo-server-express: 3.11.1_5ha345eiak62qiwwva5z4dp6gu
   bcrypt: 5.1.0
   class-transformer: 0.5.1
@@ -138,7 +138,7 @@ dependencies:
   passport-local: 1.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-hook-form: 7.39.5_react@18.2.0
+  react-hook-form: 7.39.6_react@18.2.0
   react-intersection-observer: 9.4.1_react@18.2.0
   reflect-metadata: 0.1.13
   regenerator-runtime: 0.13.11
@@ -2658,12 +2658,12 @@ packages:
     dependencies:
       graphql: 16.6.0
 
-  /@hookform/resolvers/2.9.10_react-hook-form@7.39.5:
+  /@hookform/resolvers/2.9.10_react-hook-form@7.39.6:
     resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.39.5_react@18.2.0
+      react-hook-form: 7.39.6_react@18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.7:
@@ -4625,12 +4625,12 @@ packages:
     resolution: {integrity: sha512-SMj7OsOkutuJQ9LQLIoXxW5u0kx84V7RICmJEcjpKNkHsBd31QttJvtG1hLx9GXb3ZuFLZ0Y1dOD/D9b/GIzTg==}
     dev: true
 
-  /@tanstack/query-core/4.15.1:
-    resolution: {integrity: sha512-+UfqJsNbPIVo0a9ANW0ZxtjiMfGLaaoIaL9vZeVycvmBuWywJGtSi7fgPVMCPdZQFOzMsaXaOsDtSKQD5xLRVQ==}
+  /@tanstack/query-core/4.18.0:
+    resolution: {integrity: sha512-PP4mG8MD08sq64RZCqMfXMYfaj7+Oulwg7xZ/fJoEOdTZNcPIgaOkHajZvUBsNLbi/0ViMvJB4cFkL2Jg2WPbw==}
     dev: false
 
-  /@tanstack/react-query/4.17.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-0AAC1DerbNmmmR4EB6fkILhgTVao7nRPp8jDNHUq1m6AHaDdNV9VKy+h9fsTnBbiHBbcr3erfF//KEO3y3HojA==}
+  /@tanstack/react-query/4.18.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-s1kdbGMdVcfUIllzsHUqVUdktBT5uuIRgnvrqFNLjl9TSOXEoBSDrhjsGjao0INQZv8cMpQlgOh3YH9YtN6cKw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4641,7 +4641,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.15.1
+      '@tanstack/query-core': 4.18.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -12795,8 +12795,8 @@ packages:
       react: 18.2.0
       scheduler: 0.23.0
 
-  /react-hook-form/7.39.5_react@18.2.0:
-    resolution: {integrity: sha512-OE0HKyz5IPc6svN2wd+e+evidZrw4O4WZWAWYzQVZuHi+hYnHFSLnxOq0ddjbdmaLIsLHut/ab7j72y2QT3+KA==}
+  /react-hook-form/7.39.6_react@18.2.0:
+    resolution: {integrity: sha512-f6bghLpUm1nfUtuJ09Zsaz2AkuHAGghngYAsKFGarFpi/NQl6JcGQ/ETc34tvLtjVo6hSLYw+/4dgBt0X54Jvw==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
