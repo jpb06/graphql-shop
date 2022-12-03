@@ -336,6 +336,7 @@ export type ProductsByPageQuery = {
   __typename?: 'Query';
   productsByPage: {
     __typename?: 'GqlPaginatedProductsOutput';
+    id: number;
     hasMoreData: boolean;
     data: Array<{
       __typename?: 'GqlProduct';
@@ -572,6 +573,7 @@ export const ProductsByPageDocument = /*#__PURE__*/ `
     filters: {text: $text, categoriesIds: $categoriesIds, availableStock: $availableStock, price: $price, priceCondition: $priceCondition}
     sort: {field: $sortField, direction: $sortDirection}
   ) {
+    id
     data {
       id
       name
