@@ -15,7 +15,7 @@ export interface InputProps<T extends FieldValues>
   extends UseControllerProps<T> {
   onInputFocus?: ChangeEventHandler<NameValue>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
-  formatValue?: ChangeEventHandler<HTMLInputElement> | undefined;
+  formatValue?: ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   spellcheck?: boolean;
   pattern?: string;
