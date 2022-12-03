@@ -1,4 +1,5 @@
 import {
+  ChangeEvent,
   ChangeEventHandler,
   Dispatch,
   FormEventHandler,
@@ -7,16 +8,20 @@ import {
 import { Control } from 'react-hook-form';
 
 import {
+  Select,
   Button,
+  NameValue,
+  Input,
+} from '@front/components/design-system';
+import {
   CreditCardFocus,
   CurrentYearSelectOptions,
+  formatCvc,
+  formatNumber,
   MonthSelectOptions,
-} from '@front/components';
+} from '@front/components/specific';
 
-import { Input } from './children/Input';
-import { Select } from './children/Select';
 import { PaymentFormModel } from './logic/credit-card-form.schema';
-import { NameValue } from './types/name-value.type';
 
 type PaymentModalFormProps = {
   isLoading: boolean;
@@ -40,15 +45,35 @@ export const PaymentModalForm = ({
     setFocus(() => name as CreditCardFocus);
   };
 
+  const formatValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    let maybeFormattedValue = '';
+    switch (name) {
+      case 'number':
+        maybeFormattedValue = formatNumber(value, true);
+        break;
+      case 'cvc':
+        maybeFormattedValue = formatCvc(value, 3, true);
+        break;
+      default:
+        maybeFormattedValue = value;
+        break;
+    }
+
+    return value === '' ? undefined : maybeFormattedValue;
+  };
+
   return (
     <form
       className="flex w-[335px] flex-col items-center gap-2 p-2 pt-4"
       onSubmit={onSubmit}
     >
       <Input
-        type="tel"
+        type="text"
         name="number"
         onInputFocus={handleInputFocus}
+        formatValue={formatValue}
         maxLength={19}
         placeholder="Card Number"
         control={control}
@@ -90,6 +115,7 @@ export const PaymentModalForm = ({
         type="number"
         name="cvc"
         onInputFocus={handleInputFocus}
+        formatValue={formatValue}
         maxLength={4}
         placeholder="CVC"
         autoComplete="off"
