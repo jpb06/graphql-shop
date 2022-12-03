@@ -1,4 +1,4 @@
-import { ModalContent } from '@front/components';
+import { ModalContent } from '@front/components/design-system';
 
 import { ShippingAddressSelectionModalContent } from './ShippingAddressSelectionModalContent';
 

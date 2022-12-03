@@ -4,7 +4,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 
-import { ModalWrapper } from '@front/components';
+import { ModalWrapper } from '@front/components/design-system';
 
 import './../../styles/global.css';
 import { NavBar } from '../components/generic/navbar';

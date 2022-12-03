@@ -1,7 +1,7 @@
 import { BaseSyntheticEvent } from 'react';
 import { Control } from 'react-hook-form';
 
-import { Button, Input, Title } from '..';
+import { Button, Input, Title } from './../../design-system';
 import { CreateAccount } from './children/CreateAccount';
 import { LostPassword } from './children/LostPassword';
 import { LoginFormModel } from './hooks/useLoginForm';

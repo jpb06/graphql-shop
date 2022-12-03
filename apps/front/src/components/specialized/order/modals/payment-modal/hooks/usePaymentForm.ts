@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 
 import { usePlaceOrderMutation } from '@front/api';
-import { useModal } from '@front/components';
+import { useModal } from '@front/components/design-system';
 import { ordersAtom } from '@front/state';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';

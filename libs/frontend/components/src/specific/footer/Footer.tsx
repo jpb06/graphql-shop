@@ -1,6 +1,6 @@
 import GithubIcon from '@front/assets/technos-icons/github.svg';
 
-import { Brand } from '../brand/Brand';
+import { Brand } from '../../design-system';
 import { Links } from './Links';
 
 export const Footer = () => (

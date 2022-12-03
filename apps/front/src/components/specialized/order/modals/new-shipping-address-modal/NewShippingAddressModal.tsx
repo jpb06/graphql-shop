@@ -8,7 +8,7 @@ import {
   Input,
   Title,
   useModal,
-} from '@front/components';
+} from '@front/components/design-system';
 
 import { orderModalAtom } from '../../state/order-modal.state';
 import { AddressModal } from '../shipping-address-selection-modal';

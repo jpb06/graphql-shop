@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { useState } from 'react';
 
 import { GqlNewAddressOutput, MyAddressesQuery } from '@front/api';
-import { useModal } from '@front/components';
+import { useModal } from '@front/components/design-system';
 
 import { orderModalAtom } from '../../../state/order-modal.state';
 import { PaymentModal } from '../../payment-modal';

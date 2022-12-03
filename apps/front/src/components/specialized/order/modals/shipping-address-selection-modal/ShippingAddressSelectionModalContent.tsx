@@ -9,7 +9,7 @@ import {
   Title,
   Loader,
   useModal,
-} from '@front/components';
+} from '@front/components/design-system';
 
 import { orderModalAtom } from '../../state/order-modal.state';
 import { NewAddressModal } from '../new-shipping-address-modal';

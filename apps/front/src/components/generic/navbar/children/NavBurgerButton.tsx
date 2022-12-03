@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 
 import MenuIcon from '@front/assets/icons/menu-icon.svg';
-import { Avatar } from '@front/components';
+import { Avatar } from '@front/components/design-system';
 import { authStateAtom } from '@front/state';
 
 type NavBurgerButtonProps = {

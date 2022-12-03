@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { useModal } from '@front/components';
+import { useModal } from '@front/components/design-system';
 import { ordersAtom } from '@front/state';
 
 import { useLocalStorage } from '../../../../../../hooks/useLocalStorage';

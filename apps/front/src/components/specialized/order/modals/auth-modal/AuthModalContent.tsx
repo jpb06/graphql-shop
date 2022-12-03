@@ -1,7 +1,8 @@
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { AuthModalForm, useLoginForm, useModal } from '@front/components';
+import { useModal } from '@front/components/design-system';
+import { AuthModalForm, useLoginForm } from '@front/components/specific';
 import { authStateAtom } from '@front/state';
 
 import { orderModalAtom } from '../../state/order-modal.state';
