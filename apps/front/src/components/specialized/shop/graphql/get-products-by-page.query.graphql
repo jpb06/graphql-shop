@@ -1,5 +1,25 @@
-query ProductsByPage($offset: Int!, $limit: Int!) {
-  productsByPage(pagination: { offset: $offset, limit: $limit }) {
+query ProductsByPage(
+  $offset: Int!
+  $limit: Int!
+  $text: String
+  $categoriesIds: [Int!]
+  $availableStock: Boolean
+  $price: Int
+  $priceCondition: NumberCondition
+  $sortField: SortField
+  $sortDirection: SortDirection
+) {
+  productsByPage(
+    pagination: { offset: $offset, limit: $limit }
+    filters: {
+      text: $text
+      categoriesIds: $categoriesIds
+      availableStock: $availableStock
+      price: $price
+      priceCondition: $priceCondition
+    }
+    sort: { field: $sortField, direction: $sortDirection }
+  ) {
     id
     data {
       id

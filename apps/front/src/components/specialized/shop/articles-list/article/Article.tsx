@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ProductsQueryDataItem } from '@front/api';
 import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '@front/assets/icons/product-goods-box-complete.svg';
-import { TextWithIcon, Title } from '@front/components';
+import { TextWithIcon, Title } from '@front/components/design-system';
 import { ordersAtom } from '@front/state';
 
 import { ArticleBuyButton } from './article-buy-button/ArticleBuyButton';

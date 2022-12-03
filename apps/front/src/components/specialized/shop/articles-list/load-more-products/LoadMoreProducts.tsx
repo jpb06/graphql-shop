@@ -6,8 +6,7 @@ import { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { ProductsByPageQuery, ProductsByPageQueryVariables } from '@front/api';
-import ProductIcon from '@front/assets/icons/product-2.svg';
-import { Button } from '@front/components';
+import { Button } from '@front/components/design-system';
 
 export interface LoadMoreProductsProps {
   fetchNextPage: (
@@ -72,12 +71,7 @@ export const LoadMoreProducts = ({
         </Button>
       </div>
     ),
-    false: (
-      <div className="mt-4 grid w-full justify-center rounded-lg p-5 text-slate-400">
-        <ProductIcon className="w-40 pb-2" />
-        <div>Nothing more to display</div>
-      </div>
-    ),
+    false: null,
     undefined: null,
   }[`${hasNextPage}`];
 };

@@ -7,7 +7,9 @@ import { GqlPaginationArgs } from '../dtos/pagination-args.dto';
 import { GetAllClosure, GetAllSelectType } from './closures/get-all.closure';
 import { GetByClosure, GetBySelectType } from './closures/get-by.closure';
 import { GetPaginatedClosure } from './closures/get-paginated.closure';
-import { GqlPaginatedProducts } from './dtos/gql.paginated-products.dto';
+import { GqlPaginatedProductsFiltersInput } from './dtos/gql.paginated-products-filters.input.dto';
+import { GqlPaginatedProductsSortingInput } from './dtos/gql.paginated-products-sorting.input.dto';
+import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 
 @Injectable()
 export class ProductsService {
@@ -22,17 +24,25 @@ export class ProductsService {
     return this.getAllClosure.fetch();
   }
 
-  async getPaginated(input: GqlPaginationArgs): Promise<GqlPaginatedProducts> {
-    const [data, count] = await this.getPaginatedClosure.fetch(input);
+  async getPaginated(
+    pagination: GqlPaginationArgs,
+    filters: GqlPaginatedProductsFiltersInput,
+    sorting: GqlPaginatedProductsSortingInput
+  ): Promise<GqlPaginatedProductsOutput> {
+    const [data, count] = await this.getPaginatedClosure.fetch(
+      pagination,
+      filters,
+      sorting
+    );
 
     return {
-      id: data.length > 0 ? data.at(0).id : null,
+      id: data.length > 0 ? data.at(0).id : -1,
       data: data.map((product) => {
         const { price, ...data } = product;
 
         return { ...data, price: Number(price) };
       }),
-      hasMoreData: data.length + input.offset < count,
+      hasMoreData: data.length + pagination.offset < count,
     };
   }
 

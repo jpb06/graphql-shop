@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { Button, useModal } from '@front/components';
+import { Button, useModal } from '@front/components/design-system';
 import { authStateAtom } from '@front/state';
 
 import { AuthModal } from '../modal/auth-modal';

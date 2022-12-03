@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import EmptyBoxIcon from '@front/assets/icons/box-empty.svg';
-import { GlobalIndicator } from '@front/components';
+import { GlobalIndicator } from '@front/components/design-system';
 
 export const EmptyBasket = () => (
   <GlobalIndicator Icon={EmptyBoxIcon}>

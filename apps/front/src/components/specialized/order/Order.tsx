@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { PageTitle } from '@front/components';
+import { PageTitle } from '@front/components/design-system';
 import { ordersAtom } from '@front/state';
 
 import { EmptyBasket } from './empty-basket/EmptyBasket';

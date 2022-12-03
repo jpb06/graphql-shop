@@ -1,6 +1,6 @@
 import { UseFormWatch } from 'react-hook-form';
 
-import { CreditCard, CreditCardInfos } from '@front/components';
+import { CreditCard, CreditCardInfos } from '@front/components/specific';
 
 interface BoundCreditCardProps {
   focus: keyof CreditCardInfos;

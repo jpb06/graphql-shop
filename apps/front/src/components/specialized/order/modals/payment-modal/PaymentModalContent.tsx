@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CreditCardFocus, CreditCardInfos } from '@front/components';
+import { CreditCardFocus, CreditCardInfos } from '@front/components/specific';
 
 import { PaymentModalForm } from './PaymentModalForm';
 import { BoundCreditCard } from './children/BoundCreditCard';

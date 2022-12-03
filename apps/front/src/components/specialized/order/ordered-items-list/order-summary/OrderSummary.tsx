@@ -1,6 +1,6 @@
 import MonitorMoneyIcon from '@front/assets/icons/monitor-money.svg';
 import CheckSquareIcon from '@front/assets/icons/tick-square.svg';
-import { Button, TextWithIcon } from '@front/components';
+import { Button, TextWithIcon } from '@front/components/design-system';
 
 import { useOrderSummaryActions } from './hooks/useOrderSummaryActions';
 import { useOrdersData } from './hooks/useOrdersData';

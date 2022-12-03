@@ -1,4 +1,5 @@
-import { AuthModalForm, useLoginForm, useModal } from '@front/components';
+import { useModal } from '@front/components/design-system';
+import { AuthModalForm, useLoginForm } from '@front/components/specific';
 
 export const AuthModalContent = () => {
   const { updateModal } = useModal();

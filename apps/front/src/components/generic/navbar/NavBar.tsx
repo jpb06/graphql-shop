@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 
-import { Brand, Button, useModal } from '@front/components';
+import { Brand, Button, useModal } from '@front/components/design-system';
 import { authStateAtom } from '@front/state';
 
 import { NavBurgerButton } from './children/NavBurgerButton';

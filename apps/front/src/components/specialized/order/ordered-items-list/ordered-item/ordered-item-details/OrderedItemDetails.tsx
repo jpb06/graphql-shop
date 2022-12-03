@@ -3,7 +3,7 @@ import Image from 'next/image';
 import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '@front/assets/icons/product-goods-box-complete.svg';
 import ProductIcon from '@front/assets/icons/product.svg';
-import { TextWithIcon } from '@front/components';
+import { TextWithIcon } from '@front/components/design-system';
 import { OrderData } from '@front/state';
 
 export const OrderedItemDetails = ({
