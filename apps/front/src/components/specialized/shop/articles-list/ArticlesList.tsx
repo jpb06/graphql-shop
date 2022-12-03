@@ -2,11 +2,11 @@ import { Fragment } from 'react';
 
 import { ProductsByPageQuery } from '@front/api';
 
+import { Article } from './article/Article';
 import {
   LoadMoreProducts,
   LoadMoreProductsProps,
-} from '../load-more-products/LoadMoreProducts';
-import { Article } from './article/Article';
+} from './load-more-products/LoadMoreProducts';
 
 interface ArticlesListProps extends Omit<LoadMoreProductsProps, 'hasMoreData'> {
   pages?: ProductsByPageQuery[];
