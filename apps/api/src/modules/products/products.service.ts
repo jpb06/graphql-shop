@@ -25,24 +25,24 @@ export class ProductsService {
   }
 
   async getPaginated(
-    input: GqlPaginationArgs,
+    pagination: GqlPaginationArgs,
     filters: GqlPaginatedProductsFiltersInput,
     sorting: GqlPaginatedProductsSortingInput
   ): Promise<GqlPaginatedProductsOutput> {
     const [data, count] = await this.getPaginatedClosure.fetch(
-      input,
+      pagination,
       filters,
       sorting
     );
 
     return {
-      id: data.length > 0 ? data.at(0).id : null,
+      id: data.length > 0 ? data.at(0).id : -1,
       data: data.map((product) => {
         const { price, ...data } = product;
 
         return { ...data, price: Number(price) };
       }),
-      hasMoreData: data.length + input.offset < count,
+      hasMoreData: data.length + pagination.offset < count,
     };
   }
 
