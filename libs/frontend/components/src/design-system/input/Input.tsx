@@ -1,4 +1,8 @@
-import { ChangeEventHandler, HTMLInputTypeAttribute } from 'react';
+import {
+  ChangeEventHandler,
+  HTMLInputTypeAttribute,
+  KeyboardEventHandler,
+} from 'react';
 import {
   FieldValues,
   useController,
@@ -10,6 +14,7 @@ import { NameValue } from '../../types/name-value.type';
 export interface InputProps<T extends FieldValues>
   extends UseControllerProps<T> {
   onInputFocus?: ChangeEventHandler<NameValue>;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   formatValue?: ChangeEventHandler<HTMLInputElement> | undefined;
   maxLength?: number;
   spellcheck?: boolean;
@@ -44,6 +49,7 @@ export function Input<T extends FieldValues>(props: InputProps<T>) {
         autoComplete={props.autoComplete}
         pattern={props.pattern}
         onFocus={props.onInputFocus}
+        onKeyDown={props.onKeyDown}
         onChange={(e) => {
           if (e.target.value === '') {
             return onChange(undefined);
