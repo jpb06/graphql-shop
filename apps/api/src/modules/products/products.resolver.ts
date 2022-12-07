@@ -9,23 +9,23 @@ import {
 import { Product, Category } from '@prisma/client';
 
 import { CategoriesService } from '../categories/categories.service';
-import { GqlCategory } from '../categories/dtos/gql.category.dto';
+import { GqlCategory } from '../categories/dtos/gql-category.dto';
 import { GqlPaginationArgs } from '../dtos/pagination-args.dto';
-import { GqlProduct } from '../products/dtos/gql.product.dto';
+import { GqlProductWithCategory } from '../products/dtos/gql.product-with-category.dto';
 import { ProductsService } from '../products/products.service';
 import { GetAllSelectType } from './closures/get-all.closure';
 import { GqlPaginatedProductsFiltersInput } from './dtos/gql.paginated-products-filters.input.dto';
 import { GqlPaginatedProductsSortingInput } from './dtos/gql.paginated-products-sorting.input.dto';
 import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 
-@Resolver(GqlProduct)
+@Resolver(GqlProductWithCategory)
 export class ProductsResolver {
   constructor(
     private categories: CategoriesService,
     private products: ProductsService
   ) {}
 
-  @Query(() => [GqlProduct], { name: 'products' })
+  @Query(() => [GqlProductWithCategory], { name: 'products' })
   async getAll(): Promise<Array<GetAllSelectType>> {
     return this.products.getAll();
   }
@@ -42,20 +42,22 @@ export class ProductsResolver {
     return this.products.getPaginated(pagination, filters, sorting);
   }
 
-  @Query(() => [GqlProduct], { name: 'productsWithIds' })
+  @Query(() => [GqlProductWithCategory], { name: 'productsWithIds' })
   async getProductsWithIds(
     @Args('ids', { type: () => [Int] }) ids: Array<number>
   ): Promise<Array<Product>> {
     return this.products.getByIds(ids);
   }
 
-  @Query(() => GqlProduct, { name: 'product' })
+  @Query(() => GqlProductWithCategory, { name: 'product' })
   async getBy(@Args('id', { type: () => Int }) id: number): Promise<Product> {
     return this.products.getBy(id);
   }
 
   @ResolveField('category', () => GqlCategory)
-  async getCategory(@Parent() { Category }: GqlProduct): Promise<Category> {
+  async getCategory(
+    @Parent() { Category }: GqlProductWithCategory
+  ): Promise<Category> {
     return this.categories.getBy(Category.id);
   }
 }

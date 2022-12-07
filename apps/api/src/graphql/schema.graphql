@@ -43,7 +43,22 @@ type GqlLoggedUser {
   token: String!
 }
 
+type GqlCategory {
+  id: ID!
+  name: String!
+}
+
 type GqlProduct {
+  id: ID!
+  idCategory: ID!
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  stock: Int!
+}
+
+type GqlProductWithCategory {
   id: ID!
   idCategory: ID!
   name: String!
@@ -54,16 +69,16 @@ type GqlProduct {
   category: GqlCategory!
 }
 
-type GqlCategory {
+type GqlPaginatedProductsOutput {
+  id: Int!
+  data: [GqlProductWithCategory!]!
+  hasMoreData: Boolean!
+}
+
+type GqlCategoryWithProducts {
   id: ID!
   name: String!
   products: [GqlProduct!]!
-}
-
-type GqlPaginatedProductsOutput {
-  id: Int!
-  data: [GqlProduct!]!
-  hasMoreData: Boolean!
 }
 
 type GqlOrderedItem {
@@ -106,12 +121,12 @@ type GqlUserOrder {
 }
 
 type Query {
-  products: [GqlProduct!]!
+  products: [GqlProductWithCategory!]!
   productsByPage(pagination: GqlPaginationArgs!, filters: GqlPaginatedProductsFiltersInput!, sort: GqlPaginatedProductsSortingInput!): GqlPaginatedProductsOutput!
-  productsWithIds(ids: [Int!]!): [GqlProduct!]!
-  product(id: Int!): GqlProduct!
-  categories: [GqlCategory!]!
-  category(id: Int!): GqlCategory!
+  productsWithIds(ids: [Int!]!): [GqlProductWithCategory!]!
+  product(id: Int!): GqlProductWithCategory!
+  categories: [GqlCategoryWithProducts!]!
+  category(id: Int!): GqlCategoryWithProducts!
   me: GqlLoggedUser!
   getOrder(id: Int!): GqlUserOrder!
   myOrders: [GqlOrder!]!
