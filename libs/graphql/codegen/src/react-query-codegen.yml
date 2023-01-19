@@ -1,0 +1,7 @@
+outputPath: './libs/graphql/artifacts/src/api'
+schemaUrl: 'http://localhost:3333/graphql'
+fetcher:
+  path: './../../useFetchData'
+  functionName: 'useFetchData'
+infiniteQueries:
+  - productsByPage
