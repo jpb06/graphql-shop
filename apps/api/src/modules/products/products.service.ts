@@ -3,12 +3,10 @@ import { Product } from '@prisma/client';
 
 import { DatabaseService } from '@backend/database';
 
-import { GqlPaginationArgs } from '../dtos/pagination-args.dto';
 import { GetAllClosure, GetAllSelectType } from './closures/get-all.closure';
 import { GetByClosure, GetBySelectType } from './closures/get-by.closure';
 import { GetPaginatedClosure } from './closures/get-paginated.closure';
-import { GqlPaginatedProductsFiltersInput } from './dtos/gql.paginated-products-filters.input.dto';
-import { GqlPaginatedProductsSortingInput } from './dtos/gql.paginated-products-sorting.input.dto';
+import { GqlPaginatedProductsInput } from './dtos/gql.paginated-products.input.dto';
 import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 
 @Injectable()
@@ -25,15 +23,9 @@ export class ProductsService {
   }
 
   async getPaginated(
-    pagination: GqlPaginationArgs,
-    filters: GqlPaginatedProductsFiltersInput,
-    sorting: GqlPaginatedProductsSortingInput
+    input: GqlPaginatedProductsInput
   ): Promise<GqlPaginatedProductsOutput> {
-    const [data, count] = await this.getPaginatedClosure.fetch(
-      pagination,
-      filters,
-      sorting
-    );
+    const [data, count] = await this.getPaginatedClosure.fetch(input);
 
     return {
       id: data.length > 0 ? data.at(0).id : -1,
@@ -42,7 +34,7 @@ export class ProductsService {
 
         return { ...data, price: Number(price) };
       }),
-      hasMoreData: data.length + pagination.offset < count,
+      hasMoreData: data.length + input.offset < count,
     };
   }
 
@@ -50,6 +42,9 @@ export class ProductsService {
     return this.db.product.findMany({
       where: {
         id: { in: ids },
+      },
+      include: {
+        Category: true,
       },
     });
   }
