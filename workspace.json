@@ -10,6 +10,6 @@
     "front-shop-app": "apps/front",
     "front-state-lib": "libs/frontend/state",
     "graphql-codegen-lib": "libs/graphql/codegen",
-    "graphql-types-lib": "libs/graphql/types"
+    "graphql-artifacts-lib": "libs/graphql/artifacts"
   }
 }

@@ -8,9 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "noImplicitAny": true,
@@ -18,7 +18,8 @@
     "paths": {
       "@backend/database": ["libs/backend/database/src/index.ts"],
       "@backend/tests": ["libs/backend/tests/src/index.ts"],
-      "@front/api": ["libs/graphql/types/src/index.ts"],
+      "@front/api/legacy": ["libs/graphql/artifacts/src/legacy/index.ts"],
+      "@front/api": ["libs/graphql/artifacts/src/api/index.ts"],
       "@front/assets/*": ["libs/frontend/assets/files/*"],
       "@front/components/design-system": [
         "libs/frontend/components/src/design-system/index.ts"
