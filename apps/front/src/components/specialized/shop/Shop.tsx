@@ -1,11 +1,6 @@
 import { useAtom } from 'jotai';
 
-import {
-  NumberCondition,
-  SortDirection,
-  SortField,
-  useInfiniteProductsByPageQuery,
-} from '@front/api';
+import { useProductsByPageInfiniteQuery } from '@front/api';
 import ErrorCircle from '@front/assets/icons/error-circle.svg';
 import {
   PageTitle,
@@ -23,15 +18,34 @@ export const ShopRoot = () => {
   );
 
   const { status, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteProductsByPageQuery(
+    useProductsByPageInfiniteQuery(
       {
-        offset: 0,
-        limit: 20,
-        sortField: SortField.Price,
-        sortDirection: SortDirection.Asc,
-        ...filters,
-        categoriesIds: categoriesIds === -1 ? undefined : [categoriesIds],
-        priceCondition: priceCondition as NumberCondition,
+        data: {
+          id: true,
+          idCategory: true,
+          name: true,
+          image: true,
+          description: true,
+          price: true,
+          stock: true,
+          category: {
+            id: true,
+            name: true,
+          },
+        },
+        hasMoreData: true,
+        id: true,
+      },
+      {
+        input: {
+          offset: 0,
+          limit: 25,
+          direction: 'desc',
+          field: 'price',
+          categoriesIds: categoriesIds === -1 ? undefined : [categoriesIds],
+          priceCondition,
+          ...filters,
+        },
       },
       {
         getNextPageParam: (lastPage) =>

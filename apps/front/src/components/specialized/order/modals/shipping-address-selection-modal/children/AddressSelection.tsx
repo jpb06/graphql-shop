@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 
-import { GqlNewAddressOutput, MyAddressesQuery } from '@front/api';
+import { GqlNewAddressOutput, GqlAddress } from '@front/api';
 import { useModal } from '@front/components/design-system';
 
 import { orderModalAtom } from '../../../state/order-modal.state';
@@ -9,7 +9,7 @@ import { PaymentModal } from '../../payment-modal';
 import { BorderedRadio } from './BorderedRadio';
 
 type AddressSelectionProps = {
-  data: MyAddressesQuery;
+  data: Array<GqlAddress>;
 };
 
 export const AddressSelection = ({ data }: AddressSelectionProps) => {
@@ -22,7 +22,7 @@ export const AddressSelection = ({ data }: AddressSelectionProps) => {
   const handleAddressChosen = (id: string) => {
     setCheckedId(id);
 
-    const selectedAddress = data.myAddresses.find((a) => a.id === id);
+    const selectedAddress = data.find((a) => a.id === id);
     setOrderModalState(() => ({
       step: 'payment',
       address: selectedAddress as GqlNewAddressOutput,
@@ -32,7 +32,7 @@ export const AddressSelection = ({ data }: AddressSelectionProps) => {
 
   return (
     <ul className="mb-2 grid h-80 w-full gap-1 overflow-scroll rounded-md p-1 ring-2 ring-sky-600 ring-offset-1 ring-offset-sky-600">
-      {data?.myAddresses.map(({ id, street, zipCode, city, country }) => (
+      {data?.map(({ id, street, zipCode, city, country }) => (
         <BorderedRadio
           key={id}
           id={id}

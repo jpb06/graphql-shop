@@ -5,13 +5,18 @@ import {
 import { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { ProductsByPageQuery, ProductsByPageQueryVariables } from '@front/api';
+import { GqlPaginatedProductsOutput, GqlPaginationArgs } from '@front/api';
 import { Button } from '@front/components/design-system';
 
 export interface LoadMoreProductsProps {
   fetchNextPage: (
     options?: FetchNextPageOptions | undefined
-  ) => Promise<InfiniteQueryObserverResult<ProductsByPageQuery, unknown>>;
+  ) => Promise<
+    InfiniteQueryObserverResult<
+      { productsByPage: GqlPaginatedProductsOutput },
+      unknown
+    >
+  >;
   pageParams: unknown[] | undefined;
   isLoading: boolean;
   hasNextPage: boolean | undefined;
@@ -29,9 +34,7 @@ export const LoadMoreProducts = ({
 
   const loadMore = useCallback(() => {
     if (hasMoreData) {
-      const lastPageParam = pageParams?.at(-1) as
-        | ProductsByPageQueryVariables
-        | undefined;
+      const lastPageParam = pageParams?.at(-1) as GqlPaginationArgs;
 
       void fetchNextPage({
         pageParam: lastPageParam

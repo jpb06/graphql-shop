@@ -1,10 +1,10 @@
-import { ProductsQueryDataItem } from '@front/api';
+import { GqlProduct } from '@front/api';
 
 import { useOrderActions } from '../hooks/useOrderActions';
 import { NoStock } from './NoStock';
 import { OrderButton } from './OrderButton';
 
-export const ArticleOrderSelector = (product: ProductsQueryDataItem) => {
+export const ArticleOrderSelector = (product: GqlProduct) => {
   const { quantity, handleCancelOrder, handleBumpOrder } = useOrderActions({
     ...product,
     quantity: 0,
