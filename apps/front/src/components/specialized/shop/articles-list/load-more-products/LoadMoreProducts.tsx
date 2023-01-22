@@ -5,7 +5,10 @@ import {
 import { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { GqlPaginatedProductsOutput, GqlPaginationArgs } from '@front/api';
+import {
+  GqlPaginatedProductsOutput,
+  GqlPaginatedProductsInput,
+} from '@front/api';
 import { Button } from '@front/components/design-system';
 
 export interface LoadMoreProductsProps {
@@ -17,7 +20,7 @@ export interface LoadMoreProductsProps {
       unknown
     >
   >;
-  pageParams: unknown[] | undefined;
+  pageParams: { input?: { offset: number; limit: number } }[] | undefined;
   isLoading: boolean;
   hasNextPage: boolean | undefined;
   hasMoreData: boolean | undefined;
@@ -34,17 +37,24 @@ export const LoadMoreProducts = ({
 
   const loadMore = useCallback(() => {
     if (hasMoreData) {
-      const lastPageParam = pageParams?.at(-1) as GqlPaginationArgs;
+      const lastPageParam = pageParams?.at(-1)?.input as Pick<
+        GqlPaginatedProductsInput,
+        'offset' | 'limit'
+      >;
 
       void fetchNextPage({
         pageParam: lastPageParam
           ? {
-              offset: lastPageParam.offset + 20,
-              limit: lastPageParam.limit,
+              input: {
+                offset: lastPageParam.offset + 20,
+                limit: lastPageParam.limit,
+              },
             }
           : {
-              offset: 20,
-              limit: 20,
+              input: {
+                offset: 20,
+                limit: 20,
+              },
             },
       });
     }
