@@ -14,6 +14,7 @@ const bootstrap = async (): Promise<void> => {
   app.setGlobalPrefix(globalPrefix);
   app.useGlobalPipes(
     new ValidationPipe({
+      // https://github.com/typestack/class-validator/issues/1873
       forbidUnknownValues: false,
     })
   );
