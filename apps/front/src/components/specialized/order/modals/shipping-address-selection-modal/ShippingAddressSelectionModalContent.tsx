@@ -11,9 +11,9 @@ import {
   useModal,
 } from '@front/components/design-system';
 
+import { AddressSelection } from './children/AddressSelection';
 import { orderModalAtom } from '../../state/order-modal.state';
 import { NewAddressModal } from '../new-shipping-address-modal';
-import { AddressSelection } from './children/AddressSelection';
 
 export const ShippingAddressSelectionModalContent = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);

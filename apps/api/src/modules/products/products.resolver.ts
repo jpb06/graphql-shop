@@ -8,13 +8,13 @@ import {
 } from '@nestjs/graphql';
 import { Product, Category } from '@prisma/client';
 
+import { GetAllSelectType } from './closures/get-all.closure';
+import { GqlPaginatedProductsInput } from './dtos/gql.paginated-products.input.dto';
+import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 import { CategoriesService } from '../categories/categories.service';
 import { GqlCategory } from '../categories/dtos/gql-category.dto';
 import { GqlProductWithCategory } from '../products/dtos/gql.product-with-category.dto';
 import { ProductsService } from '../products/products.service';
-import { GetAllSelectType } from './closures/get-all.closure';
-import { GqlPaginatedProductsInput } from './dtos/gql.paginated-products.input.dto';
-import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 
 @Resolver(GqlProductWithCategory)
 export class ProductsResolver {

@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 
 import { DatabaseService } from '@backend/database';
 
-import { CreditCardsService } from '../credit-cards/credit-cards.service';
-import { GqlCreditCard } from '../credit-cards/dtos/gql.credit-card.dto';
 import {
   GetUserOrderClosure,
   GetUserOrderSelectType,
@@ -13,6 +11,8 @@ import {
   GetUserOrdersSelectType,
 } from './closures/get-user-orders.closure';
 import { GqlNewOrderedItem } from './dtos/gql.new-ordered-item.dto';
+import { CreditCardsService } from '../credit-cards/credit-cards.service';
+import { GqlCreditCard } from '../credit-cards/dtos/gql.credit-card.dto';
 
 @Injectable()
 export class OrdersService {

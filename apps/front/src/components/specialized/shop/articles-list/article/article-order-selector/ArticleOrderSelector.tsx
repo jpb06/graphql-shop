@@ -1,8 +1,8 @@
 import { GqlProduct } from '@front/api';
 
-import { useOrderActions } from '../hooks/useOrderActions';
 import { NoStock } from './NoStock';
 import { OrderButton } from './OrderButton';
+import { useOrderActions } from '../hooks/useOrderActions';
 
 export const ArticleOrderSelector = (product: GqlProduct) => {
   const { quantity, handleCancelOrder, handleBumpOrder } = useOrderActions({

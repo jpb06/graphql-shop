@@ -4,9 +4,9 @@ import { hash } from 'bcrypt';
 
 import { DatabaseService } from '@backend/database';
 
+import { GqlSignupArgs } from './dtos/gql.signup-args.dto';
 import { AuthService } from '../auth/auth.service';
 import { GqlAuthOutput } from '../auth/dtos/gql.auth-output.dto';
-import { GqlSignupArgs } from './dtos/gql.signup-args.dto';
 
 @Injectable()
 export class UsersService {

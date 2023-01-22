@@ -3,8 +3,8 @@ import { Prisma } from '@prisma/client';
 
 import { DatabaseService, selectProduct } from '@backend/database';
 
-import { GqlPaginatedProductsInput } from '../dtos/gql.paginated-products.input.dto';
 import { GetAllSelectType } from './get-all.closure';
+import { GqlPaginatedProductsInput } from '../dtos/gql.paginated-products.input.dto';
 
 @Injectable()
 export class GetPaginatedClosure {

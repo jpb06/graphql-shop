@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { GqlNewAddressOutput, GqlAddress } from '@front/api';
 import { useModal } from '@front/components/design-system';
 
+import { BorderedRadio } from './BorderedRadio';
 import { orderModalAtom } from '../../../state/order-modal.state';
 import { PaymentModal } from '../../payment-modal';
-import { BorderedRadio } from './BorderedRadio';
 
 type AddressSelectionProps = {
   data: Array<GqlAddress>;

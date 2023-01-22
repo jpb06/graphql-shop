@@ -58,6 +58,12 @@ type GqlProduct {
   stock: Int!
 }
 
+type GqlCategoryWithProducts {
+  id: ID!
+  name: String!
+  products: [GqlProduct!]!
+}
+
 type GqlProductWithCategory {
   id: ID!
   idCategory: ID!
@@ -73,12 +79,6 @@ type GqlPaginatedProductsOutput {
   id: Int!
   data: [GqlProductWithCategory!]!
   hasMoreData: Boolean!
-}
-
-type GqlCategoryWithProducts {
-  id: ID!
-  name: String!
-  products: [GqlProduct!]!
 }
 
 type GqlOrderedItem {

@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import { Field, Int, InputType } from '@nestjs/graphql';
 
-import { GqlPaginationArgs } from '../../dtos/pagination-args.dto';
 import { SortDirection } from './gql-sort-direction.enum';
 import { NumberCondition } from './gql.number-condition.enum';
 import { SortField } from './gql.sort-field.enum';
+import { GqlPaginationArgs } from '../../dtos/pagination-args.dto';
 
 @InputType()
 export class GqlPaginatedProductsInput extends GqlPaginationArgs {
