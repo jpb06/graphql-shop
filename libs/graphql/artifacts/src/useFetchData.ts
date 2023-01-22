@@ -5,11 +5,11 @@ import { authStateAtom } from '@front/state';
 import { endpointUrl } from './fetch-config';
 
 export const useFetchData = <TData>(
-  query: string
-): ((variables?: unknown) => Promise<TData>) => {
+  initialQuery: string
+): ((variables?: unknown, query?: string) => Promise<TData>) => {
   const [auth] = useAtom(authStateAtom);
 
-  return async (variables?: unknown) => {
+  return async (variables?: unknown, query?: string) => {
     const result = await fetch(endpointUrl, {
       method: 'POST',
       headers: {
@@ -17,7 +17,7 @@ export const useFetchData = <TData>(
         Authorization: `Bearer ${auth?.token}`,
       },
       body: JSON.stringify({
-        query,
+        query: query ? query : initialQuery,
         variables,
       }),
     });

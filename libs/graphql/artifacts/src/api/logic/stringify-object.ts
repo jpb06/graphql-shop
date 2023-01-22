@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { isObject } from './is-object';
 import { typesWithEnumsObject } from './types-with-enums-object';
-
-const isObject = (input: any): boolean =>
-  input !== null && typeof input === 'object';
 
 const repeatTabs = (count: number): string =>
   count === 0 ? '' : '  '.repeat(count - 1);
@@ -35,11 +33,11 @@ ${r}
 export const stringify = (input: any, typeName: string, level = 2): string => {
   if (Array.isArray(input)) {
     return `[${input.map((el) =>
-      isObject(el) ? stringifyObject(el, typeName) : el
+      isObject(el) ? stringifyObject(el, typeName) : el,
     )}]`;
   } else if (isObject(input)) {
     return stringifyObject(input, typeName, level);
-  } 
+  }
 
   return input;
 };

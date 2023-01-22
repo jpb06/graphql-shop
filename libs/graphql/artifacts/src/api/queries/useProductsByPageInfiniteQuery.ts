@@ -4,6 +4,7 @@ import {
   UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 
+import { deepMerge } from '../logic/deep-merge';
 import { namedQuerySelectorToDocument } from '../logic/named-query-selector-to-document';
 import { ProductsByPageQueryArgs } from '../types/api-types';
 import { DeepReplace } from '../types/deep-replace.type';
@@ -21,7 +22,7 @@ export type ProductsByPageInfiniteResult<Selector> = {
 };
 
 export const useProductsByPageInfiniteQuery = <
-  Selector extends Pick<QuerySelector, 'productsByPage'>['productsByPage'],
+  Selector extends Pick<QuerySelector, 'productsByPage'>['productsByPage']
 >(
   selector: Selector,
   variables: ProductsByPageQueryArgs,
@@ -32,17 +33,17 @@ export const useProductsByPageInfiniteQuery = <
       ProductsByPageInfiniteResult<Selector>
     >,
     'queryFn' | 'queryKey'
-  >,
+  >
 ): UseInfiniteQueryResult<ProductsByPageInfiniteResult<Selector>> => {
-  const document = namedQuerySelectorToDocument(
+  const initialDocument = namedQuerySelectorToDocument(
     'productsByPage',
     selector,
-    variables,
+    variables
   );
 
   const queryKey = ['productsByPageInfiniteQuery', ...Object.values(variables)];
   const fetchFn =
-    useFetchData<ProductsByPageInfiniteResult<Selector>>(document);
+    useFetchData<ProductsByPageInfiniteResult<Selector>>(initialDocument);
 
   return useInfiniteQuery<
     ProductsByPageInfiniteResult<Selector>,
@@ -50,7 +51,16 @@ export const useProductsByPageInfiniteQuery = <
     ProductsByPageInfiniteResult<Selector>
   >(
     queryKey,
-    (metaData) => fetchFn({ ...variables, ...(metaData.pageParam ?? {}) }),
-    options,
+    (metaData) => {
+      const updatedVariables = deepMerge(variables, metaData.pageParam ?? {});
+      const document = namedQuerySelectorToDocument(
+        'productsByPage',
+        selector,
+        updatedVariables
+      );
+
+      return fetchFn(updatedVariables, document);
+    },
+    options
   );
 };
