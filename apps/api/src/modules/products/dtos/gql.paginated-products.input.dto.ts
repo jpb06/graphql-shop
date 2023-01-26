@@ -1,12 +1,6 @@
 import 'reflect-metadata';
 import { Field, Int, InputType } from '@nestjs/graphql';
-import {
-  IsArray,
-  IsBoolean,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { SortDirection } from './gql-sort-direction.enum';
 import { NumberCondition } from './gql.number-condition.enum';
