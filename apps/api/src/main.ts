@@ -12,12 +12,7 @@ const bootstrap = async (): Promise<void> => {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  app.useGlobalPipes(
-    new ValidationPipe({
-      // https://github.com/typestack/class-validator/issues/1873
-      forbidUnknownValues: false,
-    })
-  );
+  app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
 
   const port = process.env.PORT || 3333;
