@@ -17,7 +17,7 @@ export class UsersService {
   ) {}
 
   async findById(id: number): Promise<User | null> {
-    return this.db.user.findFirst({
+    return this.db.user.findFirstOrThrow({
       where: {
         id,
       },
@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.db.user.findFirst({
+    return this.db.user.findFirstOrThrow({
       where: {
         email,
       },

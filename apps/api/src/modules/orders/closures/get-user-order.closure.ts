@@ -40,7 +40,7 @@ export class GetUserOrderClosure {
   constructor(private readonly db: DatabaseService) {}
 
   async for(userId: number, orderId: number): Promise<GetUserOrderSelectType> {
-    return this.db.order.findFirst({
+    return this.db.order.findFirstOrThrow({
       where: {
         idUser: userId,
         id: orderId,
