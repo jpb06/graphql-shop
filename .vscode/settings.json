@@ -8,5 +8,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
 }
