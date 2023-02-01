@@ -4,8 +4,8 @@ import {
   UseMutationResult,
 } from '@tanstack/react-query';
 
-import { LoginMutationArgs, GqlAuthOutput } from '../types/api-types';
 import { useFetchData } from './../../useFetchData';
+import { LoginMutationArgs,  GqlAuthOutput } from '../types/api-types';
 
 export type LoginResult = {
   login: GqlAuthOutput;

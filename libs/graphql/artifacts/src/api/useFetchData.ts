@@ -2,7 +2,8 @@ import { useAtom } from 'jotai';
 
 import { authStateAtom } from '@front/state';
 
-import { endpointUrl } from './fetch-config';
+const endpointUrl =
+  process.env.NEXT_PUBLIC_GQL_API_URL || 'NEXT_PUBLIC_GQL_API_URL_NOT_SET';
 
 export const useFetchData = <TData>(
   initialQuery: string
@@ -26,7 +27,7 @@ export const useFetchData = <TData>(
 
     if (json.errors) {
       const { message } = json.errors[0] || {};
-      throw new Error(message || 'Error…');
+      throw new Error(message || 'Error ...');
     }
 
     return json.data;

@@ -1,57 +1,68 @@
 import {
-  useQuery,
-  UseQueryResult,
-  UseQueryOptions,
+  useInfiniteQuery,
+  UseInfiniteQueryResult,
+  UseInfiniteQueryOptions,
 } from '@tanstack/react-query';
 
+import { useFetchData } from './../../useFetchData';
+import { deepMerge } from '../logic/deep-merge';
 import { namedQuerySelectorToDocument } from '../logic/named-query-selector-to-document';
 import { ProductsByPageQueryArgs } from '../types/api-types';
 import { DeepReplace } from '../types/deep-replace.type';
 import { QuerySelector } from '../types/query-selector';
 import { QuerySelectorResult } from '../types/query-selector-result';
-import { useFetchData } from './../../useFetchData';
 
 type ProductsByPageSelectorResult = Pick<
   QuerySelectorResult,
   'productsByPage'
 >['productsByPage'];
 
-export type ProductsByPageResult<Selector> = {
+export type ProductsByPageInfiniteResult<Selector> = {
   productsByPage: DeepReplace<Selector, ProductsByPageSelectorResult>;
 };
 
-export const useProductsByPagePartialQuery = <
+export const useProductsByPageInfinitePartialQuery = <
   Selector extends Pick<QuerySelector, 'productsByPage'>['productsByPage']
 >(
   selector: Selector,
   variables: ProductsByPageQueryArgs,
   options?: Omit<
-    UseQueryOptions<
-      ProductsByPageResult<Selector>,
+    UseInfiniteQueryOptions<
+      ProductsByPageInfiniteResult<Selector>,
       unknown,
-      ProductsByPageResult<Selector>
+      ProductsByPageInfiniteResult<Selector>
     >,
     'queryFn' | 'queryKey'
   >
-): UseQueryResult<ProductsByPageResult<Selector>> => {
-  const document = namedQuerySelectorToDocument(
+): UseInfiniteQueryResult<ProductsByPageInfiniteResult<Selector>> => {
+  const initialDocument = namedQuerySelectorToDocument(
     'productsByPage',
     selector,
     variables
   );
 
-  return useQuery<
-    ProductsByPageResult<Selector>,
+  const queryKey = ['productsByPageInfiniteQuery', ...Object.values(variables)];
+  const fetchFn =
+    useFetchData<ProductsByPageInfiniteResult<Selector>>(initialDocument);
+
+  return useInfiniteQuery<
+    ProductsByPageInfiniteResult<Selector>,
     unknown,
-    ProductsByPageResult<Selector>
-  >({
-    queryKey: ['productsByPage', ...Object.values(variables)],
-    queryFn: useFetchData<ProductsByPageResult<Selector>>(document).bind(
-      null,
-      variables
-    ),
-    ...options,
-  });
+    ProductsByPageInfiniteResult<Selector>
+  >(
+    queryKey,
+    (metaData) => {
+      const updatedVariables = deepMerge(variables, metaData.pageParam ?? {});
+      const document = namedQuerySelectorToDocument(
+        'productsByPage',
+        selector,
+        updatedVariables
+      );
+
+      return fetchFn(updatedVariables, document);
+    },
+    options
+  );
 };
 
 type ProductsByPageSelector = {
@@ -69,18 +80,20 @@ type ProductsByPageSelector = {
   hasMoreData: boolean;
 };
 
-export const useProductsByPageQuery = (
+export const useProductsByPageInfiniteQuery = (
   variables: ProductsByPageQueryArgs,
   options?: Omit<
-    UseQueryOptions<
-      ProductsByPageResult<ProductsByPageSelector>,
+    UseInfiniteQueryOptions<
+      ProductsByPageInfiniteResult<ProductsByPageSelector>,
       unknown,
-      ProductsByPageResult<ProductsByPageSelector>
+      ProductsByPageInfiniteResult<ProductsByPageSelector>
     >,
     'queryFn' | 'queryKey'
   >
-): UseQueryResult<ProductsByPageResult<ProductsByPageSelector>> =>
-  useProductsByPagePartialQuery(
+): UseInfiniteQueryResult<
+  ProductsByPageInfiniteResult<ProductsByPageSelector>
+> =>
+  useProductsByPageInfinitePartialQuery(
     {
       id: true,
       data: {

@@ -8,14 +8,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/graphql/artifacts/src/*.ts"]
+        "lintFilePatterns": ["libs/graphql/artifacts/src/api/**/*.ts"]
       }
     },
     "type-check": {
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/libs/graphql/artifacts"],
       "options": {
-        "command": "pnpm tsc -b libs/graphql/artifacts/tsconfig.json"
+        "command": "pnpm tsc -b libs/graphql/artifacts/tsconfig.lib.json"
       }
     }
   },

@@ -4,27 +4,16 @@ import {
   UseMutationResult,
 } from '@tanstack/react-query';
 
-import {
-  CreateAddressMutationArgs,
-  GqlNewAddressOutput,
-} from '../types/api-types';
 import { useFetchData } from './../../useFetchData';
+import { CreateAddressMutationArgs,  GqlNewAddressOutput } from '../types/api-types';
 
 export type CreateAddressResult = {
   createAddress: GqlNewAddressOutput;
 };
 
 export const useCreateAddressMutation = (
-  options?: UseMutationOptions<
-    CreateAddressResult,
-    unknown,
-    CreateAddressMutationArgs
-  >
-): UseMutationResult<
-  CreateAddressResult,
-  unknown,
-  CreateAddressMutationArgs
-> => {
+  options?: UseMutationOptions<CreateAddressResult, unknown, CreateAddressMutationArgs>
+): UseMutationResult<CreateAddressResult, unknown, CreateAddressMutationArgs> => {
   const mutation = `mutation CreateAddress($street: String!, $zipCode: String!, $city: String!, $country: String!) {
     createAddress(street: $street, zipCode: $zipCode, city: $city, country: $country) {
       id

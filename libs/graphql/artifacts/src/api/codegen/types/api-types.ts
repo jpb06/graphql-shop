@@ -7,9 +7,9 @@ export interface GqlAuthOutput { id: string; email: string; lastName: string; fi
 export interface GqlLoggedUser { id: string; email: string; lastName: string; firstName: string; joinDate: Date; role: string; token: string; }
 export interface GqlCategory { id: string; name: string; }
 export interface GqlProduct { id: string; idCategory: string; name: string; description: string; image: string; price: number; stock: number; }
+export interface GqlCategoryWithProducts { id: string; name: string; products: Array<GqlProduct>; }
 export interface GqlProductWithCategory { id: string; idCategory: string; name: string; description: string; image: string; price: number; stock: number; category: GqlCategory; }
 export interface GqlPaginatedProductsOutput { id: number; data: Array<GqlProductWithCategory>; hasMoreData: boolean; }
-export interface GqlCategoryWithProducts { id: string; name: string; products: Array<GqlProduct>; }
 export interface GqlOrderedItem { id: string; quantity: number; name: string; image: string; price: number; }
 export interface GqlOrder { id: string; idUser: string; idCreditCard: string; createdAt: Date; creditCardNumber: string; items: Array<GqlOrderedItem>; }
 export interface GqlPlaceOrderOutput { orderId: number; }
