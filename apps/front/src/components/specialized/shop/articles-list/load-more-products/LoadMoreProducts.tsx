@@ -11,6 +11,8 @@ import {
 } from '@front/api';
 import { Button } from '@front/components/design-system';
 
+import { ProductsByPagePageParams } from '../../types/products-by-page.page-params';
+
 export interface LoadMoreProductsProps {
   fetchNextPage: (
     options?: FetchNextPageOptions | undefined
@@ -20,7 +22,7 @@ export interface LoadMoreProductsProps {
       unknown
     >
   >;
-  pageParams: { input?: { offset: number; limit: number } }[] | undefined;
+  pageParams: ProductsByPagePageParams;
   isLoading: boolean;
   hasNextPage: boolean | undefined;
   hasMoreData: boolean | undefined;

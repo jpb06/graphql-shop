@@ -11,6 +11,7 @@ import {
 import { ArticlesList } from './articles-list/ArticlesList';
 import { ProductsSearchFilters } from './filters/ProductsSearchFilters';
 import { productsSearchFiltersAtom } from './state/products-search-filters.state';
+import { ProductsByPagePageParams } from './types/products-by-page.page-params';
 
 export const ShopRoot = () => {
   const [{ categoriesIds, priceCondition, ...filters }] = useAtom(
@@ -19,23 +20,6 @@ export const ShopRoot = () => {
 
   const { status, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useProductsByPageInfiniteQuery(
-      {
-        data: {
-          id: true,
-          idCategory: true,
-          name: true,
-          image: true,
-          description: true,
-          price: true,
-          stock: true,
-          category: {
-            id: true,
-            name: true,
-          },
-        },
-        hasMoreData: true,
-        id: true,
-      },
       {
         input: {
           offset: 0,
@@ -64,7 +48,7 @@ export const ShopRoot = () => {
             success: (
               <ArticlesList
                 pages={data?.pages}
-                pageParams={data?.pageParams}
+                pageParams={data?.pageParams as ProductsByPagePageParams}
                 fetchNextPage={fetchNextPage}
                 hasNextPage={hasNextPage}
                 isLoading={isFetchingNextPage}
