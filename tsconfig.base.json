@@ -18,7 +18,6 @@
     "paths": {
       "@backend/database": ["libs/backend/database/src/index.ts"],
       "@backend/tests": ["libs/backend/tests/src/index.ts"],
-      "@front/api/legacy": ["libs/graphql/artifacts/src/legacy/index.ts"],
       "@front/api": ["libs/graphql/artifacts/src/api/codegen/index.ts"],
       "@front/assets/*": ["libs/frontend/assets/files/*"],
       "@front/components/design-system": [
