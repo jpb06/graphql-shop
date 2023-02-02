@@ -11,7 +11,7 @@ type GqlQueryResultType<Selector> = DeepReplace<Selector, QuerySelectorResult>;
 export const useGqlQuery = <Selector extends QuerySelector>(
   key: QueryKey,
   selector: Selector,
-  variables?: unknown,
+  variables?: unknown
 ): UseQueryResult<GqlQueryResultType<Selector>> => {
   const document = dynamicQuerySelectorToDocument(selector, variables);
 

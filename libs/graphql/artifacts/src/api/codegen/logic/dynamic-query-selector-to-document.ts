@@ -17,11 +17,11 @@ const getAllCaptureGroups = (target: string, regex: RegExp): Array<string> => {
 
 export const dynamicQuerySelectorToDocument = <TVariables = unknown>(
   selector: QuerySelector,
-  variables?: TVariables,
+  variables?: TVariables
 ): string => {
   let queryContent = JSON.stringify(selector, null, 2).replace(
     variablesRegex,
-    '$1$3$5',
+    '$1$3$5'
   );
 
   const queries = getAllCaptureGroups(queryContent, queriesNameRegex);

@@ -1,2 +1,2 @@
 export const isObject = (input: unknown): boolean =>
-input !== null && typeof input === 'object';
+  input !== null && typeof input === 'object';

@@ -5,11 +5,11 @@ const variablesRegex = /"(.*)"(:?)( {|)|( true,?)(\n)/g;
 export const namedQuerySelectorToDocument = (
   queryName: string,
   selector: unknown,
-  variables?: unknown,
+  variables?: unknown
 ): string => {
   const queryContent = JSON.stringify(selector, null, 2).replace(
     variablesRegex,
-    '$1$3$5',
+    '$1$3$5'
   );
 
   const replaceArgs = queryReplacer[queryName](variables);
