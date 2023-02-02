@@ -37,6 +37,7 @@ import { UsersResolver } from './users/users.resolver';
       fieldResolverEnhancers: ['guards', 'interceptors'],
       // debug: true,
       playground: true,
+      introspection: true,
     }),
   ],
   providers: [

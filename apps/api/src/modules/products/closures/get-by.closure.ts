@@ -19,7 +19,7 @@ export class GetByClosure {
   constructor(private readonly db: DatabaseService) {}
 
   async from(id: number): Promise<GetBySelectType> {
-    return this.db.product.findFirst({
+    return this.db.product.findFirstOrThrow({
       where: {
         id,
       },

@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 
+import { seedProducts } from './seed.products';
 import { PrismaDb } from '../types/prisma-db.type';
 import { range } from '../util/range';
-import { seedProducts } from './seed.products';
 
 export const seedCategoriesAndProducts = async (
   prisma: PrismaDb

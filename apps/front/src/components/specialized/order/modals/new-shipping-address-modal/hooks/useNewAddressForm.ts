@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import zod from 'zod';
 
-import { useNewAddressMutation } from '@front/api';
+import { useCreateAddressMutation } from '@front/api';
 import { useModal } from '@front/components/design-system';
 
 import { orderModalAtom } from '../../../state/order-modal.state';
@@ -41,7 +41,7 @@ export const useNewAddressForm = () => {
     resolver: zodResolver(schema),
   });
 
-  const { mutate, isLoading, isError } = useNewAddressMutation({
+  const { mutate, isLoading, isError } = useCreateAddressMutation({
     onSuccess: (data) => {
       setOrderModalState(() => ({
         step: 'payment',

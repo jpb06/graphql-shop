@@ -3,8 +3,8 @@ import { useAtom } from 'jotai';
 import { Button, useModal } from '@front/components/design-system';
 import { authStateAtom } from '@front/state';
 
-import { AuthModal } from '../modal/auth-modal';
 import { NavMenuLink } from './NavMenuLink';
+import { AuthModal } from '../modal/auth-modal';
 
 type NavMenuProps = {
   isCollapsed: boolean;

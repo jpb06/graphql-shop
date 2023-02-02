@@ -1,21 +1,21 @@
 {
-  "name": "graphql-types-lib",
+  "name": "graphql-artifacts-lib",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/graphql/types/src",
+  "sourceRoot": "libs/graphql/artifacts/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/graphql/types/src/custom-types/**/*.ts"]
+        "lintFilePatterns": ["libs/graphql/artifacts/src/api/**/*.ts"]
       }
     },
     "type-check": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/graphql/types"],
+      "outputs": ["{workspaceRoot}/dist/libs/graphql/artifacts"],
       "options": {
-        "command": "pnpm tsc -b libs/graphql/types/tsconfig.json"
+        "command": "pnpm tsc -b libs/graphql/artifacts/tsconfig.lib.json"
       }
     }
   },

@@ -8,15 +8,13 @@ import {
 } from '@nestjs/graphql';
 import { Product, Category } from '@prisma/client';
 
+import { GetAllSelectType } from './closures/get-all.closure';
+import { GqlPaginatedProductsInput } from './dtos/gql.paginated-products.input.dto';
+import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 import { CategoriesService } from '../categories/categories.service';
 import { GqlCategory } from '../categories/dtos/gql-category.dto';
-import { GqlPaginationArgs } from '../dtos/pagination-args.dto';
 import { GqlProductWithCategory } from '../products/dtos/gql.product-with-category.dto';
 import { ProductsService } from '../products/products.service';
-import { GetAllSelectType } from './closures/get-all.closure';
-import { GqlPaginatedProductsFiltersInput } from './dtos/gql.paginated-products-filters.input.dto';
-import { GqlPaginatedProductsSortingInput } from './dtos/gql.paginated-products-sorting.input.dto';
-import { GqlPaginatedProductsOutput } from './dtos/gql.paginated-products.output.dto';
 
 @Resolver(GqlProductWithCategory)
 export class ProductsResolver {
@@ -32,14 +30,10 @@ export class ProductsResolver {
 
   @Query(() => GqlPaginatedProductsOutput, { name: 'productsByPage' })
   async getPaginatedProducts(
-    @Args({ name: 'pagination', type: () => GqlPaginationArgs })
-    pagination: GqlPaginationArgs,
-    @Args({ name: 'filters', type: () => GqlPaginatedProductsFiltersInput })
-    filters: GqlPaginatedProductsFiltersInput,
-    @Args({ name: 'sort', type: () => GqlPaginatedProductsSortingInput })
-    sorting: GqlPaginatedProductsSortingInput
+    @Args({ name: 'input', type: () => GqlPaginatedProductsInput })
+    input: GqlPaginatedProductsInput
   ): Promise<GqlPaginatedProductsOutput> {
-    return this.products.getPaginated(pagination, filters, sorting);
+    return this.products.getPaginated(input);
   }
 
   @Query(() => [GqlProductWithCategory], { name: 'productsWithIds' })

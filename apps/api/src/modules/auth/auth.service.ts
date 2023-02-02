@@ -3,12 +3,12 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { compare } from 'bcrypt';
 
-import { UsersService } from '../users/users.service';
 import { JwtPayload } from './dtos/jwt-payload.dto';
 import {
   UserWithoutPassword,
   withoutPassword,
 } from './util/without-password.util';
+import { UsersService } from '../users/users.service';
 
 type AuthData = Omit<JwtPayload, 'iat' | 'exp' | 'joinDate'> & {
   token: string;

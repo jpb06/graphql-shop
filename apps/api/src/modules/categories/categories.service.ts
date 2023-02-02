@@ -12,7 +12,7 @@ export class CategoriesService {
   }
 
   async getBy(id: number): Promise<Category> {
-    return this.db.category.findFirst({
+    return this.db.category.findFirstOrThrow({
       where: {
         id,
       },

@@ -1,10 +1,10 @@
 import { Role } from '@prisma/client';
 import { hash } from 'bcrypt';
 
-import { PrismaDb } from '../types/prisma-db.type';
 import { seedAddresses } from './seed.addresses';
 import { seedCreditCards } from './seed.credit-cards';
 import { seedOrders } from './seed.orders';
+import { PrismaDb } from '../types/prisma-db.type';
 
 const seedAdmin = async (prisma: PrismaDb): Promise<void> => {
   const adminData = {

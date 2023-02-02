@@ -3,8 +3,8 @@ import { useAtom } from 'jotai';
 import { ordersAtom } from '@front/state';
 
 import { OrderSummary } from './order-summary/OrderSummary';
-import { OrderedItemSkeleton } from './ordered-item-skeleton/OrderedItemSkeleton';
 import { OrderedItem } from './ordered-item/OrderedItem';
+import { OrderedItemSkeleton } from './ordered-item-skeleton/OrderedItemSkeleton';
 
 export const OrderedItemsList = () => {
   const [orders] = useAtom(ordersAtom);

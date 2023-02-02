@@ -3,10 +3,8 @@ import { Prisma } from '@prisma/client';
 
 import { DatabaseService, selectProduct } from '@backend/database';
 
-import { GqlPaginationArgs } from '../../dtos/pagination-args.dto';
-import { GqlPaginatedProductsFiltersInput } from '../dtos/gql.paginated-products-filters.input.dto';
-import { GqlPaginatedProductsSortingInput } from '../dtos/gql.paginated-products-sorting.input.dto';
 import { GetAllSelectType } from './get-all.closure';
+import { GqlPaginatedProductsInput } from '../dtos/gql.paginated-products.input.dto';
 
 @Injectable()
 export class GetPaginatedClosure {
@@ -16,17 +14,17 @@ export class GetPaginatedClosure {
 
   constructor(private readonly db: DatabaseService) {}
 
-  async fetch(
-    { limit, offset }: GqlPaginationArgs,
-    {
-      categoriesIds,
-      text,
-      price,
-      priceCondition,
-      availableStock,
-    }: GqlPaginatedProductsFiltersInput,
-    { direction, field }: GqlPaginatedProductsSortingInput
-  ): Promise<[GetAllSelectType[], number]> {
+  async fetch({
+    limit,
+    offset,
+    categoriesIds,
+    text,
+    price,
+    priceCondition,
+    availableStock,
+    direction,
+    field,
+  }: GqlPaginatedProductsInput): Promise<[GetAllSelectType[], number]> {
     const where: Prisma.ProductWhereInput = {
       OR: text && [
         {

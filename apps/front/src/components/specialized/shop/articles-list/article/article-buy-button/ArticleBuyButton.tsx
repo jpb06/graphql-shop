@@ -1,9 +1,9 @@
-import { ProductsQueryDataItem } from '@front/api';
+import { GqlProduct } from '@front/api';
 import UpArrowChevronIcon from '@front/assets/icons/up-arrow-chevron.svg';
 
 import { useOrderActions } from '../hooks/useOrderActions';
 
-export const ArticleBuyButton = (product: ProductsQueryDataItem) => {
+export const ArticleBuyButton = (product: GqlProduct) => {
   const { handleBumpOrder } = useOrderActions({ ...product, quantity: 0 });
 
   if (product.stock === 0) {

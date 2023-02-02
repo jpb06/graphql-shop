@@ -30,7 +30,7 @@ export function Select<T extends FieldValues>(
 
   return (
     <select
-      className="block w-full rounded-lg border border-gray-400 bg-gray-600 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+      className="block w-full appearance-none rounded-lg border border-gray-400 bg-gray-600 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
       onChange={handleValueChanged}
       onFocus={props.onInputFocus}
       value={value || ''}

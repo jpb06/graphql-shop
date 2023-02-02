@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { GqlUserOrder, useGetOrderQuery } from '@front/api';
+import { useGetOrderQuery } from '@front/api';
 import { Loader, Title } from '@front/components/design-system';
 
 import { orderModalAtom } from '../../state/order-modal.state';
@@ -12,7 +12,7 @@ export const OrderCompleteModalContent = () => {
     id: orderModalState.orderId as number,
   });
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return (
       <div className="w-full pt-10 pb-10 text-center">
         <Loader />
@@ -20,7 +20,7 @@ export const OrderCompleteModalContent = () => {
     );
   }
 
-  const order = data?.getOrder as GqlUserOrder;
+  const { creditCard, items } = data.getOrder;
 
   return (
     <div className="px-6 pb-6 lg:px-8">
@@ -30,14 +30,13 @@ export const OrderCompleteModalContent = () => {
           <dt className="mb-1 text-gray-400 md:text-lg">Mean of payment</dt>
           <dd className="text-lg font-semibold text-white">Credit card</dd>
           <dd className="text-sm text-stone-500">
-            ~ {order.creditCard.number.slice(-4)} expiring{' '}
-            {order.creditCard.expires}
+            ~ {creditCard.number.slice(-4)} expiring {creditCard.expires}
           </dd>
         </div>
         <div className="flex flex-col pb-3">
           <dt className="mb-1 text-gray-400 md:text-lg">Amount</dt>
           <dd className="text-lg font-semibold text-white">
-            {order.items?.reduce(
+            {items?.reduce(
               (total, { price, quantity }) => total + price * quantity,
               0
             )}
@@ -47,7 +46,7 @@ export const OrderCompleteModalContent = () => {
       </div>
       <Title>Articles</Title>
       <ul className="max-h-72 max-w-md divide-y divide-gray-700 overflow-scroll rounded-md bg-gray-800 px-4 pt-2 ring-2 ring-sky-600">
-        {order.items?.map(({ id, name, price, quantity }) => (
+        {items?.map(({ id, name, price, quantity }) => (
           <li key={id} className="pb-2">
             <div className="flex items-center space-x-4">
               <div className="min-w-0 flex-1">

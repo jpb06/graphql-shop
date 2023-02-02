@@ -10,9 +10,9 @@ import {
   useModal,
 } from '@front/components/design-system';
 
+import { useNewAddressForm } from './hooks/useNewAddressForm';
 import { orderModalAtom } from '../../state/order-modal.state';
 import { AddressModal } from '../shipping-address-selection-modal';
-import { useNewAddressForm } from './hooks/useNewAddressForm';
 
 export const NewShippingAddressModal = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);

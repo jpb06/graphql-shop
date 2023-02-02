@@ -3,8 +3,8 @@ import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import { TextWithIcon } from '@front/components/design-system';
 import { OrderData } from '@front/state';
 
-import { useOrderActions } from '../../../../shop/articles-list/article/hooks/useOrderActions';
 import { OrderedItemAction } from './OrderedItemAction';
+import { useOrderActions } from '../../../../shop/articles-list/article/hooks/useOrderActions';
 
 export const OrderedItemControls = (order: OrderData) => {
   const { handleBumpOrder, handleCancelOrder } = useOrderActions(order);

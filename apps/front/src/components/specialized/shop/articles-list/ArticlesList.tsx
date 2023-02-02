@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { ProductsByPageQuery } from '@front/api';
+import { GqlPaginatedProductsOutput } from '@front/api';
 
 import { Article } from './article/Article';
 import {
@@ -9,7 +9,7 @@ import {
 } from './load-more-products/LoadMoreProducts';
 
 interface ArticlesListProps extends Omit<LoadMoreProductsProps, 'hasMoreData'> {
-  pages?: ProductsByPageQuery[];
+  pages?: { productsByPage: GqlPaginatedProductsOutput }[];
 }
 
 export const ArticlesList = ({
@@ -28,7 +28,7 @@ export const ArticlesList = ({
       <div className="grid place-content-center gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {pages.map(({ productsByPage }) => (
           <Fragment key={productsByPage.id}>
-            {productsByPage.data.map((p) => (
+            {productsByPage.data?.map((p) => (
               <Article key={p.id} {...p} />
             ))}
           </Fragment>

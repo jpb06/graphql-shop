@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { MyAddressesQuery, useMyAddressesQuery } from '@front/api';
+import { useMyAddressesQuery } from '@front/api';
 import ErrorCircle from '@front/assets/icons/error-circle.svg';
 import PlusIcon from '@front/assets/icons/plus.svg';
 import {
@@ -11,9 +11,9 @@ import {
   useModal,
 } from '@front/components/design-system';
 
+import { AddressSelection } from './children/AddressSelection';
 import { orderModalAtom } from '../../state/order-modal.state';
 import { NewAddressModal } from '../new-shipping-address-modal';
-import { AddressSelection } from './children/AddressSelection';
 
 export const ShippingAddressSelectionModalContent = () => {
   const [, setOrderModalState] = useAtom(orderModalAtom);
@@ -47,7 +47,7 @@ export const ShippingAddressSelectionModalContent = () => {
     <div className="m-2">
       <Title>Addresses previously used</Title>
       <div className="m-2">
-        <AddressSelection data={data as MyAddressesQuery} />
+        <AddressSelection data={data.myAddresses} />
       </div>
       <Title>Use another address</Title>
       <Button

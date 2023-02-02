@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 
-import { ProductsQueryDataItem } from '@front/api';
+import { GqlProduct } from '@front/api';
 import DollarPriceTagIcon from '@front/assets/icons/dollar-price-tag.svg';
 import ProductGoodsBoxCompleteIcon from '@front/assets/icons/product-goods-box-complete.svg';
 import { TextWithIcon, Title } from '@front/components/design-system';
@@ -10,7 +10,7 @@ import { ordersAtom } from '@front/state';
 import { ArticleBuyButton } from './article-buy-button/ArticleBuyButton';
 import { ArticleOrderSelector } from './article-order-selector/ArticleOrderSelector';
 
-export const Article = (props: ProductsQueryDataItem) => {
+export const Article = (props: GqlProduct) => {
   const [orders] = useAtom(ordersAtom);
   const { id, name, image, description, price, stock } = props;
   const hasOrders = orders.find((el) => el.id === id)?.quantity ?? 0;

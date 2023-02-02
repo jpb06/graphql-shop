@@ -58,6 +58,12 @@ type GqlProduct {
   stock: Int!
 }
 
+type GqlCategoryWithProducts {
+  id: ID!
+  name: String!
+  products: [GqlProduct!]!
+}
+
 type GqlProductWithCategory {
   id: ID!
   idCategory: ID!
@@ -73,12 +79,6 @@ type GqlPaginatedProductsOutput {
   id: Int!
   data: [GqlProductWithCategory!]!
   hasMoreData: Boolean!
-}
-
-type GqlCategoryWithProducts {
-  id: ID!
-  name: String!
-  products: [GqlProduct!]!
 }
 
 type GqlOrderedItem {
@@ -122,7 +122,7 @@ type GqlUserOrder {
 
 type Query {
   products: [GqlProductWithCategory!]!
-  productsByPage(pagination: GqlPaginationArgs!, filters: GqlPaginatedProductsFiltersInput!, sort: GqlPaginatedProductsSortingInput!): GqlPaginatedProductsOutput!
+  productsByPage(input: GqlPaginatedProductsInput!): GqlPaginatedProductsOutput!
   productsWithIds(ids: [Int!]!): [GqlProductWithCategory!]!
   product(id: Int!): GqlProductWithCategory!
   categories: [GqlCategoryWithProducts!]!
@@ -133,27 +133,21 @@ type Query {
   myAddresses: [GqlAddress!]!
 }
 
-input GqlPaginationArgs {
+input GqlPaginatedProductsInput {
   offset: Int = 0
   limit: Int = 25
-}
-
-input GqlPaginatedProductsFiltersInput {
   categoriesIds: [Int!]
   text: String
   price: Int
   priceCondition: NumberCondition
   availableStock: Boolean
+  field: SortField
+  direction: SortDirection
 }
 
 enum NumberCondition {
   gte
   lte
-}
-
-input GqlPaginatedProductsSortingInput {
-  field: SortField
-  direction: SortDirection
 }
 
 enum SortField {

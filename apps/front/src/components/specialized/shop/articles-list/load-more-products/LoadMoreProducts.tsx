@@ -5,14 +5,24 @@ import {
 import { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { ProductsByPageQuery, ProductsByPageQueryVariables } from '@front/api';
+import {
+  GqlPaginatedProductsOutput,
+  GqlPaginatedProductsInput,
+} from '@front/api';
 import { Button } from '@front/components/design-system';
+
+import { ProductsByPagePageParams } from '../../types/products-by-page.page-params';
 
 export interface LoadMoreProductsProps {
   fetchNextPage: (
     options?: FetchNextPageOptions | undefined
-  ) => Promise<InfiniteQueryObserverResult<ProductsByPageQuery, unknown>>;
-  pageParams: unknown[] | undefined;
+  ) => Promise<
+    InfiniteQueryObserverResult<
+      { productsByPage: GqlPaginatedProductsOutput },
+      unknown
+    >
+  >;
+  pageParams: ProductsByPagePageParams;
   isLoading: boolean;
   hasNextPage: boolean | undefined;
   hasMoreData: boolean | undefined;
@@ -29,19 +39,24 @@ export const LoadMoreProducts = ({
 
   const loadMore = useCallback(() => {
     if (hasMoreData) {
-      const lastPageParam = pageParams?.at(-1) as
-        | ProductsByPageQueryVariables
-        | undefined;
+      const lastPageParam = pageParams?.at(-1)?.input as Pick<
+        GqlPaginatedProductsInput,
+        'offset' | 'limit'
+      >;
 
       void fetchNextPage({
         pageParam: lastPageParam
           ? {
-              offset: lastPageParam.offset + 20,
-              limit: lastPageParam.limit,
+              input: {
+                offset: lastPageParam.offset + 20,
+                limit: lastPageParam.limit,
+              },
             }
           : {
-              offset: 20,
-              limit: 20,
+              input: {
+                offset: 20,
+                limit: 20,
+              },
             },
       });
     }
