@@ -1,4 +1,4 @@
-outputPath: 'libs/graphql/artifacts/src/api/codegen'
+outputPath: 'libs/graphql/codegen/src/artifacts'
 schemaUrl: NEXT_PUBLIC_GQL_API_URL
 fetcher:
   path: './../../useFetchData'
