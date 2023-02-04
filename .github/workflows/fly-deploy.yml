@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - fixing-dockerfile
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
