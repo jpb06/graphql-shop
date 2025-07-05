@@ -1,5 +1,5 @@
 # base node image
-FROM node:16-bullseye-slim as base
+FROM node:22-bullseye-slim as base
 
 # Install dependencies
 RUN apt-get update && apt-get install -y openssl make g++ gcc python3
@@ -9,7 +9,7 @@ RUN npm --silent install --global --depth 0 pnpm nx prisma
 ENV NODE_ENV=production
 
 # Install all node_modules, including dev dependencies
-FROM base as deps
+FROM base AS deps
 
 RUN mkdir /app
 WORKDIR /app
@@ -19,7 +19,7 @@ ADD ./libs/backend/database/model/schema.prisma ./libs/backend/database/model/sc
 RUN pnpm i --prod=false
 
 # Build the app
-FROM base as build
+FROM base AS build
 
 RUN mkdir /app
 WORKDIR /app
