@@ -31,7 +31,7 @@ jobs:
         with:
           main-branch-name: main
 
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v4.1.0
         with:
           version: latest
 
